@@ -7,11 +7,15 @@
  * @version 0.1 / 03.02.2021
  */
 
-$title = "home";
 ob_start();
+$title = "home";
+
+?>
+
+    <h1>Hello world</h1>
+
+<?php
 
 $content = ob_get_clean();
-?>
-<h1>Hello world</h1>
-<?
+
 require_once "view/template.php";
