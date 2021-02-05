@@ -63,8 +63,9 @@
     </div>
   </div>
 </nav>
-
+  <div class="container-fluid">
     <?= $content ?>
+  </div>
 
     <script src="view/js/bootstrap.bundle.min.js"></script>
 </body>
