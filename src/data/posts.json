@@ -1,0 +1,19 @@
+{
+    "1":{
+        "Owner": "",
+        "title": "",
+        "description": "",
+        "coordinates": {
+            "lon": "",
+            "lat": ""
+        },
+        "pictures": [
+            {
+                "path": ""
+            },{
+                "path": ""
+            }
+        ],
+        "tags": ""
+    }
+}

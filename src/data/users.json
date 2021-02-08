@@ -1,0 +1,37 @@
+{
+    "JPChavey":{
+    "creationDate": "08.02.2021",
+    "password": "Pa$$w0rd",
+    "email": "jean-philippe.chavey@cpnv.ch"
+    },
+    "Mon": {
+        "creationDate": "08.02.2021",
+        "password": "Pa$$w0rd",
+        "email": "kenan.augsburger@cpnv.ch"
+    },
+    "R0kkxSynetique": {
+        "creationDate": "08.02.2021",
+        "password": "Pa$$w0rd",
+        "email": "benjamin.fontana@cpnv.ch"
+    },
+    "R0kkxRyuk": {
+        "creationDate": "08.02.2021",
+        "password": "Pa$$w0rd",
+        "email": "benjamin.fontana@cpnv.ch"
+    },
+    "Jared": {
+        "creationDate": "08.02.2021",
+        "password": "Pa$$w0rd",
+        "email": "benjamin.muminovic@cpnv.ch"
+    },
+    "Beusis": {
+        "creationDate": "08.02.2021",
+        "password": "Pa$$w0rd",
+        "email": "loic.meylan@cpnv.ch"
+    },
+    "Axwells": {
+        "creationDate": "08.02.2021",
+        "password": "Pa$$w0rd",
+        "email": "axel.pittet@cpnv.ch"
+    }
+}
