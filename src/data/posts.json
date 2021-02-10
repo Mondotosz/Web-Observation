@@ -1,19 +1,32 @@
 {
-    "1":{
-        "Owner": "",
-        "title": "",
-        "description": "",
+    "1": {
+        "Owner": "JPChavey",
+        "title": "Hermine",
+        "description": "Hermine blanche solitaire dans un champ, visible entre 8h30 et 9h30 plusieurs jours de suite",
+        "date": "21.01.2018",
         "coordinates": {
-            "lon": "",
-            "lat": ""
+            "lon": "46.831366",
+            "lat": "6.564394"
         },
         "pictures": [
             {
-                "path": ""
-            },{
-                "path": ""
+                "path": "view/content/img/Hermine_24_01.jpg"
+            },
+            {
+                "path": "view/content/img/Hermine2_1600.jpg"
+            },
+            {
+                "path": "view/content/img/Hermine3_1600.jpg"
+            },
+            {
+                "path": "view/content/img/Hermine5_1600.jpg"
             }
         ],
-        "tags": ""
+        "tags": [
+            "hermine",
+            "blanc",
+            "champ",
+            "neige"
+        ]
     }
 }
