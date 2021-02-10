@@ -9,10 +9,9 @@
 
 ob_start();
 $title = "home";
+$currentNav = "home";
 
 ?>
-<h1>Hello world</h1>
-
 <!-- <div class="row row-cols-1 row-cols-md-3 g-4 col-centered mx-auto"> -->
     <div id="carouselExampleControls" class="carousel slide mx-auto" data-bs-ride="carousel">
         <div class="carousel-inner">
