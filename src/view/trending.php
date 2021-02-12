@@ -9,21 +9,23 @@
 
 ob_start();
 $title = "home";
-
+$scripts = '<script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script>'
 ?>
-<h1>Hello world</h1>
 
-<div class="row row-cols-1 row-cols-md-3 g-4">
-    <div class="col">
-        <div class="card" style="width:18rem;">
-            <img src="view/content/img/3animaux_1600.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <h6 class="card-subtitle mb-2 text-muted ">Card subtitle</h6>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+<div class="row" data-masonry='{"percentPosition": true }'>
+
+    <?php
+    if (!empty($cards)) {
+        foreach ($cards as $card) {
+    ?>
+            <div class="col col-lg-2 col-mb-4">
+                <?= $card ?>
             </div>
-        </div>
-    </div>
+    <?php
+        }
+    }
+    ?>
+
 </div>
 
 <?php

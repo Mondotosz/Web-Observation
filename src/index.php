@@ -10,11 +10,15 @@
 // Creates/Resumes a sessions
 session_start();
 require_once "controller/nav.php";
+require_once "controller/trending.php";
 
 switch ($_SERVER["REQUEST_URI"]) {
     case "/":
     case "/home":
         home();
+        break;
+    case "/trending":
+        trending();
         break;
     default:
         lost();
