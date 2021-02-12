@@ -35,8 +35,8 @@
 
   <?php /** Fixed navbar requires padding to avoid overlap */ ?>
   <style>
-    .pt-56px {
-      padding-top: 56px;
+    body {
+      padding: 56px 0 0 0;
     }
   </style>
 
@@ -45,7 +45,7 @@
 
 </head>
 
-<body class="d-flex flex-column h-100 pt-56px">
+<body class="d-flex flex-column h-100">
 
   <header>
     <nav class="navbar navbar-expand-md navbar-dark  fixed-top bg-dark">
