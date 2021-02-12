@@ -77,7 +77,7 @@
 
   <main class="flex-shrink-0">
 
-    <div class="container-fluid">
+    <div class="">
       <?= !empty($content) ? $content : "<h1>bad dev forgot to add content</h1>" ?>
     </div>
 
