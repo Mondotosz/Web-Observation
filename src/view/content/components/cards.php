@@ -6,15 +6,15 @@
  * @param string $title required image title
  */
 
- //TODO: add link
- //TODO: add missing image default
+//TODO: add link
+//TODO: add missing image default
 
 function getComponent($title, $img)
 {
     ob_start();
 ?>
 
-    <div class="card" style="width: 18rem;">
+    <div class="card">
         <img src="<?= !empty($img) ? $img : "" ?>" class="card-img-top" alt="...">
         <div class="card-body">
             <h5 class="card-title"><?= !empty($title) ? $title : "" ?></h5>

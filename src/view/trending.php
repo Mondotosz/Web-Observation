@@ -12,13 +12,13 @@ $title = "home";
 $scripts = '<script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script>'
 ?>
 
-<div class="row" data-masonry='{"percentPosition": true }'>
+<div class="row mx-auto" style="width:99vw;" data-masonry='{"percentPosition": true }'>
 
     <?php
     if (!empty($cards)) {
         foreach ($cards as $card) {
     ?>
-            <div class="col col-lg-2 col-mb-4">
+            <div class="col-sm-6 col-lg-4 col-mb-4">
                 <?= $card ?>
             </div>
     <?php
