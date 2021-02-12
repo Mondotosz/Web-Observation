@@ -16,9 +16,6 @@
  * @param string  $currentNav optional string to define which navItem should be active for simplicity's sake we'll use lowercase
  */
 
-// Avoids undefined variable errors for currentNav
-$currentNav = !empty($currentNav) ? $currentNav : "";
-
 ?>
 <!DOCTYPE html>
 <html lang="en" class="h-100">
@@ -61,11 +58,11 @@ $currentNav = !empty($currentNav) ? $currentNav : "";
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
               <?php /** NavItem with active attribute depending on the view */ ?>
-              <a class="nav-link <?= ($currentNav == "home") ? "active" : "" ?>" aria-current="page" href="/home">Home</a>
+              <a class="nav-link <?= (@$currentNav == "home") ? "active" : "" ?>" aria-current="page" href="/home">Home</a>
             </li>
             <li class="nav-item">
               <?php /** NavItem with active attribute depending on the view */ ?>
-              <a class="nav-link" href="/trending" <?= ($currentNav == "trending") ? "active" : "" ?>>Trending</a>
+              <a class="nav-link" href="/trending" <?= (@$currentNav == "trending") ? "active" : "" ?>>Trending</a>
             </li>
           </ul>
           <form class="d-flex">
