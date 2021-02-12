@@ -16,6 +16,9 @@
  * @param string  $currentNav optional string to define which navItem should be active for simplicity's sake we'll use lowercase
  */
 
+// Avoids undefined variable errors for currentNav
+$currentNav = !empty($currentNav) ? $currentNav : "";
+
 ?>
 <!DOCTYPE html>
 <html lang="en" class="h-100">
