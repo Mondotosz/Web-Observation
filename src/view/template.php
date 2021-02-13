@@ -55,20 +55,32 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <?php /** NavItem with active attribute depending on the view */ ?>
-              <a class="nav-link <?= (@$currentNav == "home") ? "active" : "" ?>" aria-current="page" href="/home">Home</a>
-            </li>
-            <li class="nav-item">
-              <?php /** NavItem with active attribute depending on the view */ ?>
-              <a class="nav-link <?= (@$currentNav == "trending") ? "active" : "" ?>" href="/trending">Trending</a>
-            </li>
-          </ul>
-          <form class="d-flex">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-          </form>
+          <div class="w-100 row mx-auto">
+            <ul class="navbar-nav col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-3">
+              <li class="nav-item">
+                <?php /** NavItem with active attribute depending on the view */ ?>
+                <a class="nav-link <?= (@$currentNav == "home") ? "active" : "" ?>" aria-current="page" href="/home">Home</a>
+              </li>
+              <li class="nav-item">
+                <?php /** NavItem with active attribute depending on the view */ ?>
+                <a class="nav-link <?= (@$currentNav == "trending") ? "active" : "" ?>" href="/trending">Trending</a>
+              </li>
+            </ul>
+            <form class="d-flex col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-6 gx-0">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-3 d-flex justify-content-md-end mt-sm-2 mt-md-0 gx-0">
+              <?php
+              if (!empty($_SESSION["username"])) {
+                echo "<a href=\"/logout\" class=\"btn btn-primary\">logout</a>";
+              } else {
+                echo "<a href=\"/login\" class=\"btn btn-primary me-2\">login</a>";
+                echo "<a href=\"/register\" class=\"btn btn-primary\">Register</a>";
+              }
+              ?>
+            </div>
+          </div>
         </div>
 
       </div>

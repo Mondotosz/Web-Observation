@@ -36,7 +36,7 @@ $scripts = "<script src=\"https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist
                 itemSelector: '.masonry-item'
             });
 
-        }, 100)
+        }, 250)
     });
 </script>
 

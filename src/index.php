@@ -11,11 +11,22 @@
 session_start();
 require_once "controller/nav.php";
 require_once "controller/trending.php";
+require_once "controller/authentication.php";
 
 switch ($_SERVER["REQUEST_URI"]) {
     case "/":
     case "/home":
         home();
+        break;
+    case "/register":
+        //TODO
+        home();
+        break;
+    case "/login":
+        login($_POST);
+        break;
+    case "/logout":
+        logout($_POST);
         break;
     case "/trending":
         trending();
