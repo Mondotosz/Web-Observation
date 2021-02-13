@@ -62,7 +62,7 @@
             </li>
             <li class="nav-item">
               <?php /** NavItem with active attribute depending on the view */ ?>
-              <a class="nav-link" href="/trending" <?= (@$currentNav == "trending") ? "active" : "" ?>>Trending</a>
+              <a class="nav-link <?= (@$currentNav == "trending") ? "active" : "" ?>" href="/trending">Trending</a>
             </li>
           </ul>
           <form class="d-flex">
