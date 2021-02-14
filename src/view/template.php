@@ -87,11 +87,9 @@
     </nav>
   </header>
 
-  <main class="flex-shrink-0">
+  <main>
 
-    <div class="">
-      <?= !empty($content) ? $content : "<h1>bad dev forgot to add content</h1>" ?>
-    </div>
+    <?= !empty($content) ? $content : "<h1>bad dev forgot to add content</h1>" ?>
 
   </main>
 
