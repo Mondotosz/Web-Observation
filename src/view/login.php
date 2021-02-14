@@ -16,11 +16,11 @@ $title = "login";
     <div class="col-0 col-md-3 col-xl-4"></div>
     <form class="border rounded-2 p-4 col-12 col-md-6 col-xl-4" method="post" action="/login">
         <div class="mb-3">
-            <label for="inputUsername" class="form-label">Username</label>
+            <label for="inputUsername" class="form-label" required>Username</label>
             <input type="text" class="form-control" id="inputUsername" name="inputUsername">
         </div>
         <div class="mb-3">
-            <label for="inputPassword" class="form-label">Password</label>
+            <label for="inputPassword" class="form-label" required>Password</label>
             <input type="password" class="form-control" id="inputPassword" name="inputPassword">
         </div>
         <button type="submit" class="btn btn-primary">Login</button>
