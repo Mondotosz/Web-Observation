@@ -37,3 +37,47 @@ function getUser($username)
     }
     return $user;
 }
+
+/**
+ * @description Add an user to the users file
+ * @return boolean $success true => user saved | false => couldn't save the user
+ */
+
+function addUser($username, $password, $email)
+{
+    $success = true;
+
+    // Check for existing users with the same email or username
+    $users = getUsers();
+
+    // check username first to avoid unnecessary loops
+    if (!isset($users[$username])) {
+
+        // go through each existing users to check for email
+        foreach ($users as $user) {
+            //TODO: check whether this breaks anything
+            //TODO: find a good way to break
+            if ($user["email"] == $email) {
+                $success = false;
+                break;
+            }
+        }
+
+        // if still successful
+        if ($success) {
+            // set timezone for creation date
+            date_default_timezone_set("Europe/Zurich");
+            // add new user to the users array
+            // ! due to the limitations of json here if multiple users register at the same time there is a risk of overwriting
+            $users[$username] = ["creationDate" => date("d.m.Y"), "password" => $password, "email" => $email];
+            // save to file
+            file_put_contents("data/users.json", json_encode($users));
+        }
+    } else {
+
+        $success = false;
+    }
+    // Add the user
+
+    return $success;
+}
