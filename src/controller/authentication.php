@@ -5,7 +5,6 @@
  */
 
 //login
-
 function login($request)
 {
     // check for empty request
@@ -37,9 +36,41 @@ function login($request)
 }
 
 //logout
-function logout($request)
+function logout()
 {
     session_destroy();
     header("Location: /home");
     require_once "view/home.php";
+}
+
+//register
+function register($request)
+{
+    // check for empty request
+    if (!empty($request)) {
+
+        // checks if the required field are filled
+        if (!empty($request["inputUsername"]) && !empty($request["inputPassword"]) && !empty($request["inputEmail"])) {
+
+            // try to add user
+            require_once "model/usersManager.php";
+            $success = addUser($request["inputUsername"], $request["inputPassword"], $request["inputEmail"]);
+
+            // checks success
+            if ($success) {
+                // login to created account
+                $_SESSION["username"] = $request["inputUsername"];
+
+                //redirects to /home
+                header("Location: /home");
+                require "view/home.php";
+            } else {
+                require_once "view/register.php";
+            }
+        } else {
+            require_once "view/register.php";
+        }
+    } else {
+        require_once "view/register.php";
+    }
 }

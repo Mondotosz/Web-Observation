@@ -19,14 +19,13 @@ switch ($_SERVER["REQUEST_URI"]) {
         home();
         break;
     case "/register":
-        //TODO
-        home();
+        register($_POST);
         break;
     case "/login":
         login($_POST);
         break;
     case "/logout":
-        logout($_POST);
+        logout();
         break;
     case "/trending":
         trending();
