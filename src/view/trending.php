@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @file home.php
- * @brief View for the homepage
+ * @file trending.php
+ * @brief View for the trending
  * @author Created by Benjamin.Fontana@cpnv.ch
  * @version 0.1 / 10.02.2021
  */
@@ -19,7 +19,7 @@ $scripts = "<script src=\"https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist
     if (!empty($cards)) {
         foreach ($cards as $card) {
     ?>
-            <div class="col-12 col-md-6 col-lg-4 col-xl-3 gy-3 gx-3 masonry-item">
+            <div class="col-12 col-md-6 col-lg-4 col-xl-3 g-3 masonry-item">
                 <?= $card ?>
             </div>
     <?php
