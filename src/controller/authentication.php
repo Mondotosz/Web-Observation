@@ -18,7 +18,7 @@ function login($request)
             $user = getUser($request["inputUsername"]);
 
             // checks password
-            if ($user["password"] == $request["inputPassword"]) {
+            if (@$user["password"] == @$request["inputPassword"]) {
                 $_SESSION["username"] = $request["inputUsername"];
 
                 //redirects to /home
