@@ -1,19 +1,10 @@
 <?php
 
 /**
- * @file template.php
- * @brief Centralizes all common graphical components like header and footer
- * @author Created by Kenan.Augsburger@cpnv.ch
- * @version 0.1 / 03.02.2021
- */
-
-/**
- * @param string  $title required page title
- * @param string  $content required page content
- * @param string  $favicon optional path to specific favicon
- * @param string  $head optional html inserted in the head
- * @param string  $scripts optional html inserted just before the body closing tag
- * @param string  $currentNav optional string to define which navItem should be active for simplicity's sake we'll use lowercase
+ * @file home.php
+ * @brief Home page
+ * @author Created by Benjamin.FONTANA@cpnv.ch
+ * @version 0.1 / 14.02.2021
  */
 
 ?>
@@ -28,15 +19,14 @@
     <link rel="stylesheet" href="/view/css/bootstrap.min.css">
 
     <?php /** Favicon with default value */ ?>
-    <link rel="icon" href="<?= !empty($favicon) ? $favicon : "/view/content/icons/favicon.svg" ?>" type="image/svg+xml">
+    <link rel="icon" href="/view/content/icons/favicon.svg" type="image/svg+xml">
 
     <?php /** View defined title */ ?>
-    <title><?= !empty($title) ? $title : "bad dev forgot to put a title" ?></title>
+    <title>home</title>
 
     <?php /** Fixed navbar requires padding to avoid overlap */ ?>
     <style>
         body {
-            padding: 0px 0 0 0;
             overflow: hidden;
         }
 
@@ -47,9 +37,6 @@
             right: 0;
         }
     </style>
-
-    <?php /** Optional css */ ?>
-    <?= !empty($head) ? $head : "" ?>
 
 </head>
 
@@ -67,11 +54,11 @@
                         <ul class="navbar-nav col-12 col-md-4 col-xl-3">
                             <li class="nav-item">
                                 <?php /** NavItem with active attribute depending on the view */ ?>
-                                <a class="nav-link <?= (@$currentNav == "home") ? "active" : "" ?>" aria-current="page" href="/home">Home</a>
+                                <a class="nav-link active" aria-current="page" href="/home">Home</a>
                             </li>
                             <li class="nav-item">
                                 <?php /** NavItem with active attribute depending on the view */ ?>
-                                <a class="nav-link <?= (@$currentNav == "trending") ? "active" : "" ?>" href="/trending">Trending</a>
+                                <a class="nav-link" href="/trending">Trending</a>
                             </li>
                         </ul>
                         <form class="d-flex col-12 col-md-4 col-xl-6 gx-0">
@@ -144,7 +131,6 @@
     </footer>
 
     <script src="view/js/bootstrap.bundle.min.js"></script>
-    <?= !empty($scripts) ? $scripts : "" ?>
 </body>
 
 </html>
