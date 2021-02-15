@@ -32,3 +32,18 @@ function getPosts()
 
     return $posts;
 }
+
+/**
+ * @description get a single post
+ * @return array $post containing the requested post or an empty array
+ */
+
+function getPost($id)
+{
+    if (!empty(getPosts()[$id])) {
+        $post = getPosts()[$id];
+    } else {
+        $post = [];
+    }
+    return $post;
+}

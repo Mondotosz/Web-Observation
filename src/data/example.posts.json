@@ -10,16 +10,16 @@
         },
         "pictures": [
             {
-                "path": "view/content/img/Hermine_24_01.jpg"
+                "path": "/view/content/img/Hermine_24_01.jpg"
             },
             {
-                "path": "view/content/img/Hermine2_1600.jpg"
+                "path": "/view/content/img/Hermine2_1600.jpg"
             },
             {
-                "path": "view/content/img/Hermine3_1600.jpg"
+                "path": "/view/content/img/Hermine3_1600.jpg"
             },
             {
-                "path": "view/content/img/Hermine5_1600.jpg"
+                "path": "/view/content/img/Hermine5_1600.jpg"
             }
         ],
         "tags": [

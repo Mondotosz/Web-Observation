@@ -12,6 +12,7 @@ session_start();
 require_once "controller/nav.php";
 require_once "controller/trending.php";
 require_once "controller/authentication.php";
+require_once "controller/post.php";
 
 switch ($_SERVER["REQUEST_URI"]) {
     case "/":
@@ -29,6 +30,9 @@ switch ($_SERVER["REQUEST_URI"]) {
         break;
     case "/trending":
         trending();
+        break;
+    case (preg_match('/\/post\/(.*)/', $_SERVER["REQUEST_URI"], $res) ? true : false):
+        showPost(@$res[1]);
         break;
     default:
         lost();
