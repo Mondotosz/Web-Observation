@@ -18,7 +18,8 @@ function login($request)
             $user = getUser($request["inputUsername"]);
 
             // checks password
-            if (@$user["password"] == @$request["inputPassword"]) {
+            //@$user["password"] == @$request["inputPassword"]
+            if (password_verify(@$request["inputPassword"], @$user["password"])) {
                 $_SESSION["username"] = $request["inputUsername"];
 
                 //redirects to /home
@@ -52,9 +53,12 @@ function register($request)
         // checks if the required field are filled
         if (!empty($request["inputUsername"]) && !empty($request["inputPassword"]) && !empty($request["inputEmail"])) {
 
+            // Hash password
+            $hashedPassword = password_hash($request["inputPassword"], PASSWORD_DEFAULT);
+
             // try to add user
             require_once "model/usersManager.php";
-            $success = addUser($request["inputUsername"], $request["inputPassword"], $request["inputEmail"]);
+            $success = addUser($request["inputUsername"], $hashedPassword, $request["inputEmail"]);
 
             // checks success
             if ($success) {
