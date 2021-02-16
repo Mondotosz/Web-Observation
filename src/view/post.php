@@ -33,9 +33,9 @@ $title = $post["title"];
                 <?php
                 foreach ($post["pictures"] as $key => $picture) {
                 ?>
-                    <div class="carousel-item<?= ($key === array_key_first($post["pictures"]) ? " active" : "") ?>">
+                    <div class="carousel-item text-center<?= ($key === array_key_first($post["pictures"]) ? " active" : "") ?>">
                         <?php /** image with hotfix defined height */ ?>
-                        <img style="height:50vh;" loading="lazy" class="img-responsive d-block mx-auto" src="<?= @$picture["path"] ?>">
+                        <img style="height:600px;background:url(<?= @$picture["path"] ?>) no-repeat center center; background-size: contain;" loading="lazy" class="w-100">
                     </div>
 
                 <?php
