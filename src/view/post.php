@@ -13,7 +13,7 @@ ob_start();
 $title = $post["title"];
 
 ?>
-<?php/** this div is used to center and resize the register form */?>
+<?php /** this div is used to center and resize the register form */ ?>
 <div class="row p-3 m-0 g-2">
     <?php /** images and map */ ?>
     <div class="col-12 col-xl-6 border rounded-2">
@@ -23,7 +23,7 @@ $title = $post["title"];
                 <?php
                 foreach ($post["pictures"] as $key => $picture) {
                 ?>
-                    <button type="button" data-bs-target="#postCarousel" data-bs-slide-to="<?= $key ?>" class="<?= ($key === array_key_first($post["pictures"]) ? " active" : "") ?>" aria-current="true" aria-label=""></button>
+                    <button type="button" data-bs-target="#postCarousel" data-bs-slide-to="<?= $key ?>" <?= ($key === array_key_first($post["pictures"]) ? " class=\"active border rounded-3 pb-2 mb-2 btn-primary w-25\" aria-current=\"true\"" : " class=\"border rounded-3 pb-2 mb-2 btn-primary w-25\"") ?> aria-label="Slide <?= $key ?>"></button>
                 <?php
                 }
                 ?>
@@ -34,21 +34,22 @@ $title = $post["title"];
                 foreach ($post["pictures"] as $key => $picture) {
                 ?>
                     <div class="carousel-item<?= ($key === array_key_first($post["pictures"]) ? " active" : "") ?>">
-                        <img class="img-fluid d-block mx-auto" src="<?= @$picture["path"] ?>">
+                        <?php /** image with hotfix defined height */ ?>
+                        <img style="height:50vh;" loading="lazy" class="img-responsive d-block mx-auto" src="<?= @$picture["path"] ?>">
                     </div>
 
                 <?php
                 }
                 ?>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#postCarousel" data-bs-slide="prev">
+            <a href="#postCarousel" class="carousel-control-prev" type="button" data-bs-target="#postCarousel" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#postCarousel" data-bs-slide="next">
+            </a>
+            <a href="#postCarousel" class="carousel-control-next" type="button" data-bs-target="#postCarousel" data-bs-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
-            </button>
+            </a>
         </div>
 
     </div>
