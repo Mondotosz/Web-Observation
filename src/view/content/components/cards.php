@@ -9,17 +9,19 @@
 //TODO: add link
 //TODO: add missing image default
 
-function getComponent($title, $img)
+function getComponent($title, $img, $link)
 {
     ob_start();
 ?>
 
-    <div class="card">
-        <img src="<?= !empty($img) ? $img : "" ?>" class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title"><?= !empty($title) ? $title : "" ?></h5>
+    <a class="text-decoration-none" href="<?= !empty($link) ? $link : "" ?>">
+        <div class="card">
+            <img src="<?= !empty($img) ? $img : "" ?>" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title"><?= !empty($title) ? $title : "" ?></h5>
+            </div>
         </div>
-    </div>
+    </a>
 
 <?php
     return ob_get_clean();
