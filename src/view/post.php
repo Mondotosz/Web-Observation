@@ -12,8 +12,28 @@
 ob_start();
 $title = $post["title"];
 
+$head = "<style>
+      html, body {
+        height: 100%;
+        margin: 0;
+      }
+      #map {
+        /* configure the size of the map */
+        width: 100%;
+        height: 100%;
+      }
+    </style>"
+
 ?>
-<?php /** this div is used to center and resize the register form */ ?>
+<?php /** this div is used to center and resize the register form */
+
+$owner = @$post['owner'];
+$desc = @$post['description'];
+$date = @$post['date'];
+$lat = @$post['coordinates']['lat'];
+$lon = @$post['coordinates']['lon'];
+
+?>
 <div class="row p-3 m-0 g-2">
     <?php /** images and map */ ?>
     <div class="col-12 col-xl-6 border rounded-2">
@@ -57,15 +77,15 @@ $title = $post["title"];
     <div class="col-12 col-xl-6 border rounded-2">
         <?php /** title */ ?>
         <div class="row">
-            <div class="col"><?= @$post["title"] ?></div>
+            <div class="col"><?= @$title ?></div>
         </div>
         <?php /** author */ ?>
         <div class="row">
-            <div class="col"><?= @$post["owner"] ?></div>
+            <div class="col"><?= @$owner ?></div>
         </div>
         <?php /** description */ ?>
         <div class="row">
-            <div class="col"><?= @$post["description"] ?></div>
+            <div class="col"><?= @$desc ?></div>
         </div>
         <?php /** tags */ ?>
         <div class="row">
@@ -94,6 +114,30 @@ $title = $post["title"];
                 </tr>
             </tbody>
         </table>
+
+        <div id="map"></div>
+        <script>
+            var map = L.map('map', {
+                center: [<?= $lon ?>, <?= $lat ?>],
+                zoom: 14
+            });
+
+            // add the OpenStreetMap tiles
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 16,
+                attribution: '&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap contributors</a>'
+            }).addTo(map);
+
+            // show the scale bar on the lower left corner
+            L.control.scale().addTo(map);
+
+            // show a marker on the map
+            L.marker({
+                lon: <?= $lat ?>,
+                lat: <?= $lon ?>
+            }).bindPopup('C\'est le spot de photographie').addTo(map);
+        </script>
+
 
     </div>
 </div>
