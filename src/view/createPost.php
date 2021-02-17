@@ -44,14 +44,12 @@ $title = "Create";
         <?php /** title */ ?>
         <div class="row">
             <div class="col">TITLE</div>
-        </div>
-        <?php /** author */ ?>
-        <div class="row">
-            <div class="col">Author</div>
+            <input type="text" id="inputTitle">
         </div>
         <?php /** description */ ?>
         <div class="row">
             <div class="col">Description</div>
+            <input type="text" id="inputDescription">
         </div>
         <?php /** tags */ ?>
         <div class="row">
@@ -73,7 +71,7 @@ $title = "Create";
                 </tr>
             </tbody>
         </table>
-        <button id="testPost" class="btn btn-primary">button</button>
+        <button id="create" class="btn btn-primary">button</button>
 
     </div>
 </div>
@@ -83,28 +81,8 @@ $content = ob_get_clean();
 
 ob_start();
 ?>
-<script>
-    // Sending and receiving data in JSON format using POST method
-    //
-    var xhr = new XMLHttpRequest();
-    var url = "/post/create";
-    xhr.open("POST", url, true);
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            var json = JSON.parse(xhr.responseText);
-            console.log(json.email + ", " + json.password);
-        }
-    };
-    var data = JSON.stringify({
-        "post": "post",
-        "email": "hey@mail.com",
-        "password": "101010"
-    });
-    document.getElementById("testPost").addEventListener('click', () => {
-        xhr.send(data);
-    })
-</script>
+<script src="/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/view/js/createPost.js" defer></script>
 <?php
 $scripts = ob_get_clean();
 require_once "view/template.php";

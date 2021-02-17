@@ -24,8 +24,25 @@ function createPost($request)
         file_put_contents("data/post.json", ($request));
         if (!empty($request["post"])) {
             //check input validity
-            //format and save images
-            //save post using model
+            $sentPost = $request["post"];
+            if (!empty($sentPost["title"]) && !empty($sentPost["description"])) {
+
+                $post = ["postID" => [
+                    "owner" => $_SESSION["username"],
+                    "title" => $sentPost["title"],
+                    "description" => $sentPost["description"],
+                    "date" => Date("d.m.Y"),
+                    "coordinates" => [
+                        "lon" => $sentPost["coordinates"]["lon"],
+                        "lat" => $sentPost["coordinates"]["lat"]
+                    ]
+                ]];
+
+                file_put_contents("data/post.json", json_encode($post, JSON_PRETTY_PRINT));
+                //format and save images
+                //TODO Handle images, coordinates etc and create model
+                //save post using model
+            }
         } else {
             //redirects to post creation page
             require "view/createPost.php";
