@@ -31,6 +31,9 @@ switch ($_SERVER["REQUEST_URI"]) {
     case "/trending":
         trending();
         break;
+    case "/post/create":
+        createPost($_POST);
+        break;
     case (preg_match('/\/post\/(.*)/', $_SERVER["REQUEST_URI"], $res) ? true : false):
         showPost(@$res[1]);
         break;
