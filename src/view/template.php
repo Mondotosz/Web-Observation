@@ -24,6 +24,11 @@
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <script src="/node_modules/leaflet/dist/leaflet.js"></script>
+
+  <link rel="stylesheet" href="/node_modules/leaflet/dist/leaflet.css" />
 
   <link rel="stylesheet" href="/view/css/bootstrap.min.css">
 
