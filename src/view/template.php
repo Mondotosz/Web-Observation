@@ -73,6 +73,7 @@
             <div class="col-12 col-md-4 col-xl-3 d-flex justify-content-md-end mt-2 mt-md-0 gx-0">
               <?php
               if (!empty($_SESSION["username"])) {
+                echo "<a href=\"/post/create\" class=\"btn btn-primary me-2\">Create a post</a>";
                 echo "<a href=\"/logout\" class=\"btn btn-primary\">logout</a>";
               } else {
                 echo "<a href=\"/login\" class=\"btn btn-primary me-2\">login</a>";
