@@ -4,11 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "php -S localhost:8000"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "leaflet": "^1.7.1"
+    "bootstrap": "^5.0.0-beta2",
+    "leaflet": "^1.7.1",
+    "masonry-layout": "^4.2.2"
   }
 }

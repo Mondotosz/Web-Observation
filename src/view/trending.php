@@ -10,7 +10,7 @@
 ob_start();
 $title = "trending";
 $currentNav = "trending";
-$scripts = "<script src=\"https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js\" integrity=\"sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D\" crossorigin=\"anonymous\" async></script>"
+$scripts = "<script src=\"/node_modules/masonry-layout/dist/masonry.pkgd.min.js\" async></script>"
 ?>
 
 <div id="trendingMasonry" class="row mx-auto masonry" style="width:99vw;" data-masonry='{"percentPosition": true , "itemSelector" : ".masonry-item"}'>

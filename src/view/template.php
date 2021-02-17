@@ -30,7 +30,7 @@
 
   <link rel="stylesheet" href="/node_modules/leaflet/dist/leaflet.css" />
 
-  <link rel="stylesheet" href="/view/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
 
   <?php /** Favicon with default value */ ?>
   <link rel="icon" href="<?= !empty($favicon) ? $favicon : "/view/content/icons/favicon.svg" ?>" type="image/svg+xml">
@@ -115,7 +115,7 @@
 
   </footer>
 
-  <script src="/view/js/bootstrap.bundle.min.js"></script>
+  <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <?= !empty($scripts) ? $scripts : "" ?>
 </body>
 
