@@ -32,6 +32,8 @@
 
   <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
 
+  <link rel="stylesheet" href="/view/css/scrollbar.css">
+
   <?php /** Favicon with default value */ ?>
   <link rel="icon" href="<?= !empty($favicon) ? $favicon : "/view/content/icons/favicon.svg" ?>" type="image/svg+xml">
 

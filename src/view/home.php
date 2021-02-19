@@ -12,12 +12,6 @@ $title = "Home";
 
 ob_start();
 ?>
-<link rel="stylesheet" href="/view/css/scrollbar.css">
-<?php
-$head = ob_get_clean();
-
-ob_start();
-?>
 
 <div class="container-fluid px-0">
     <div id="homeCarousel" class="carousel slide" data-ride="carousel">
