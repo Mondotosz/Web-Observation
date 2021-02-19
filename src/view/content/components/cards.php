@@ -6,9 +6,6 @@
  * @param string $title required image title
  */
 
-//TODO: add link
-//TODO: add missing image default
-
 function getComponent($title, $img, $link)
 {
     ob_start();
