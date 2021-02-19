@@ -36,7 +36,7 @@ $lon = @$post['coordinates']['lon'];
 ?>
 <div class="row p-3 m-0 g-2">
     <?php /** images and map */ ?>
-    <div class="col-12 col-xl-6 border rounded-2">
+    <div class="col-12 col-xl-12">
 
         <div id="postCarousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-indicators">
@@ -55,7 +55,7 @@ $lon = @$post['coordinates']['lon'];
                 ?>
                     <div class="carousel-item text-center<?= ($key === array_key_first($post["pictures"]) ? " active" : "") ?>">
                         <?php /** image with hotfix defined height */ ?>
-                        <img style="height:600px;background:url(<?= @$picture["path"] ?>) no-repeat center center; background-size: contain;" loading="lazy" class="w-100">
+                        <img style="height:800px;background:url(<?= @$picture["path"] ?>) no-repeat center center; background-size: contain;" loading="lazy" class="w-100" href="<?=@$picture['path']?>">
                     </div>
 
                 <?php
@@ -74,7 +74,7 @@ $lon = @$post['coordinates']['lon'];
 
     </div>
     <?php /** title and description */ ?>
-    <div class="col-12 col-xl-6 border rounded-2">
+    <div class="col-12 col-xl-6">
         <?php /** title */ ?>
         <div class="row">
             <div class="col"><?= @$title ?></div>
@@ -89,7 +89,7 @@ $lon = @$post['coordinates']['lon'];
         </div>
         <?php /** tags */ ?>
         <div class="row">
-            <div class="col">tags</div>
+            <div class="col"><strong>tags: </strong></div>
         </div>
         <div class="d-flex">
             <?php
@@ -115,11 +115,15 @@ $lon = @$post['coordinates']['lon'];
             </tbody>
         </table>
 
+    </div>
+    <div class="col-6" style="height: 600px;">
+
         <div id="map"></div>
         <script>
             var map = L.map('map', {
                 center: [<?= $lon ?>, <?= $lat ?>],
-                zoom: 14
+                zoom: 14,
+                scrollWheelZoom: false
             });
 
             // add the OpenStreetMap tiles
@@ -137,7 +141,6 @@ $lon = @$post['coordinates']['lon'];
                 lat: <?= $lon ?>
             }).bindPopup('C\'est le spot de photographie').addTo(map);
         </script>
-
 
     </div>
 </div>
