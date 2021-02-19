@@ -28,5 +28,278 @@
             "champ",
             "neige"
         ]
+    },
+    "2": {
+        "owner": "JPChavey",
+        "title": "Chamois",
+        "description": "Chamois sur le Château de Joux, dans des pentes impressionnantes",
+        "date": "29.12.2017",
+        "coordinates": {
+            "lon": "46.875676",
+            "lat": "6.376810"
+        },
+        "pictures": [
+            {
+                "path": "/view/content/img/Raide_1600.jpg"
+            }
+        ],
+        "tags": [
+            "hermine",
+            "blanc",
+            "champ",
+            "neige"
+        ]
+    },
+    "3": {
+        "owner": "JPChavey",
+        "title": "Sanglier",
+        "description": "5 sanglier dans la grosse neige et le brouillard",
+        "date": "23.12.2017",
+        "coordinates": {
+            "lon": "46.885889",
+            "lat": "6.465526"
+        },
+        "pictures": [
+            {
+                "path": "/view/content/img/Patrouille_1600.jpg"
+            }
+        ],
+        "tags": [
+            "hermine",
+            "blanc",
+            "champ",
+            "neige"
+        ]
+    },
+    "4": {
+        "owner": "JPChavey",
+        "title": "Chevreuils",
+        "description": "2 chevreuils dans 60cm de neige",
+        "date": "21.12.2017",
+        "coordinates": {
+            "lon": "46.847599",
+            "lat": "6.587887"
+        },
+        "pictures": [
+            {
+                "path": "/view/content/img/60cm_1600.jpg"
+            }
+        ],
+        "tags": [
+            "hermine",
+            "blanc",
+            "champ",
+            "neige"
+        ]
+    },
+    "5": {
+        "owner": "JPChavey",
+        "title": "Cheval et chamois",
+        "description": "Dialogue entre un cheval et un chamois",
+        "date": "17.12.2017",
+        "coordinates": {
+            "lon": "46.817931",
+            "lat": "6.530551"
+        },
+        "pictures": [
+            {
+                "path": "/view/content/img/Dialogue_1600.jpg"
+            }
+        ],
+        "tags": [
+            "hermine",
+            "blanc",
+            "champ",
+            "neige"
+        ]
+    },
+    "6": {
+        "owner": "JPChavey",
+        "title": "Renard",
+        "description": "Renard, petit arrêt pipi dans la neige",
+        "date": "23.11.2017",
+        "coordinates": {
+            "lon": "46.839803",
+            "lat": "6.567878"
+        },
+        "pictures": [
+            {
+                "path": "/view/content/img/Arret_1600.jpg"
+            }
+        ],
+        "tags": [
+            "hermine",
+            "blanc",
+            "champ",
+            "neige"
+        ]
+    },
+    "7": {
+        "owner": "JPChavey",
+        "title": "Renards",
+        "description": "2 renards jouant dans la première neige",
+        "date": "13.11.2017",
+        "coordinates": {
+            "lon": "46.840312",
+            "lat": "6.566067"
+        },
+        "pictures": [
+            {
+                "path": "/view/content/img/PremiereNeige_1600.jpg"
+            },
+            {
+                "path": "/view/content/img/Yeux_renard_1600.jpg"
+            }
+        ],
+        "tags": [
+            "hermine",
+            "blanc",
+            "champ",
+            "neige"
+        ]
+    },
+    "8": {
+        "owner": "JPChavey",
+        "title": "Chevreuils",
+        "description": "3 chevreuils dans les betteraves",
+        "date": "29.10.2017",
+        "coordinates": {
+            "lon": "46.716372",
+            "lat": "6.561446"
+        },
+        "pictures": [
+            {
+                "path": "/view/content/img/Betteraves_1600.jpg"
+            }
+        ],
+        "tags": [
+            "hermine",
+            "blanc",
+            "champ",
+            "neige"
+        ]
+    },
+    "9": {
+        "owner": "JPChavey",
+        "title": "3 Animaux",
+        "description": "Vache, renard et campagnol dans la gueule du renard",
+        "date": "18.10.2017",
+        "coordinates": {
+            "lon": "46.839803",
+            "lat": "6.567878"
+        },
+        "pictures": [
+            {
+                "path": "/view/content/img/3animaux_1600.jpg"
+            }
+        ],
+        "tags": [
+            "hermine",
+            "blanc",
+            "champ",
+            "neige"
+        ]
+    },
+    "10": {
+        "owner": "JPChavey",
+        "title": "Trio",
+        "description": "Hermine, Bouquetin, lagopède à la cabane du Fenestral",
+        "date": "16.10.2017",
+        "coordinates": {
+            "lon": "46.189096",
+            "lat": "7.100579"
+        },
+        "pictures": [
+            {
+                "path": "/view/content/img/Hermine_fenestral.jpg"
+            },
+            {
+                "path": "/view/content/img/Bouquetin_fenestral.jpg"
+            },
+            {
+                "path": "/view/content/img/Lagopèdes_1600.jpg"
+            }
+        ],
+        "tags": [
+            "hermine",
+            "blanc",
+            "champ",
+            "neige"
+        ]
+    },
+    "11": {
+        "owner": "JPChavey",
+        "title": "Renards",
+        "description": "renard tout proche",
+        "date": "08.09.2017",
+        "coordinates": {
+            "lon": "46.830002",
+            "lat": "6.455072"
+        },
+        "pictures": [
+            {
+                "path": "/view/content/img/SiPrès_1600_bright.jpg"
+            }
+        ],
+        "tags": [
+            "hermine",
+            "blanc",
+            "champ",
+            "neige"
+        ]
+    },
+    "12": {
+        "owner": "JPChavey",
+        "title": "Faucon",
+        "description": "Observation d’un faucon crécerelle",
+        "date": "07.09.2017",
+        "coordinates": {
+            "lon": "46.825369",
+            "lat": "6.549763"
+        },
+        "pictures": [
+            {
+                "path": "/view/content/img/Faucon_Crécerelle6.jpg"
+            },
+            {
+                "path": "/view/content/img/Faucon_Crécerelle5.jpg"
+            },
+            {
+                "path": "/view/content/img/Faucon_Crécerelle4.jpg"
+            },
+            {
+                "path": "/view/content/img/Faucon_Crécerelle3.jpg"
+            },
+            {
+                "path": "/view/content/img/Faucon_Crécerelle2.jpg"
+            }
+        ],
+        "tags": [
+            "hermine",
+            "blanc",
+            "champ",
+            "neige"
+        ]
+    },
+    "13": {
+        "owner": "JPChavey",
+        "title": "Renards",
+        "description": "2 renards jouant dans la première neige",
+        "date": "20.07.2017",
+        "coordinates": {
+            "lon": "46.831366",
+            "lat": "6.564394"
+        },
+        "pictures": [
+            {
+                "path": "/view/content/img/Hermine_profil_1600.jpg"
+            }
+        ],
+        "tags": [
+            "hermine",
+            "blanc",
+            "champ",
+            "neige"
+        ]
     }
 }
