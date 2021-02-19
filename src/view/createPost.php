@@ -41,38 +41,41 @@ $title = "Create";
     </div>
     <?php /** title and description */ ?>
     <div class="col-12 col-xl-6 border rounded-2">
-        <?php /** title */ ?>
-        <div class="row">
-            <div class="col">TITLE</div>
-            <input type="text" id="inputTitle">
-        </div>
-        <?php /** description */ ?>
-        <div class="row">
-            <div class="col">Description</div>
-            <input type="text" id="inputDescription">
-        </div>
-        <?php /** tags */ ?>
-        <div class="row">
-            <div class="col">tags</div>
-        </div>
-        <div class="d-flex">
-        </div>
-        <?php /** geolocation */ ?>
-        <div>Geolocation</div>
-        <table>
-            <tbody>
-                <tr>
-                    <th>Latitude</th>
-                    <td>a</td>
-                </tr>
-                <tr>
-                    <th>Longitude</th>
-                    <td>b</td>
-                </tr>
-            </tbody>
-        </table>
-        <button id="create" class="btn btn-primary">button</button>
-
+        <form method="POST" enctype="multipart/form-data" action="/post/create">
+            <?php /** title */ ?>
+            <div class="row">
+                <div class="col">TITLE</div>
+                <input type="text" id="inputTitle" name="postTitle">
+            </div>
+            <?php /** description */ ?>
+            <div class="row">
+                <div class="col">Description</div>
+                <input type="text" id="inputDescription" name="postDescription">
+            </div>
+            <?php /** tags */ ?>
+            <div class="row">
+                <div class="col">tags</div>
+            </div>
+            <div class="d-flex">
+            </div>
+            <?php /** geolocation */ ?>
+            <div>Geolocation</div>
+            <table>
+                <tbody>
+                    <tr>
+                        <th>Latitude</th>
+                        <td>a</td>
+                    </tr>
+                    <tr>
+                        <th>Longitude</th>
+                        <td>b</td>
+                    </tr>
+                </tbody>
+            </table>
+            <input id="postImage" type="file" name="postImage">
+            <button id="create" class="btn btn-primary">button</button>
+            <button type="submit" class="btn btn-primary">submit</button>
+        </form>
     </div>
 </div>
 <?php
