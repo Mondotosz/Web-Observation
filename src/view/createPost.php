@@ -9,89 +9,128 @@
 /**
  * @param array $post containing post name etc.
  */
-function createPostView(){
+function createPostView()
+{
 
-ob_start();
-$title = "Create";
+    $title = "Create";
 
-// Content
+    // Head
+    ob_start();
 ?>
-<?php /** this div is used to center and resize the register form */ ?>
-<div class="row p-3 m-0 g-2">
-    <?php /** images and map */ ?>
-    <div class="col-12 col-xl-6 border rounded-2">
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+        }
 
-        <div id="postCarousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item text-center active">
-                    <?php /** image with hotfix defined height */ ?>
-                    <div style="height:600px" class="d-flex align-items-center justify-content-center">
-                        <h1 class="display-1">ONE</h1>
+        #map {
+            /* configure the size of the map */
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+    <?php
+    $head = ob_get_clean();
+
+    // Content
+    ob_start();
+    ?>
+    <?php /** this div is used to center and resize the register form */ ?>
+    <div class="row p-3 m-0 g-2">
+        <?php /** images and map */ ?>
+        <div class="col-12">
+
+            <div id="postCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item text-center active">
+                        <?php /** image with hotfix defined height */ ?>
+                        <div style="height:600px;background:black;" class="d-flex align-items-center justify-content-center">
+                            <h1 class="display-1">ONE</h1>
+                        </div>
                     </div>
-                </div>
 
+                </div>
+                <a href="#postCarousel" class="carousel-control-prev" type="button" data-bs-target="#postCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </a>
+                <a href="#postCarousel" class="carousel-control-next" type="button" data-bs-target="#postCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </a>
             </div>
-            <a href="#postCarousel" class="carousel-control-prev" type="button" data-bs-target="#postCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </a>
-            <a href="#postCarousel" class="carousel-control-next" type="button" data-bs-target="#postCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </a>
+
+        </div>
+        <?php /** title and description */ ?>
+        <div class="col-12 col-xl-6">
+            <form method="POST" enctype="multipart/form-data" action="/post/create">
+                <?php /** title */ ?>
+                <div class="row">
+                    <label for="postTitle" class="form-label">Title</label>
+                    <input type="text" id="postTitle" name="postTitle" class="form-control px-1 ms-2 w-75">
+                </div>
+                <?php /** description */ ?>
+                <div class="row">
+                    <label for="postDescription" class="form-label">Description</label>
+                    <input type="text" id="postDescription" name="postDescription" class="form-control px-1 ms-2 w-75 ">
+                </div>
+                <?php /** tags */ ?>
+                <div class="row">
+                    <div class="col">tags</div>
+                </div>
+                <div class="d-flex">
+                </div>
+                <div class="row">
+                    <label for="postImage" class="form-label">Image</label>
+                    <input type="file" id="postImage" name="postImage" class="form-control ms-2 w-75">
+                </div>
+                <br>
+                <button id="create" class="btn btn-primary">Ajax</button>
+                <button type="submit" class="btn btn-primary">submit</button>
+            </form>
+        </div>
+        <div class="col-12 col-xl-6" style="height: 600px;">
+
+            <?php /** OpenStreetMap */ ?>
+            <div id="map"></div>
+            <script>
+                var map = L.map('map', {
+                    center: [46.831366, 6.564394],
+                    zoom: 14,
+                    scrollWheelZoom: false
+                });
+
+                // add the OpenStreetMap tiles
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    maxZoom: 16,
+                    attribution: '&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap contributors</a>'
+                }).addTo(map);
+
+                // show the scale bar on the lower left corner
+                L.control.scale().addTo(map);
+
+                // show a marker on the map
+                L.marker({
+                    lon: 6.564394,
+                    lat: 46.831366
+                }).bindPopup('C\'est le spot de photographie').addTo(map);
+            </script>
+
         </div>
 
     </div>
-    <?php /** title and description */ ?>
-    <div class="col-12 col-xl-6 border rounded-2">
-        <form method="POST" enctype="multipart/form-data" action="/post/create">
-            <?php /** title */ ?>
-            <div class="row">
-                <div class="col">TITLE</div>
-                <input type="text" id="inputTitle" name="postTitle">
-            </div>
-            <?php /** description */ ?>
-            <div class="row">
-                <div class="col">Description</div>
-                <input type="text" id="inputDescription" name="postDescription">
-            </div>
-            <?php /** tags */ ?>
-            <div class="row">
-                <div class="col">tags</div>
-            </div>
-            <div class="d-flex">
-            </div>
-            <?php /** geolocation */ ?>
-            <div>Geolocation</div>
-            <table>
-                <tbody>
-                    <tr>
-                        <th>Latitude</th>
-                        <td>a</td>
-                    </tr>
-                    <tr>
-                        <th>Longitude</th>
-                        <td>b</td>
-                    </tr>
-                </tbody>
-            </table>
-            <input id="postImage" type="file" name="postImage">
-            <button id="create" class="btn btn-primary">button</button>
-            <button type="submit" class="btn btn-primary">submit</button>
-        </form>
-    </div>
-</div>
-<?php
+    <?php
 
-$content = ob_get_clean();
+    $content = ob_get_clean();
 
-// Scripts
-ob_start();
-?>
-<script src="/node_modules/jquery/dist/jquery.min.js"></script>
-<script src="/view/js/createPost.js" defer></script>
+    // Scripts
+    ob_start();
+    ?>
+    <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="/view/js/createPost.js" defer></script>
 <?php
-$scripts = ob_get_clean();
-require_once "view/template.php";
-renderTemplate($title, $content, null, null, $scripts);
+    $scripts = ob_get_clean();
+    require_once "view/template.php";
+    renderTemplate($title, $content, null, $head, $scripts);
 }

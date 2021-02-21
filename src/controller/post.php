@@ -39,7 +39,20 @@ function createPost($request)
 
             if (!empty($request["postTitle"]) && !empty($request["postDescription"])) {
 
-                $post = ["postID" => [
+                // Generate a post id by incrementing the amount of posts
+                require_once "model/postsManager.php";
+                $postID = count(getPosts()) + 1;
+                $imageNames = [];
+
+                require_once "model/imagesManager.php";
+                foreach ($_FILES as $key => $file) {
+                    $imageNames[$key] = saveImage($file, $postID, $key);
+                }
+
+                //TODO Handle images, coordinates etc and create model
+
+                //save post using model
+                $post = [$postID => [
                     "owner" => $_SESSION["username"],
                     "title" => $request["postTitle"],
                     "description" => $request["postDescription"],
@@ -50,17 +63,15 @@ function createPost($request)
                     ]
                 ]];
 
-                file_put_contents("log.log", print_r($_FILES, true));
-
-                //format and save images
-                foreach ($_FILES as $key => $file) {
-                    $name = basename($file["name"]);
-                    move_uploaded_file($file["tmp_name"], "view/content/img/original/" . $name);
-                    // file_put_contents("view/content/img/original/" . $key . ".png", $file);
+                //save filename
+                foreach ($imageNames as $key => $name) {
+                    $post[$postID]["pictures"][] = ["filename" => $name];
                 }
 
-                //TODO Handle images, coordinates etc and create model
-                //save post using model
+                //TODO add it to the existing posts via model
+                file_put_contents("data/test.post.json", json_encode($post, JSON_PRETTY_PRINT));
+
+                header("location:/home");
             }
         } else {
             //redirects to post creation page
