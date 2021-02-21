@@ -4,7 +4,12 @@
  * @brief this file manages user authentication
  */
 
-//login
+/**
+ * @function login
+ * @description Manages login request redirects to login view on bad login
+ * @TODO add error messages
+ * @param array $request : Expect an array with ["inputUsername"=>string, "inputPassword"=>string]
+ */
 function login($request)
 {
     // check for empty request
@@ -20,7 +25,7 @@ function login($request)
             // checks password
             //@$user["password"] == @$request["inputPassword"]
             if (password_verify(@$request["inputPassword"], @$user["password"])) {
-                $_SESSION["username"] = $request["inputUsername"];
+                createSession($request["inputUsername"]);
 
                 //redirects to /home
                 header("Location: /home");
@@ -36,7 +41,20 @@ function login($request)
     }
 }
 
-//logout
+/**
+ * @function createSession
+ * @description create session variables
+ * @param string $username
+ */
+function createSession($username)
+{
+    $_SESSION["username"] = $username;
+}
+
+/**
+ * @function logout
+ * @description destroys user session and redirects to /home
+ */
 function logout()
 {
     session_destroy();
@@ -44,7 +62,12 @@ function logout()
     require_once "view/home.php";
 }
 
-//register
+/**
+ * @function register
+ * @description Manages register request redirects to register view on bad input ()
+ * @TODO add error messages
+ * @param array $request : Expect an array with ["inputUsername"=>string, "inputPassword"=>string, "inputEmail"=>string]
+ */
 function register($request)
 {
     // check for empty request
@@ -58,12 +81,9 @@ function register($request)
 
             // try to add user
             require_once "model/usersManager.php";
-            $success = addUser($request["inputUsername"], $hashedPassword, $request["inputEmail"]);
-
-            // checks success
-            if ($success) {
+            if (addUser($request["inputUsername"], $hashedPassword, $request["inputEmail"])) {
                 // login to created account
-                $_SESSION["username"] = $request["inputUsername"];
+                createSession($request["inputUsername"]);
 
                 //redirects to /home
                 header("Location: /home");

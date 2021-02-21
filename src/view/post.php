@@ -43,7 +43,7 @@ $lon = @$post['coordinates']['lon'];
                 <?php
                 foreach ($post["pictures"] as $key => $picture) {
                 ?>
-                    <button type="button" data-bs-target="#postCarousel" data-bs-slide-to="<?= $key ?>" <?= ($key === array_key_first($post["pictures"]) ? " class=\"active border rounded-3 pb-2 mb-2 btn-primary w-25\" aria-current=\"true\"" : " class=\"border rounded-3 pb-2 mb-2 btn-primary w-25\"") ?> aria-label="Slide <?= $key ?>"></button>
+                    <button type="button" data-bs-target="#postCarousel" data-bs-slide-to="<?= $key ?>" class="border rounded-3 pb-2 mb-2 btn-primary w-25 <?= ($key === array_key_first($post["pictures"]) ? " active" : "") ?>" <?= ($key === array_key_first($post["pictures"]) ? "aria-current=\"true\"" : "") ?> aria-label="Slide <?= $key ?>"></button>
                 <?php
                 }
                 ?>
@@ -55,7 +55,7 @@ $lon = @$post['coordinates']['lon'];
                 ?>
                     <div class="carousel-item text-center<?= ($key === array_key_first($post["pictures"]) ? " active" : "") ?>">
                         <?php /** image with hotfix defined height */ ?>
-                        <img style="height:800px;background:url(<?= @$picture["path"] ?>) no-repeat center center; background-size: contain;" loading="lazy" class="w-100" href="<?=@$picture['path']?>">
+                        <img style="height:800px;background:url(<?= @$picture["path"] ?>) no-repeat center center; background-size: contain;" loading="lazy" class="w-100" href="<?= @$picture['path'] ?>">
                     </div>
 
                 <?php
@@ -118,6 +118,7 @@ $lon = @$post['coordinates']['lon'];
     </div>
     <div class="col-6" style="height: 600px;">
 
+        <?php /** OpenStreetMap */ ?>
         <div id="map"></div>
         <script>
             var map = L.map('map', {

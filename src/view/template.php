@@ -24,21 +24,23 @@
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
   <script src="/node_modules/leaflet/dist/leaflet.js"></script>
 
+  <?php /** Why is this a global dependency? */ ?>
   <link rel="stylesheet" href="/node_modules/leaflet/dist/leaflet.css" />
 
+  <?php /** Bootstrap */ ?>
   <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
 
+  <?php /** Custom scrollbar */ ?>
   <link rel="stylesheet" href="/view/css/scrollbar.css">
 
   <?php /** Favicon with default value */ ?>
-  <link rel="icon" href="<?= !empty($favicon) ? $favicon : "/view/content/icons/favicon.svg" ?>" type="image/svg+xml">
+  <link rel="icon" href="<?= $favicon ?? "/view/content/icons/favicon.svg" ?>" type="image/svg+xml">
 
   <?php /** View defined title */ ?>
-  <title><?= !empty($title) ? $title : "bad dev forgot to put a title" ?></title>
+  <title><?= $title ?? "bad dev forgot to put a title" ?></title>
 
   <?php /** Fixed navbar requires padding to avoid overlap */ ?>
   <style>
@@ -48,7 +50,7 @@
   </style>
 
   <?php /** Optional css */ ?>
-  <?= !empty($head) ? $head : "" ?>
+  <?= $head ?? "" ?>
 
 </head>
 
@@ -78,6 +80,7 @@
               <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
             <div class="col-12 col-md-4 col-xl-3 d-flex justify-content-md-end mt-2 mt-md-0 gx-0">
+              <?php /** Controls depending on the session */ ?>
               <?php
               if (!empty($_SESSION["username"])) {
                 echo "<a href=\"/post/create\" class=\"btn btn-primary me-2\">Create a post</a>";
@@ -96,11 +99,12 @@
   </header>
 
   <main>
-
-    <?= !empty($content) ? $content : "<h1>bad dev forgot to add content</h1>" ?>
+    <?php /** Content defined in views */ ?>
+    <?= $content ?? "<h1>bad dev forgot to add content</h1>" ?>
 
   </main>
 
+  <?php /** Static footer */ ?>
   <footer class="footer mt-auto py-3 bg-dark text-center">
 
     <div class="d-flex justify-content-center">
@@ -118,7 +122,8 @@
   </footer>
 
   <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-  <?= !empty($scripts) ? $scripts : "" ?>
+  <?php /** Custom html called at the end, mainly used for scripts */ ?>
+  <?= $scripts ?? "" ?>
 </body>
 
 </html>

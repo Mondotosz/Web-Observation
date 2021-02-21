@@ -11,7 +11,7 @@ ob_start();
 $title = "404";
 
 ?>
-<h1>404 : Page not found</h1>
+<h1 class="mx-auto pt-5" style="width:fit-content;">404 : Page not found</h1>
 <?php
 
 $content = ob_get_clean();

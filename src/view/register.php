@@ -6,7 +6,7 @@
  * @version 0.1 / 14.02.2021
  */
 
-//TODO : add confirm password filed and logic
+//TODO : add confirm password field and logic
 
 ob_start();
 $title = "register";

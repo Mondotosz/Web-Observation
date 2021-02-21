@@ -1,12 +1,19 @@
 <?php
 
-// Show post
+/**
+ * @function showPost
+ * @description 
+ * @param string $postID : key to the post in json
+ */
 function showPost($postID)
 {
+    // get the requested post
     require_once "model/postsManager.php";
     $post = getPost($postID);
 
+    // checks if it exist
     if (!empty($post)) {
+        // redirects to post view
         require_once "view/post.php";
     } else {
         //redirects to lost
@@ -14,7 +21,11 @@ function showPost($postID)
     }
 }
 
-// New post
+/**
+ * function createPost
+ * @description handles post creation requests
+ * @param array $request : contains post infos in an associative array, files are treated using the $_FILES global variable
+ */
 function createPost($request)
 {
     // User needs to be authenticated to create a post

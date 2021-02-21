@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @function trending
+ * @description gets every post and displays them in a single view
+ */
 function trending()
 {
     require_once "view/content/components/cards.php";
@@ -20,7 +24,7 @@ function trending()
             array_push($cards, getComponent($post["title"], $post["pictures"][0]["path"], "/post/" . $key));
         }
     }
-    
+
     // send cards to the trending view
     require_once "view/trending.php";
 }

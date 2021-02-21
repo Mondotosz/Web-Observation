@@ -9,6 +9,8 @@
 
 // Creates/Resumes a sessions
 session_start();
+
+// Dependencies
 require_once "controller/nav.php";
 require_once "controller/trending.php";
 require_once "controller/authentication.php";
@@ -34,7 +36,7 @@ switch ($_SERVER["REQUEST_URI"]) {
     case "/post/create":
         createPost($_POST);
         break;
-    case (preg_match('/\/post\/(.*)/', $_SERVER["REQUEST_URI"], $res) ? true : false):
+    case (preg_match('/\/post\/(.*)/', $_SERVER["REQUEST_URI"], $res) ? true : false): // Match revery requests on /post/*
         showPost(@$res[1]);
         break;
     default:

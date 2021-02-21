@@ -9,6 +9,7 @@
 
 
 $title = "Home";
+$currentNav = "home";
 
 ob_start();
 ?>

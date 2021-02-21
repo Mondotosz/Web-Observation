@@ -7,6 +7,10 @@
  * @version 0.1 / 10.02.2021
  */
 
+/**
+ * @param array $cards : card association array containing post titles, images and such
+ */
+
 ob_start();
 $title = "trending";
 $currentNav = "trending";
@@ -14,7 +18,7 @@ $scripts = "<script src=\"/node_modules/masonry-layout/dist/masonry.pkgd.min.js\
 ?>
 
 <div id="trendingMasonry" class="row mx-auto masonry" style="width:99vw;" data-masonry='{"percentPosition": true , "itemSelector" : ".masonry-item"}'>
-
+    <?php /** Load cards */ ?>
     <?php
     if (!empty($cards)) {
         foreach ($cards as $card) {
