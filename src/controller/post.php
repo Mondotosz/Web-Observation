@@ -15,9 +15,11 @@ function showPost($postID)
     if (!empty($post)) {
         // redirects to post view
         require_once "view/post.php";
+        showPostView($post);
     } else {
         //redirects to lost
         require "view/lost.php";
+        lostView();
     }
 }
 
@@ -62,11 +64,11 @@ function createPost($request)
             }
         } else {
             //redirects to post creation page
-            require "view/createPost.php";
+            require_once "view/createPost.php";
+            createPostView();
         }
     } else {
         //redirects to login page
         header("Location: /login");
-        require "view/login.php";
     }
 }

@@ -27,4 +27,5 @@ function trending()
 
     // send cards to the trending view
     require_once "view/trending.php";
+    trendingView($cards);
 }

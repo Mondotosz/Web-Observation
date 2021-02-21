@@ -9,9 +9,12 @@
 /**
  * @param array $post containing post name etc.
  */
+function createPostView(){
+
 ob_start();
 $title = "Create";
 
+// Content
 ?>
 <?php /** this div is used to center and resize the register form */ ?>
 <div class="row p-3 m-0 g-2">
@@ -82,6 +85,7 @@ $title = "Create";
 
 $content = ob_get_clean();
 
+// Scripts
 ob_start();
 ?>
 <script src="/node_modules/jquery/dist/jquery.min.js"></script>
@@ -89,3 +93,5 @@ ob_start();
 <?php
 $scripts = ob_get_clean();
 require_once "view/template.php";
+renderTemplate($title, $content, null, null, $scripts);
+}

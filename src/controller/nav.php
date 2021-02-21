@@ -7,6 +7,7 @@
 function home()
 {
     require_once "view/home.php";
+    homeView();
 }
 
 /**
@@ -16,4 +17,5 @@ function home()
 function lost()
 {
     require_once "view/lost.php";
+    lostView();
 }

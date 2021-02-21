@@ -12,6 +12,7 @@
  */
 function login($request)
 {
+    require_once "view/login.php";
     // check for empty request
     if (!empty($request)) {
 
@@ -30,14 +31,15 @@ function login($request)
                 //redirects to /home
                 header("Location: /home");
                 require "view/home.php";
+                homeView();
             } else {
-                require_once "view/login.php";
+                loginView();
             }
         } else {
-            require_once "view/login.php";
+            loginView();
         }
     } else {
-        require_once "view/login.php";
+        loginView();
     }
 }
 
@@ -59,7 +61,6 @@ function logout()
 {
     session_destroy();
     header("Location: /home");
-    require_once "view/home.php";
 }
 
 /**
@@ -70,6 +71,7 @@ function logout()
  */
 function register($request)
 {
+    require_once "view/register.php";
     // check for empty request
     if (!empty($request)) {
 
@@ -87,14 +89,13 @@ function register($request)
 
                 //redirects to /home
                 header("Location: /home");
-                require "view/home.php";
             } else {
-                require_once "view/register.php";
+                registerView();
             }
         } else {
-            require_once "view/register.php";
+            registerView();
         }
     } else {
-        require_once "view/register.php";
+        registerView();
     }
 }
