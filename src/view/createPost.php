@@ -35,13 +35,11 @@ function createPostView()
     <div class="row p-3 m-0 g-2">
         <?php /** images and map */ ?>
         <div class="col-12">
-
             <div id="postCarousel" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item text-center active">
+                <div id="carouselInner" class="carousel-inner">
+                    <div id="previewPlaceHolder" class="carousel-item text-center active">
                         <?php /** image with hotfix defined height */ ?>
-                        <div style="height:600px;background:black;" class="d-flex align-items-center justify-content-center">
-                            <h1 class="display-1">ONE</h1>
+                        <div style="height:800px;background:black url('/view/content/icons/dragAndDrop.svg') no-repeat center center;" class="d-flex align-items-center justify-content-center">
                         </div>
                     </div>
 
@@ -113,7 +111,6 @@ function createPostView()
             </script>
 
         </div>
-
     </div>
     <?php
 
