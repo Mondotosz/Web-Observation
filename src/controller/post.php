@@ -27,9 +27,11 @@ function showPost($postID)
  * function createPost
  * @description handles post creation requests
  * @param array $request : contains post infos in an associative array, files are treated using the $_FILES global variable
+ * @param array $files : contains file uploaded
  */
-function createPost($request)
+function createPost($request, $files)
 {
+    file_put_contents("log.log", print_r($request, true) . print_r($files, true));
     // User needs to be authenticated to create a post
     if (!empty($_SESSION["username"])) {
 
@@ -37,41 +39,31 @@ function createPost($request)
         //dummy verification
         if (!empty($request)) {
 
-            if (!empty($request["postTitle"]) && !empty($request["postDescription"])) {
+            if (!empty($request["title"]) && !empty($request["description"]) && !empty($files)) {
 
                 // Generate a post id by incrementing the amount of posts
                 require_once "model/postsManager.php";
                 $postID = count(getPosts()) + 1;
                 $imageNames = [];
 
+                // Save images
                 require_once "model/imagesManager.php";
-                foreach ($_FILES as $key => $file) {
+                foreach ($files as $key => $file) {
                     $imageNames[$key] = saveImage($file, $postID, $key);
                 }
 
-                //TODO Handle images, coordinates etc and create model
+                // Save post
+                require_once "model/postsManager.php";
+                $post = createPostObject($request["title"], $request["description"], $imageNames, @$request["tags"], @$request["coordinates"], $_SESSION["username"]);
+                addPost($postID, $post);
 
-                //save post using model
-                $post = [$postID => [
-                    "owner" => $_SESSION["username"],
-                    "title" => $request["postTitle"],
-                    "description" => $request["postDescription"],
-                    "date" => Date("d.m.Y"),
-                    "coordinates" => [
-                        "lon" => "dummy",
-                        "lat" => "dummy"
-                    ]
-                ]];
-
-                //save filename
-                foreach ($imageNames as $key => $name) {
-                    $post[$postID]["pictures"][] = ["filename" => $name];
+                // Answer depending on whether the request was sent via ajax or simple form
+                // Compatibility reasons
+                if (@$request["handler"] == "ajax") {
+                    echo $postID;
+                } else {
+                    header("location:/post/$postID");
                 }
-
-                //TODO add it to the existing posts via model
-                file_put_contents("data/test.post.json", json_encode($post, JSON_PRETTY_PRINT));
-
-                header("location:/home");
             }
         } else {
             //redirects to post creation page

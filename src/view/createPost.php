@@ -17,13 +17,8 @@ function createPostView()
     // Head
     ob_start();
 ?>
+    <link rel="stylesheet" href="/view/css/createPost.css">
     <style>
-        html,
-        body {
-            height: 100%;
-            margin: 0;
-        }
-
         #map {
             /* configure the size of the map */
             width: 100%;
@@ -68,26 +63,26 @@ function createPostView()
                 <?php /** title */ ?>
                 <div class="row">
                     <label for="postTitle" class="form-label">Title</label>
-                    <input type="text" id="postTitle" name="postTitle" class="form-control px-1 ms-2 w-75">
+                    <input type="text" id="postTitle" name="title" class="form-control px-1 ms-2 w-75" required>
                 </div>
                 <?php /** description */ ?>
                 <div class="row">
                     <label for="postDescription" class="form-label">Description</label>
-                    <input type="text" id="postDescription" name="postDescription" class="form-control px-1 ms-2 w-75 ">
+                    <input type="text" id="postDescription" name="description" class="form-control px-1 ms-2 w-75 " required>
                 </div>
                 <?php /** tags */ ?>
                 <div class="row">
-                    <div class="col">tags</div>
+                    <label for="postTags" class="form-label">Tags</label>
+                    <input type="text" name="tags" id="postTags" class="form-control px-1 ms-2 w-75 ">
                 </div>
                 <div class="d-flex">
                 </div>
                 <div class="row">
                     <label for="postImage" class="form-label">Image</label>
-                    <input type="file" id="postImage" name="postImage" class="form-control ms-2 w-75">
+                    <input type="file" multiple accept="image/*" id="postImage" name="postImage" onchange="handleFiles(this.files)" class="form-control ms-2 w-75">
                 </div>
                 <br>
-                <button id="create" class="btn btn-primary">Ajax</button>
-                <button type="submit" class="btn btn-primary">submit</button>
+                <button id="create" type="submit" class="btn btn-primary">submit</button>
             </form>
         </div>
         <div class="col-12 col-xl-6" style="height: 600px;">

@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * @function saveImage
+ * @description saves a given image in full and cropped format
+ * @warning fileNames should be generated elsewhere
+ * @param array $image
+ * @param int|string $postId used to define file name
+ * @param int $imageNumber used to define index in file name
+ * @return string|int $imageName filename | 0 if file isn't in ["png","jpeg","gif"]
+ */
 function saveImage($image, $postId, $imageNumber)
 {
 
@@ -44,14 +53,11 @@ function saveImage($image, $postId, $imageNumber)
         // Save to jpeg to save space
         $imageName = "$postId-$imageNumber.jpg";
         imagejpeg($thumbnail, "view/content/img/thumbnail/" . $imageName, 100);
+        imagejpeg($img, "view/content/img/original/" . $imageName, 100);
 
         // Destroys the variables to save ram usage
         imagedestroy($img);
         imagedestroy($thumbnail);
-
-        // Save the original
-        $imageName = "$postId-$imageNumber.$extension";
-        move_uploaded_file($image["tmp_name"], "view/content/img/original/" . $imageName);
     } else {
         $imageName = 0;
     }
@@ -59,9 +65,14 @@ function saveImage($image, $postId, $imageNumber)
     return $imageName;
 }
 
-function getImageExtension($image)
+/**
+ * @function getImageExtension
+ * @description gets file extension if it's an image
+ * @return string|int $ext file extension|0 if no in ["png","jpeg","gif"]
+ */
+function getImageExtension($file)
 {
-    switch (getimagesize($image["tmp_name"])["mime"]) {
+    switch (getimagesize($file["tmp_name"])["mime"]) {
         case "image/png":
             $ext = "png";
             break;
