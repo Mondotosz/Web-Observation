@@ -72,7 +72,10 @@ function createPostView()
                 <?php /** tags */ ?>
                 <div class="row">
                     <label for="postTags" class="form-label">Tags</label>
-                    <input type="text" name="tags" id="postTags" class="form-control px-1 ms-2 w-75 ">
+                    <input type="text" name="tags" id="postTags" class="form-control px-1 ms-2 w-75" style="display:none;">
+                    <input id="addTags" type="text" class="form-control px-1 ms-2 w-25" placeholder="Tag">
+                    <div id="tagsContainer" class="d-flex flex-wrap w-75">
+                    </div>
                 </div>
                 <div class="d-flex">
                 </div>

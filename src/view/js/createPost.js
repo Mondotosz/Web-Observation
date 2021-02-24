@@ -35,7 +35,9 @@ function getPost() {
     post.set("description", document.getElementById("postDescription").value)
 
     // Todo : handle multiple tags
-    post.append("tags[]", document.getElementById("postTags").value)
+    tags.forEach(tag => {
+        if (tag !== null) post.append("tags[]", tag)
+    })
 
     // Append images
     images.forEach((image, i) => {
@@ -149,3 +151,52 @@ function previewFile(file) {
 
 // Sends to postImage input
 $('#btnAddImage').click(function () { $('#postImage').trigger('click'); });
+
+// Tags
+let tags = [];
+
+let tagsContainer = document.getElementById("tagsContainer");
+
+document.getElementById("addTags").addEventListener("keypress", event => {
+    if (event.key === "Enter") {
+        // Avoid sending form on enter
+        event.preventDefault();
+        // Check if empty
+        const pattern = /^\s*$/
+        if (!pattern.test(event.target.value)) {
+            // save tag in array and get index
+            let index = tags.push(event.target.value) - 1
+            // create html element
+            let tagElement = document.createElement("div");
+            tagElement.innerText = event.target.value;
+            tagElement.classList.add("badge", "bg-primary", "p2", "me-2", "mt-2", "fs-6")
+            // remove tag control
+            let removeTagIcon = document.createElement("img")
+
+            removeTagIcon.src = "/view/content/icons/x.svg"
+            removeTagIcon.style.height = "1rem"
+            removeTagIcon.classList.add("removeTagIcon")
+            removeTagIcon.id = `removeTagIcon-${index}`
+
+
+            tagElement.appendChild(removeTagIcon)
+
+
+            // Append it to the tags container
+            tagsContainer.appendChild(tagElement)
+
+            document.getElementById(`removeTagIcon-${index}`).addEventListener("click", (e) => {
+                // get index from id
+                let pattern = /^removeTagIcon-(\d+)$/
+                let res = e.target.id.match(pattern)[1]
+                // null value in tags array
+                tags[res] = null;
+                // remove tag item
+                e.target.parentNode.remove(e.target)
+            })
+
+            // Empty input
+            event.target.value = "";
+        }
+    }
+})
