@@ -67,7 +67,7 @@ function showPostView($post)
                     ?>
                         <div class="carousel-item text-center<?= ($key === array_key_first($post["pictures"]) ? " active" : "") ?>">
                             <?php /** image with hotfix defined height */ ?>
-                            <div style="height:800px;background:black url(<?= @$picture["path"] ?>) no-repeat center center; background-size: contain;" loading="lazy" class="w-100" href="<?= @$picture['path'] ?>"></div>
+                            <div style="height:800px;background:black url(<?= "/view/content/img/original/" . @$picture["filename"] ?>) no-repeat center center; background-size: contain;" loading="lazy" class="w-100" href="<?= @$picture['path'] ?>"></div>
                         </div>
 
                     <?php

@@ -20,8 +20,8 @@ function trending()
     foreach ($posts as $key => $post) {
         // verify if the necessary values exist
         // might become obsolete with good constraints in the model
-        if (!empty($post["title"]) && !empty($post["pictures"][0]["path"])) {
-            array_push($cards, getComponent($post["title"], $post["pictures"][0]["path"], "/post/" . $key));
+        if (!empty($post["title"]) && !empty($post["pictures"][0]["filename"])) {
+            array_push($cards, getComponent($post["title"], "/view/content/img/thumbnail/" . $post["pictures"][0]["filename"], "/post/" . $key));
         }
     }
 
