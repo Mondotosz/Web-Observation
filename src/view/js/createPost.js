@@ -144,3 +144,8 @@ function previewFile(file) {
         }
     }
 }
+
+// Handling add button
+
+// Sends to postImage input
+$('#btnAddImage').click(function () { $('#postImage').trigger('click'); });

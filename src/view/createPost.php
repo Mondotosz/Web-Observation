@@ -33,7 +33,7 @@ function createPostView()
     ?>
     <?php /** this div is used to center and resize the register form */ ?>
     <div class="row p-3 m-0 g-2">
-        <?php /** images and map */ ?>
+        <?php /** images */ ?>
         <div class="col-12">
             <div id="postCarousel" class="carousel slide" data-bs-ride="carousel">
                 <div id="carouselInner" class="carousel-inner">
@@ -52,6 +52,7 @@ function createPostView()
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
                 </a>
+                <button id="btnAddImage" type="button" class="btn btn-primary btn-plus"></button>
             </div>
 
         </div>
@@ -76,8 +77,8 @@ function createPostView()
                 <div class="d-flex">
                 </div>
                 <div class="row">
-                    <label for="postImage" class="form-label">Image</label>
-                    <input type="file" multiple accept="image/*" id="postImage" name="postImage" onchange="handleFiles(this.files)" class="form-control ms-2 w-75">
+                    <label for="postImage" class="form-label" style="display:none;">Image</label>
+                    <input type="file" multiple accept="image/*" id="postImage" name="postImage" onchange="handleFiles(this.files)" class="form-control ms-2 w-75" style="display:none;">
                 </div>
                 <br>
                 <button id="create" type="submit" class="btn btn-primary">submit</button>
