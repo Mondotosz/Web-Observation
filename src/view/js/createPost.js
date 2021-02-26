@@ -1,9 +1,9 @@
-// Todo : Add controls
-// TODO : Add image with click option
-
+//todo add tag with button
+//todo prevent empty post
 // Preview Carousel
 let postCarousel = document.querySelector('#postCarousel')
 let carousel = new bootstrap.Carousel(postCarousel)
+let placeholder = document.getElementById("previewPlaceHolder").cloneNode(true)
 
 // Contains each image file
 let images = [];
@@ -34,14 +34,14 @@ function getPost() {
     post.set("title", document.getElementById("postTitle").value)
     post.set("description", document.getElementById("postDescription").value)
 
-    // Todo : handle multiple tags
     tags.forEach(tag => {
         if (tag !== null) post.append("tags[]", tag)
     })
 
+    images = removeNullInArray(images)
     // Append images
     images.forEach((image, i) => {
-        post.append(i, image)
+        if (image !== null) post.append(i, image)
     });
     return post;
 }
@@ -109,7 +109,6 @@ function previewFile(file) {
     reader.readAsDataURL(file);
     // Once ready
     reader.onload = function () {
-        //TODO add an id to reference controls
         //TODO add slide indicator
         // Create a div element
         let img = document.createElement('div');
@@ -137,8 +136,6 @@ function previewFile(file) {
 
         // Append it to a container element
         document.getElementById("carouselInner").appendChild(wrapper)
-
-        // carousel.cycle();
 
         // Remove placeholder
         if (document.getElementById("previewPlaceHolder") != null) {
@@ -200,3 +197,109 @@ document.getElementById("addTags").addEventListener("keypress", event => {
         }
     }
 })
+
+// remove image handler
+
+let removeItemModal = $("#removeItemModal")
+let removeItemCancel = $("#removeItemCancel")
+let removeItemConfirm = $("#removeItemConfirm")
+let btnRemoveImage = $("#btnRemoveImage");
+let removeItemContainer = $("#removeItemContainer")
+
+// used to disable certain controls when modal is displayed
+// TODO implement this
+let modalTab = false
+
+// show modal trigger
+btnRemoveImage.click((e) => {
+    removeItemModal.show()
+    modalTab = true
+
+    // load images as selectable
+    images.forEach((img, i) => {
+        // check for null value
+        if (img === null) {
+            return
+        }
+
+        let element = document.createElement("div")
+        element.style.height = "200px"
+        element.style.backgroundRepeat = "no-repeat";
+        element.style.backgroundPosition = "center center";
+        element.style.backgroundSize = "contain";
+
+        element.setAttribute("data-image-index", i)
+
+
+        element.classList.add("col-4")
+
+
+        let reader = new FileReader()
+        reader.readAsDataURL(img)
+        reader.onload = function () {
+            element.style.backgroundImage = `url("${reader.result}")`
+
+        }
+
+
+
+        element.addEventListener("click", (e) => {
+            if (e.target.classList.contains("removeImageSelected")) {
+                e.target.classList.remove("removeImageSelected")
+            } else {
+                e.target.classList.add("removeImageSelected")
+            }
+        })
+
+        removeItemContainer.append(element)
+
+    })
+
+})
+
+// hide on cancel
+removeItemCancel.click(e => {
+    removeItemModal.hide();
+    modalTab = false
+    removeItemContainer.empty()
+})
+
+// remove images
+removeItemConfirm.click(e => {
+    // get indexes
+    let selectedItems = removeItemContainer.find(".removeImageSelected").toArray()
+    // remove from preview
+    $("#carouselInner").empty()
+
+    // remove selected images
+    selectedItems.forEach(item => {
+        images[item.getAttribute("data-image-index")] = null;
+    })
+
+    let noImage = true
+
+    images.forEach(item => {
+        if (item !== null) {
+            previewFile(item)
+            noImage = false
+        }
+    })
+
+    if (noImage) {
+        document.getElementById("carouselInner").appendChild(placeholder)
+    }
+
+    // hide modal
+    removeItemModal.hide();
+    modalTab = false
+    removeItemContainer.empty()
+})
+
+// quick fix for null array indexes
+function removeNullInArray(array) {
+    let tmp = []
+    array.forEach(item => {
+        if (item !== null) tmp.push(item)
+    })
+    return tmp
+}

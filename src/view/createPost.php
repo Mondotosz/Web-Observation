@@ -31,7 +31,23 @@ function createPostView()
     // Content
     ob_start();
     ?>
-    <?php /** this div is used to center and resize the register form */ ?>
+    <div id="removeItemModal" class="modal" tabindex="-1">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Remove image</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body container-fluid">
+                    <div id="removeItemContainer" class="row m-0"></div>
+                </div>
+                <div class="modal-footer">
+                    <button id="removeItemCancel" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button id="removeItemConfirm" type="button" class="btn btn-primary">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div> <?php /** this div is used to center and resize the register form */ ?>
     <div class="row p-3 m-0 g-2">
         <?php /** images */ ?>
         <div class="col-12">
@@ -52,6 +68,7 @@ function createPostView()
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
                 </a>
+                <button id="btnRemoveImage" type="button" class="btn btn-danger btn-trash"></button>
                 <button id="btnAddImage" type="button" class="btn btn-primary btn-plus"></button>
             </div>
 

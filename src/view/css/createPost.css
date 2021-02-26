@@ -20,3 +20,23 @@
 	background-repeat: no-repeat;
 	z-index: 100; /* push the button to the foreground, high value because i didn't look further on how z-index works */
 }
+
+.btn-trash {
+	position: absolute !important;
+	bottom: 5%;
+	left: 5%;
+	width: 100px;
+	height: 100px;
+	line-height: 100px;
+	border-radius: 50%;
+	font-size: 100px;
+	text-align: center;
+	background-image: url("/view/content/icons/trash.svg");
+	background-position: center center;
+	background-repeat: no-repeat;
+	z-index: 100; /* push the button to the foreground, high value because i didn't look further on how z-index works */
+}
+
+.removeImageSelected {
+	border: solid 3px lightblue;
+}
