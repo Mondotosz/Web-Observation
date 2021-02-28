@@ -98,7 +98,7 @@ function createPostView()
                 </div>
                 <div class="row">
                     <label for="postImage" class="form-label" style="display:none;">Image</label>
-                    <input type="file" multiple accept="image/*" id="postImage" name="postImage" onchange="handleFiles(this.files)" class="form-control ms-2 w-75" style="display:none;">
+                    <input type="file" multiple accept=".jpg,.jpeg,.png,.gif" id="postImage" name="postImage" onchange="handleFiles(this.files)" class="form-control ms-2 w-75" style="display:none;">
                 </div>
                 <br>
                 <button id="create" type="submit" class="btn btn-primary">submit</button>

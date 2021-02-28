@@ -276,16 +276,16 @@ removeItemConfirm.click(e => {
         images[item.getAttribute("data-image-index")] = null;
     })
 
-    let noImage = true
+    // clean image array
+    images = removeNullInArray(images)
 
+    // regenerate previews
     images.forEach(item => {
-        if (item !== null) {
-            previewFile(item)
-            noImage = false
-        }
+        previewFile(item)
     })
 
-    if (noImage) {
+    // add placeholder when there are no images left
+    if (images.length < 1) {
         document.getElementById("carouselInner").appendChild(placeholder)
     }
 
