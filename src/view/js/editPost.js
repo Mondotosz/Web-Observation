@@ -1,11 +1,15 @@
 //todo add tag with button
 //todo prevent empty post
+// get id
+let postId = window.location.pathname.match(/\/post\/edit\/(\d+)/)[1]
+
 // Preview Carousel
 let postCarousel = document.querySelector('#postCarousel')
 let carousel = new bootstrap.Carousel(postCarousel)
 let placeholder = document.getElementById("previewPlaceHolder").cloneNode(true)
 
 // Contains each image file
+// Todo: get images from post
 let images = [];
 
 // Submit form
@@ -13,7 +17,7 @@ function submitForm(data) {
     $.ajax({
         type: "POST",
         enctype: 'multipart/form-data',
-        url: window.location.origin + "/post/create",
+        url: window.location.origin + "/post/edit/" + postId,
         data: data,
         processData: false,
         contentType: false,

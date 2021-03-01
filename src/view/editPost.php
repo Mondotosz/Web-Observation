@@ -58,6 +58,18 @@ function editPostView($post)
                         <div style="height:800px;background:black url('/view/content/icons/dragAndDrop.svg') no-repeat center center;" class="d-flex align-items-center justify-content-center">
                         </div>
                     </div>
+                    <?php
+                    foreach ($post["pictures"] as $picture) {
+                        //todo:repair
+                    ?>
+                        <div class="w-100" style="height: 800px;
+                            background-color: black;
+                            background-repeat: no-repeat; background-position: center center;
+                            background-size: contain;
+                            background-image: url(&quot;data:image/jpg;base64,<?= base64_encode(file_get_contents("view/content/img/original/" . $picture["filename"])) ?>&quot;)"></div>
+                    <?php
+                    }
+                    ?>
 
                 </div>
                 <a href="#postCarousel" class="carousel-control-prev" type="button" data-bs-target="#postCarousel" data-bs-slide="prev">
@@ -92,6 +104,13 @@ function editPostView($post)
                     <input type="text" name="tags" id="postTags" class="form-control px-1 ms-2 w-75" style="display:none;">
                     <input id="addTags" type="text" class="form-control px-1 ms-2 w-25" placeholder="Tag">
                     <div id="tagsContainer" class="d-flex flex-wrap w-75">
+                        <?php
+                        foreach (@$post["tags"] as $tag) {
+                        ?>
+                            <div class="badge bg-primary p2 me-2 mt-2 fs-6"><?= $tag ?><img src="/view/content/icons/x.svg" class="removeTagIcon" id="removeTagIcon-0" style="height: 1rem;"></div>
+                        <?php
+                        }
+                        ?>
                     </div>
                 </div>
                 <div class="d-flex">

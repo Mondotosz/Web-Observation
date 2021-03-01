@@ -121,7 +121,7 @@ function createPostView()
             <div id="map"></div>
             <script>
                 var map = L.map('map', {
-                    center: [<?=$_GET["latitude"]?>, <?=$_GET["longitude"]?>],
+                    center: [<?= $_GET["latitude"] ?>, <?= $_GET["longitude"] ?>],
                     zoom: 14,
                     scrollWheelZoom: false
                 });
@@ -137,8 +137,8 @@ function createPostView()
 
                 // show a marker on the map
                 L.marker({
-                    lon: <?=$_GET["longitude"]?>,
-                    lat: <?=$_GET["latitude"]?>
+                    lon: <?= $_GET["longitude"] ?>,
+                    lat: <?= $_GET["latitude"] ?>
                 }).bindPopup('C\'est le spot de photographie').addTo(map);
             </script>
 
