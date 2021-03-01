@@ -305,3 +305,19 @@ function removeNullInArray(array) {
     })
     return tmp
 }
+//map
+
+$("#postLatitude").change(e => {
+    window.lat = e.target.value
+    if ($("#postLongitude")) {
+        map.panTo(new L.LatLng(window.lat, window.lon))
+    }
+})
+
+$("#postLongitude").change(e => {
+    window.lon = e.target.value
+    if ($("#postLatitude")) {
+        map.panTo(new L.LatLng(window.lat, window.lon))
+
+    }
+})
