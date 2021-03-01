@@ -33,6 +33,8 @@ function getPost() {
     post.set("handler", "ajax")
     post.set("title", document.getElementById("postTitle").value)
     post.set("description", document.getElementById("postDescription").value)
+    post.set("coordinates[lon]", document.getElementById("postLongitude").value)
+    post.set("coordinates[lat]", document.getElementById("postLatitude").value)
 
     tags.forEach(tag => {
         if (tag !== null) post.append("tags[]", tag)

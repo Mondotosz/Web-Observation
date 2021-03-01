@@ -134,7 +134,7 @@ function showPostView($post)
             <div id="map"></div>
             <script>
                 var map = L.map('map', {
-                    center: [<?= $lon ?>, <?= $lat ?>],
+                    center: [<?=$lat?>, <?=$lon?>],
                     zoom: 14,
                     scrollWheelZoom: false
                 });
@@ -150,8 +150,8 @@ function showPostView($post)
 
                 // show a marker on the map
                 L.marker({
-                    lon: <?= $lat ?>,
-                    lat: <?= $lon ?>
+                    lon: <?=$lon?>,
+                    lat: <?=$lat?>
                 }).bindPopup('C\'est le spot de photographie').addTo(map);
             </script>
 

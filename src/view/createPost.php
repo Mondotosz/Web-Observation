@@ -94,6 +94,17 @@ function createPostView()
                     <div id="tagsContainer" class="d-flex flex-wrap w-75">
                     </div>
                 </div>
+                <h5>Coordinates</h5>
+                <?php /** coordinates longitude */ ?>
+                <div class="row">
+                    <label for="postLongitude" class="form-label">Longitude</label>
+                    <input type="text" id="postLongitude" name="longitude" class="form-control px-1 ms-2 w-75 " required>
+                </div>
+                <?php /** coordinates latitude */ ?>
+                <div class="row">
+                    <label for="postLatitude" class="form-label">Latitude</label>
+                    <input type="text" id="postLatitude" name="latitude" class="form-control px-1 ms-2 w-75 " required>
+                </div>
                 <div class="d-flex">
                 </div>
                 <div class="row">
@@ -110,7 +121,7 @@ function createPostView()
             <div id="map"></div>
             <script>
                 var map = L.map('map', {
-                    center: [46.831366, 6.564394],
+                    center: [<?=$_GET["latitude"]?>, <?=$_GET["longitude"]?>],
                     zoom: 14,
                     scrollWheelZoom: false
                 });
@@ -126,8 +137,8 @@ function createPostView()
 
                 // show a marker on the map
                 L.marker({
-                    lon: 6.564394,
-                    lat: 46.831366
+                    lon: <?=$_GET["longitude"]?>,
+                    lat: <?=$_GET["latitude"]?>
                 }).bindPopup('C\'est le spot de photographie').addTo(map);
             </script>
 
