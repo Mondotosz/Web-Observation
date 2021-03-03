@@ -75,3 +75,20 @@ function createPost($request, $files)
         header("Location: /login");
     }
 }
+
+function editPost($postId, $request)
+{
+    if (!empty($postId)) {
+        // get post and check ownership
+        require_once "model/postsManager.php";
+        $post = getPost($postId);
+
+        if(!empty($post) && $post["owner"] == $_SESSION["username"]){
+            require_once "view/editPost.php";
+            editPostView($post);
+        }
+        
+    } else {
+        header("Location: /home");
+    }
+}

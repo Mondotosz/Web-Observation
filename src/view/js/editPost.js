@@ -1,11 +1,15 @@
 //todo add tag with button
 //todo prevent empty post
+// get id
+let postId = window.location.pathname.match(/\/post\/edit\/(\d+)/)[1]
+
 // Preview Carousel
 let postCarousel = document.querySelector('#postCarousel')
 let carousel = new bootstrap.Carousel(postCarousel)
 let placeholder = document.getElementById("previewPlaceHolder").cloneNode(true)
 
 // Contains each image file
+// Todo: get images from post
 let images = [];
 
 // Submit form
@@ -13,7 +17,7 @@ function submitForm(data) {
     $.ajax({
         type: "POST",
         enctype: 'multipart/form-data',
-        url: window.location.origin + "/post/create",
+        url: window.location.origin + "/post/edit/" + postId,
         data: data,
         processData: false,
         contentType: false,
@@ -33,8 +37,6 @@ function getPost() {
     post.set("handler", "ajax")
     post.set("title", document.getElementById("postTitle").value)
     post.set("description", document.getElementById("postDescription").value)
-    post.set("coordinates[lon]", document.getElementById("postLongitude").value)
-    post.set("coordinates[lat]", document.getElementById("postLatitude").value)
 
     tags.forEach(tag => {
         if (tag !== null) post.append("tags[]", tag)
@@ -278,16 +280,16 @@ removeItemConfirm.click(e => {
         images[item.getAttribute("data-image-index")] = null;
     })
 
-    // clean image array
-    images = removeNullInArray(images)
+    let noImage = true
 
-    // regenerate previews
     images.forEach(item => {
-        previewFile(item)
+        if (item !== null) {
+            previewFile(item)
+            noImage = false
+        }
     })
 
-    // add placeholder when there are no images left
-    if (images.length < 1) {
+    if (noImage) {
         document.getElementById("carouselInner").appendChild(placeholder)
     }
 
@@ -305,19 +307,3 @@ function removeNullInArray(array) {
     })
     return tmp
 }
-//map
-
-$("#postLatitude").change(e => {
-    window.lat = e.target.value
-    if ($("#postLongitude")) {
-        map.panTo(new L.LatLng(window.lat, window.lon))
-    }
-})
-
-$("#postLongitude").change(e => {
-    window.lon = e.target.value
-    if ($("#postLatitude")) {
-        map.panTo(new L.LatLng(window.lat, window.lon))
-
-    }
-})

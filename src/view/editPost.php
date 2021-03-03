@@ -9,15 +9,15 @@
 /**
  * @param array $post containing post name etc.
  */
-function createPostView()
+function editPostView($post)
 {
 
-    $title = "Create";
+    $title = "Edit";
 
     // Head
     ob_start();
 ?>
-    <link rel="stylesheet" href="/view/css/createPost.css">
+    <link rel="stylesheet" href="/view/css/editPost.css">
     <style>
         #map {
             /* configure the size of the map */
@@ -58,6 +58,18 @@ function createPostView()
                         <div style="height:800px;background:black url('/view/content/icons/dragAndDrop.svg') no-repeat center center;" class="d-flex align-items-center justify-content-center">
                         </div>
                     </div>
+                    <?php
+                    foreach ($post["pictures"] as $picture) {
+                        //todo:repair
+                    ?>
+                        <div class="w-100" style="height: 800px;
+                            background-color: black;
+                            background-repeat: no-repeat; background-position: center center;
+                            background-size: contain;
+                            background-image: url(&quot;data:image/jpg;base64,<?= base64_encode(file_get_contents("view/content/img/original/" . $picture["filename"])) ?>&quot;)"></div>
+                    <?php
+                    }
+                    ?>
 
                 </div>
                 <a href="#postCarousel" class="carousel-control-prev" type="button" data-bs-target="#postCarousel" data-bs-slide="prev">
@@ -78,13 +90,13 @@ function createPostView()
             <form method="POST" enctype="multipart/form-data" action="/post/create">
                 <?php /** title */ ?>
                 <div class="row">
-                    <label for="postTitle" class="form-label">Title</label>
-                    <input type="text" id="postTitle" name="title" class="form-control px-1 ms-2 w-75" required>
+                    <label for="postTitle" class="form-label"></label>
+                    <input type="text" id="postTitle" name="title" class="form-control px-1 ms-2 w-75" required value="<?= $post["title"] ?? "" ?>">
                 </div>
                 <?php /** description */ ?>
                 <div class="row">
                     <label for="postDescription" class="form-label">Description</label>
-                    <input type="text" id="postDescription" name="description" class="form-control px-1 ms-2 w-75 " required>
+                    <input type="text" id="postDescription" name="description" class="form-control px-1 ms-2 w-75 " required value="<?= $post["description"] ?? "" ?>">
                 </div>
                 <?php /** tags */ ?>
                 <div class="row">
@@ -92,24 +104,20 @@ function createPostView()
                     <input type="text" name="tags" id="postTags" class="form-control px-1 ms-2 w-75" style="display:none;">
                     <input id="addTags" type="text" class="form-control px-1 ms-2 w-25" placeholder="Tag">
                     <div id="tagsContainer" class="d-flex flex-wrap w-75">
+                        <?php
+                        foreach (@$post["tags"] as $tag) {
+                        ?>
+                            <div class="badge bg-primary p2 me-2 mt-2 fs-6"><?= $tag ?><img src="/view/content/icons/x.svg" class="removeTagIcon" id="removeTagIcon-0" style="height: 1rem;"></div>
+                        <?php
+                        }
+                        ?>
                     </div>
-                </div>
-                <h5>Coordinates</h5>
-                <?php /** coordinates latitude */ ?>
-                <div class="row">
-                    <label for="postLatitude" class="form-label">Latitude</label>
-                    <input type="text" id="postLatitude" name="latitude" class="form-control px-1 ms-2 w-75 " required>
-                </div>
-                <?php /** coordinates longitude */ ?>
-                <div class="row">
-                    <label for="postLongitude" class="form-label">Longitude</label>
-                    <input type="text" id="postLongitude" name="longitude" class="form-control px-1 ms-2 w-75 " required>
                 </div>
                 <div class="d-flex">
                 </div>
                 <div class="row">
                     <label for="postImage" class="form-label" style="display:none;">Image</label>
-                    <input type="file" multiple accept=".jpg,.jpeg,.png,.gif" id="postImage" name="postImage" onchange="handleFiles(this.files)" class="form-control ms-2 w-75" style="display:none;">
+                    <input type="file" multiple accept="image/*" id="postImage" name="postImage" onchange="handleFiles(this.files)" class="form-control ms-2 w-75" style="display:none;">
                 </div>
                 <br>
                 <button id="create" type="submit" class="btn btn-primary">submit</button>
@@ -121,7 +129,7 @@ function createPostView()
             <div id="map"></div>
             <script>
                 var map = L.map('map', {
-                    center: [<?= $_GET["latitude"] ?>, <?= $_GET["longitude"] ?>],
+                    center: [46.831366, 6.564394],
                     zoom: 14,
                     scrollWheelZoom: false
                 });
@@ -137,8 +145,8 @@ function createPostView()
 
                 // show a marker on the map
                 L.marker({
-                    lon: <?= $_GET["longitude"] ?>,
-                    lat: <?= $_GET["latitude"] ?>
+                    lon: 6.564394,
+                    lat: 46.831366
                 }).bindPopup('C\'est le spot de photographie').addTo(map);
             </script>
 
@@ -152,7 +160,7 @@ function createPostView()
     ob_start();
     ?>
     <script src="/node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="/view/js/createPost.js" defer></script>
+    <script src="/view/js/editPost.js" defer></script>
 <?php
     $scripts = ob_get_clean();
     require_once "view/template.php";
