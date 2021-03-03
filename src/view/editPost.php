@@ -53,20 +53,16 @@ function editPostView($post)
         <div class="col-12">
             <div id="postCarousel" class="carousel slide" data-bs-ride="carousel">
                 <div id="carouselInner" class="carousel-inner">
-                    <div id="previewPlaceHolder" class="carousel-item text-center active">
-                        <?php /** image with hotfix defined height */ ?>
-                        <div style="height:800px;background:black url('/view/content/icons/dragAndDrop.svg') no-repeat center center;" class="d-flex align-items-center justify-content-center">
-                        </div>
-                    </div>
                     <?php
-                    foreach ($post["pictures"] as $picture) {
-                        //todo:repair
+                    foreach ($post["pictures"] as $key => $picture) {
                     ?>
-                        <div class="w-100" style="height: 800px;
-                            background-color: black;
-                            background-repeat: no-repeat; background-position: center center;
-                            background-size: contain;
-                            background-image: url(&quot;data:image/jpg;base64,<?= base64_encode(file_get_contents("view/content/img/original/" . $picture["filename"])) ?>&quot;)"></div>
+                        <div class="carousel-item<?= $key === array_key_first($post["pictures"]) ? " active" : "" ?>">
+                            <div class="w-100" style="height: 800px;
+                                background-color: black;
+                                background-repeat: no-repeat; background-position: center center;
+                                background-size: contain;
+                                background-image: url(&quot;data:image/jpg;base64,<?= base64_encode(file_get_contents("view/content/img/original/" . $picture["filename"])) ?>&quot;)"></div>
+                        </div>
                     <?php
                     }
                     ?>
@@ -117,7 +113,7 @@ function editPostView($post)
                 </div>
                 <div class="row">
                     <label for="postImage" class="form-label" style="display:none;">Image</label>
-                    <input type="file" multiple accept="image/*" id="postImage" name="postImage" onchange="handleFiles(this.files)" class="form-control ms-2 w-75" style="display:none;">
+                    <input type="file" multiple accept=".jpeg, .jpg, .png, .gif" id="postImage" name="postImage" onchange="handleFiles(this.files); this.value = null" class="form-control ms-2 w-75" style="display:none;">
                 </div>
                 <br>
                 <button id="create" type="submit" class="btn btn-primary">submit</button>

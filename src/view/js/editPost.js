@@ -1,12 +1,19 @@
 //todo add tag with button
 //todo prevent empty post
 // get id
-let postId = window.location.pathname.match(/\/post\/edit\/(\d+)/)[1]
+let postId = window.location.pathname.match(/\/post\/(\d+)\/edit\/?/)[1]
 
 // Preview Carousel
 let postCarousel = document.querySelector('#postCarousel')
 let carousel = new bootstrap.Carousel(postCarousel)
-let placeholder = document.getElementById("previewPlaceHolder").cloneNode(true)
+
+// create placeholder element using jquery syntax
+function createPlaceHolder() {
+    let placeHolder = $("<div>", { id: "previewPlaceHolder", class: "carousel-item text-center active" })
+    placeHolder.append($("<div>", { class: "d-flex align-items-center justify-content-center", style: "height:800px;background:black url('/view/content/icons/dragAndDrop.svg') no-repeat center center;" }))
+    // return dom element from jquery object
+    return placeHolder[0]
+}
 
 // Contains each image file
 // Todo: get images from post
@@ -280,6 +287,8 @@ removeItemConfirm.click(e => {
         images[item.getAttribute("data-image-index")] = null;
     })
 
+    images = removeNullInArray(images)
+
     let noImage = true
 
     images.forEach(item => {
@@ -290,7 +299,7 @@ removeItemConfirm.click(e => {
     })
 
     if (noImage) {
-        document.getElementById("carouselInner").appendChild(placeholder)
+        document.getElementById("carouselInner").appendChild(createPlaceHolder())
     }
 
     // hide modal
