@@ -33,6 +33,12 @@ function showPostView($post)
     </style>
     <?php
     $head = ob_get_clean();
+    // Scripts
+    ob_start();
+    ?>
+    <script src="/view/js/fullscreenImage.js"></script>
+    <?php
+    $script = ob_get_clean();
 
     // Content
     ob_start();
@@ -67,7 +73,7 @@ function showPostView($post)
                     ?>
                         <div class="carousel-item text-center<?= ($key === array_key_first($post["pictures"]) ? " active" : "") ?>">
                             <?php /** image with hotfix defined height */ ?>
-                            <div style="height:800px;background:black url(<?= "/view/content/img/original/" . @$picture["filename"] ?>) no-repeat center center; background-size: contain;" loading="lazy" class="w-100" href="<?= @$picture['path'] ?>"></div>
+                            <div onclick="toggleFullScreen('<?= @$picture['filename'] ?>')" id="<?= @$picture['filename'] ?>" style="height:800px;background:black url(<?= "/view/content/img/original/" . @$picture["filename"] ?>) no-repeat center center; background-size: contain;" loading="lazy" class="w-100" href="<?= @$picture['path'] ?>"></div>
                         </div>
 
                     <?php
@@ -126,7 +132,6 @@ function showPostView($post)
                     </tr>
                 </tbody>
             </table>
-
         </div>
         <div class="col-12 col-xl-6" style="height: 600px;">
 
@@ -134,7 +139,7 @@ function showPostView($post)
             <div id="map"></div>
             <script>
                 var map = L.map('map', {
-                    center: [<?=$lat?>, <?=$lon?>],
+                    center: [<?= $lat ?>, <?= $lon ?>],
                     zoom: 14,
                     scrollWheelZoom: false
                 });
@@ -150,8 +155,8 @@ function showPostView($post)
 
                 // show a marker on the map
                 L.marker({
-                    lon: <?=$lon?>,
-                    lat: <?=$lat?>
+                    lon: <?= $lon ?>,
+                    lat: <?= $lat ?>
                 }).bindPopup('C\'est le spot de photographie').addTo(map);
             </script>
 
@@ -162,5 +167,5 @@ function showPostView($post)
     $content = ob_get_clean();
 
     require_once "view/template.php";
-    renderTemplate($title, $content, null, $head);
+    renderTemplate($title, $content, null, $head, $script);
 }

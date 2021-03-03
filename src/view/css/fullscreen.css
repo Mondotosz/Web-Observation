@@ -1,0 +1,17 @@
+.fullscreen img {
+  width: 100%;
+  height: 100%;
+}
+.fullscreen {
+  z-index: 9999;
+  position: fixed;
+  margin: 0 auto;
+  width: 90%;
+  height: 90%;
+  top: 5%;
+  left: 5%;
+  background-color: #0FF;
+}
+.toFullscreen:hover{
+    opacity: 0.8;
+}
