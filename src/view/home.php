@@ -12,6 +12,14 @@ function homeView()
 
     $title = "Home";
     $currentNav = "home";
+    $head = "<style>
+    .navbar{
+        opacity: 0.75;
+    }
+    body{
+        padding-top: 0px !important;
+    }
+    </style>";
     // Content
     ob_start();
 ?>
@@ -20,18 +28,15 @@ function homeView()
         <div id="homeCarousel" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner bg-info" role="listbox">
                 <div class="carousel-item active">
-                    <div class="d-flex align-items-center justify-content-center min-vh-100">
-                        <h1 class="display-1">ONE</h1>
+                    <div class="d-flex align-items-center justify-content-center min-vh-100" style="background: url('view/content/public/Home/1.jpg') no-repeat center center; background-size: cover">
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <div class="d-flex align-items-center justify-content-center min-vh-100">
-                        <h1 class="display-1">TWO</h1>
+                    <div class="d-flex align-items-center justify-content-center min-vh-100" style="background: url('view/content/public/Home/2.jpg') no-repeat center center; background-size: cover">
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <div class="d-flex align-items-center justify-content-center min-vh-100">
-                        <h1 class="display-1">THREE</h1>
+                    <div class="d-flex align-items-center justify-content-center min-vh-100" style="background: url('view/content/public/Home/3.jpg') no-repeat center center; background-size: cover">
                     </div>
                 </div>
             </div>
@@ -48,5 +53,5 @@ function homeView()
     $content = ob_get_clean();
 
     require_once "view/template.php";
-    renderTemplate($title, $content, $currentNav);
+    renderTemplate($title, $content, $currentNav, $head);
 }
