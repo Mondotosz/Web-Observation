@@ -56,7 +56,7 @@ function editPostView($post)
                     <?php
                     foreach ($post["pictures"] as $key => $picture) {
                     ?>
-                        <div class="carousel-item<?= $key === array_key_first($post["pictures"]) ? " active" : "" ?>">
+                        <div class="carousel-item<?= $key === array_key_first($post["pictures"]) ? " active" : "" ?>" data-image-filename="<?= $picture["filename"] ?>">
                             <div class="w-100" style="height: 800px;
                                 background-color: black;
                                 background-repeat: no-repeat; background-position: center center;
@@ -101,9 +101,9 @@ function editPostView($post)
                     <input id="addTags" type="text" class="form-control px-1 ms-2 w-25" placeholder="Tag">
                     <div id="tagsContainer" class="d-flex flex-wrap w-75">
                         <?php
-                        foreach (@$post["tags"] as $tag) {
+                        foreach (@$post["tags"] as $key => $tag) {
                         ?>
-                            <div class="badge bg-primary p2 me-2 mt-2 fs-6"><?= $tag ?><img src="/view/content/icons/x.svg" class="removeTagIcon" id="removeTagIcon-0" style="height: 1rem;"></div>
+                            <div class="badge bg-primary p2 me-2 mt-2 fs-6"><?= $tag ?><img src="/view/content/icons/x.svg" class="removeTagIcon" style="height: 1rem;" data-tags-id="<?= $key ?>"></div>
                         <?php
                         }
                         ?>

@@ -16,22 +16,33 @@ function createPlaceHolder() {
 }
 
 // Contains each image file
-// Todo: get images from post
 let images = [];
+
+// Get the file objects from the server
+$(document).ready(() => {
+    $("[data-image-filename]").toArray().forEach(div => {
+        fetch(window.location.origin + "/view/content/img/original/" + div.getAttribute("data-image-filename"))
+            .then(response => response.blob())
+            .then(data => {
+                images.push(data)
+            })
+    })
+})
 
 // Submit form
 function submitForm(data) {
     $.ajax({
         type: "POST",
         enctype: 'multipart/form-data',
-        url: window.location.origin + "/post/edit/" + postId,
+        url: window.location.origin + "/post/" + postId + "/edit",
         data: data,
         processData: false,
         contentType: false,
         cache: false,
         timeout: 60000,
         success: (e) => {
-            window.location.replace(window.location.origin + "/post/" + e)
+            console.log(e)
+            // window.location.replace(window.location.origin + "/post/" + e)
         }
     });
 }
@@ -45,13 +56,12 @@ function getPost() {
     post.set("title", document.getElementById("postTitle").value)
     post.set("description", document.getElementById("postDescription").value)
 
-    tags.forEach(tag => {
+    removeNullInArray(tags).forEach(tag => {
         if (tag !== null) post.append("tags[]", tag)
     })
 
-    images = removeNullInArray(images)
     // Append images
-    images.forEach((image, i) => {
+    removeNullInArray(images).forEach((image, i) => {
         if (image !== null) post.append(i, image)
     });
     return post;
@@ -163,7 +173,22 @@ $('#btnAddImage').click(function () { $('#postImage').trigger('click'); });
 // Tags
 let tags = [];
 
-let tagsContainer = document.getElementById("tagsContainer");
+let tagsContainer = $("#tagsContainer")
+
+$(document).ready(() => {
+    let tagElements = $("img[data-tags-id]")
+
+    tagElements.each((value, element) => {
+        element.addEventListener("click", (e) => {
+            tags[value] = null
+            e.target.parentNode.remove(e.target)
+        })
+    })
+
+    tagElements.parent().each((id, element) => {
+        tags[id] = element.textContent
+    })
+})
 
 document.getElementById("addTags").addEventListener("keypress", event => {
     if (event.key === "Enter") {
@@ -174,35 +199,26 @@ document.getElementById("addTags").addEventListener("keypress", event => {
         if (!pattern.test(event.target.value)) {
             // save tag in array and get index
             let index = tags.push(event.target.value) - 1
+
             // create html element
-            let tagElement = document.createElement("div");
-            tagElement.innerText = event.target.value;
-            tagElement.classList.add("badge", "bg-primary", "p2", "me-2", "mt-2", "fs-6")
+            let tagElement = $("<div>", { text: event.target.value, class: "badge bg-primary p2 me-2 mt-2 fs-6" })
+
             // remove tag control
-            let removeTagIcon = document.createElement("img")
+            let tagElementRemoveIcon = $("<img>", { src: "/view/content/icons/x.svg", style: "height:1rem;", class: "removeTagIcon", "data-tags-id": index })
 
-            removeTagIcon.src = "/view/content/icons/x.svg"
-            removeTagIcon.style.height = "1rem"
-            removeTagIcon.classList.add("removeTagIcon")
-            removeTagIcon.id = `removeTagIcon-${index}`
-
-
-            tagElement.appendChild(removeTagIcon)
+            tagElement.append(tagElementRemoveIcon)
 
 
             // Append it to the tags container
-            tagsContainer.appendChild(tagElement)
+            tagsContainer.append(tagElement)
 
-            document.getElementById(`removeTagIcon-${index}`).addEventListener("click", (e) => {
-                // get index from id
-                let pattern = /^removeTagIcon-(\d+)$/
-                let res = e.target.id.match(pattern)[1]
+            $(`[data-tags-id=${index}]`).click(e => {
                 // null value in tags array
-                tags[res] = null;
+                tags[index] = null
                 // remove tag item
                 e.target.parentNode.remove(e.target)
             })
-
+            
             // Empty input
             event.target.value = "";
         }
@@ -233,28 +249,30 @@ btnRemoveImage.click((e) => {
             return
         }
 
-        let element = document.createElement("div")
-        element.style.height = "200px"
-        element.style.backgroundRepeat = "no-repeat";
-        element.style.backgroundPosition = "center center";
-        element.style.backgroundSize = "contain";
+        let element = $("<div>",{"data-image-index":i,class:"col-12 col-md-4",style:"height:200px"})
 
-        element.setAttribute("data-image-index", i)
+        let ele = document.createElement("div")
+        ele.style.height = "200px"
+        ele.style.backgroundRepeat = "no-repeat";
+        ele.style.backgroundPosition = "center center";
+        ele.style.backgroundSize = "contain";
+
+        ele.setAttribute("data-image-index", i)
 
 
-        element.classList.add("col-4")
+        ele.classList.add("col-4")
 
 
         let reader = new FileReader()
         reader.readAsDataURL(img)
         reader.onload = function () {
-            element.style.backgroundImage = `url("${reader.result}")`
+            ele.style.backgroundImage = `url("${reader.result}")`
 
         }
 
 
 
-        element.addEventListener("click", (e) => {
+        ele.addEventListener("click", (e) => {
             if (e.target.classList.contains("removeImageSelected")) {
                 e.target.classList.remove("removeImageSelected")
             } else {
@@ -262,7 +280,7 @@ btnRemoveImage.click((e) => {
             }
         })
 
-        removeItemContainer.append(element)
+        removeItemContainer.append(ele)
 
     })
 

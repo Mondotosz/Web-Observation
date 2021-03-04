@@ -31,7 +31,6 @@ function showPost($postID)
  */
 function createPost($request, $files)
 {
-    file_put_contents("log.log", print_r($request, true) . print_r($files, true));
     // User needs to be authenticated to create a post
     if (!empty($_SESSION["username"])) {
 
@@ -78,16 +77,28 @@ function createPost($request, $files)
 
 function editPost($postId, $request)
 {
+    file_put_contents("log.log", $postId);
     if (!empty($postId)) {
         // get post and check ownership
         require_once "model/postsManager.php";
         $post = getPost($postId);
 
-        if(!empty($post) && $post["owner"] == $_SESSION["username"]){
-            require_once "view/editPost.php";
-            editPostView($post);
+        if (!empty($post) && $post["owner"] == $_SESSION["username"]) {
+
+            if (!empty($request)) {
+
+                // Answer depending on whether the request was sent via ajax or simple form
+                // Compatibility reasons
+                if (@$request["handler"] == "ajax") {
+                    echo "$postId";
+                } else {
+                    header("location:/post/$postID");
+                }
+            } else {
+                require_once "view/editPost.php";
+                editPostView($post);
+            }
         }
-        
     } else {
         header("Location: /home");
     }
