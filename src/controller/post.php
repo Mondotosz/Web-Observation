@@ -15,7 +15,7 @@ function showPost($postId)
     if (!empty($post)) {
         // redirects to post view
         require_once "view/post.php";
-        showPostView($post,$postId);
+        showPostView($post, $postId);
     } else {
         //redirects to lost
         require "view/lost.php";
@@ -129,6 +129,26 @@ function editPost($postId, $request, $files)
             }
         }
     } else {
+        header("Location: /home");
+    }
+}
+
+/**
+ * @function deletePost
+ * @description handles post deletion requests
+ * @param int $postId : id of the post to delete
+ */
+function deletePost($postId)
+{
+    if (!empty($postId)) {
+        // get post and check ownership
+        require_once "model/postsManager.php";
+        $post = getPost($postId);
+        if (!empty($post) && $post["owner"] == $_SESSION["username"]) {
+            // remove post
+            removePost($postId);
+        }
+        // send to home
         header("Location: /home");
     }
 }

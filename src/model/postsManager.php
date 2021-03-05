@@ -132,3 +132,19 @@ function setPost($id, $post)
 
     return $res;
 }
+
+function removePost($id)
+{
+    // Get every posts
+    $posts = getPosts();
+    // Set id to selected post
+    $posts[strval($id)] = null;
+    // Encode to json
+    $posts = json_encode($posts);
+    // Check id data directory exist and creates it if it doesn't
+    file_exists("data") ?: mkdir("data");
+    // Write to posts.json
+    $res = file_put_contents("data/posts.json", $posts);
+
+    return $res;
+}
