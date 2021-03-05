@@ -121,10 +121,16 @@ function createPostView()
             <div id="map"></div>
             <script>
                 var map = L.map('map', {
-                    center: [<?= $_GET["latitude"] ?>, <?= $_GET["longitude"] ?>],
+                    center: [<?= $_GET["latitude"] ?? 46.82 ?>, <?= $_GET["longitude"] ?? 6.505 ?>],
                     zoom: 14,
-                    scrollWheelZoom: false
+                    scrollWheelZoom: true
                 });
+                //geolocalization
+                map.locate({
+                    setView: true,
+                    zoom: 14,
+                    scrollWheelZoom: true
+                })
 
                 // add the OpenStreetMap tiles
                 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -135,11 +141,13 @@ function createPostView()
                 // show the scale bar on the lower left corner
                 L.control.scale().addTo(map);
 
+
                 // show a marker on the map
-                L.marker({
-                    lon: <?= $_GET["longitude"] ?>,
-                    lat: <?= $_GET["latitude"] ?>
-                }).bindPopup('C\'est le spot de photographie').addTo(map);
+                var marker = new L.marker([46.82, 6.505], {
+                    draggable: true,
+                    autoPan: true
+                }).addTo(map).bindPopup('C\'est le spot de photographie');
+
             </script>
 
         </div>

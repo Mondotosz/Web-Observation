@@ -318,6 +318,19 @@ $("#postLongitude").change(e => {
     window.lon = e.target.value
     if ($("#postLatitude")) {
         map.panTo(new L.LatLng(window.lat, window.lon))
-
     }
+})
+
+marker.addEventListener("moveend", e => {
+    var markerLatLng = marker.getLatLng()
+    var lat = markerLatLng.lat
+    var lng = markerLatLng.lng
+
+    var txtLat = document.getElementById("postLatitude")
+    var txtLng = document.getElementById("postLongitude")
+    
+    txtLat.value = lat;
+    txtlng.value = lng;
+
+    console.log(lat,lng)
 })
