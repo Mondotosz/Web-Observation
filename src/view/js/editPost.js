@@ -1,21 +1,15 @@
 //todo add tag with button
 //todo prevent empty post
-// get id
-let postId = window.location.pathname.match(/\/post\/(\d+)\/edit\/?/)[1]
-
-// Preview Carousel
-let postCarousel = document.querySelector('#postCarousel')
-let carousel = new bootstrap.Carousel(postCarousel)
 
 // create placeholder element using jquery syntax
 function createPlaceHolder() {
     let placeHolder = $("<div>", { id: "previewPlaceHolder", class: "carousel-item text-center active" })
     placeHolder.append($("<div>", { class: "d-flex align-items-center justify-content-center", style: "height:800px;background:black url('/view/content/icons/dragAndDrop.svg') no-repeat center center;" }))
     // return dom element from jquery object
-    return placeHolder[0]
+    return placeHolder
 }
 
-// Contains each image file
+// declare images array containing each image file
 let images = [];
 
 // Get the file objects from the server
@@ -31,6 +25,9 @@ $(document).ready(() => {
 
 // Submit form
 function submitForm(data) {
+    // get id from the first match
+    let postId = window.location.pathname.match(/\/post\/(\d+)\/edit\/?/)[1]
+
     $.ajax({
         type: "POST",
         enctype: 'multipart/form-data',
@@ -41,8 +38,12 @@ function submitForm(data) {
         cache: false,
         timeout: 60000,
         success: (e) => {
-            console.log(e)
-            // window.location.replace(window.location.origin + "/post/" + e)
+            e = JSON.parse(e)
+            if (e.response == "success") {
+                window.location.replace(window.location.origin + "/post/" + e.postId)
+            } else if (e.response == "fail") {
+                console.log(e.error)
+            }
         }
     });
 }
@@ -68,19 +69,27 @@ function getPost() {
 }
 
 // Send post on button click
-document.getElementById("create").addEventListener("click", (e) => {
+$("#create").click((e) => {
     e.preventDefault();
     let post = getPost();
-    submitForm(post);
+
+    // Check for required fields
+    let emptyPattern = /$\s*^/
+    if (emptyPattern.test(post.get("title")) || emptyPattern.test(post.get("description")) || removeNullInArray(images).length <= 0) {
+        alert("please fill all required fields")
+    } else {
+        submitForm(post);
+    }
+
 });
 
 // Handle drag and drop
-let dropArea = document.getElementById('postCarousel');
+let dropArea = $('#postCarousel')
 
-// Prevent default action
-;['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-    dropArea.addEventListener(eventName, preventDefaults, false)
-})
+    // Prevent default action
+    ;['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        dropArea.on(eventName, preventDefaults, false)
+    })
 
 function preventDefaults(e) {
     e.preventDefault()
@@ -88,24 +97,24 @@ function preventDefaults(e) {
 }
 
 ;['dragenter', 'dragover'].forEach(eventName => {
-    dropArea.addEventListener(eventName, highlight, false)
+    dropArea.on(eventName, highlight)
 })
 
     ;['dragleave', 'drop'].forEach(eventName => {
-        dropArea.addEventListener(eventName, unHighlight, false)
+        dropArea.on(eventName, unHighlight)
     })
 
 // un/Highlight drop area
 function highlight(e) {
-    dropArea.classList.add('highlight')
+    dropArea.addClass('highlight')
 }
 
 function unHighlight(e) {
-    dropArea.classList.remove('highlight')
+    dropArea.removeClass('highlight')
 }
 
 // handle drop
-dropArea.addEventListener('drop', handleDrop, false)
+dropArea[0].addEventListener('drop', handleDrop, false)
 
 function handleDrop(e) {
     let dt = e.dataTransfer
@@ -132,22 +141,17 @@ function previewFile(file) {
     reader.onload = function () {
         //TODO add slide indicator
         // Create a div element
-        let img = document.createElement('div');
-        // Style it as a bootstrap carousel item
-        img.style.height = "800px";
-        img.style.backgroundColor = "black";
-        img.style.backgroundRepeat = "no-repeat";
-        img.style.backgroundPosition = "center center";
-        img.style.backgroundSize = "contain";
-        img.classList.add("w-100");
-
-        // Set the image as its source
-        img.style.backgroundImage = `url("${reader.result}")`
+        let img = $("<div>", {
+            style: `height:800px;background:black url("${reader.result}") no-repeat center center;background-size:contain`,
+            class: "w-100"
+        })
 
         // Add carousel item wrapper
-        let wrapper = document.createElement("div");
-        wrapper.classList.add("carousel-item", "active")
-        wrapper.appendChild(img);
+        let wrapper = $("<div>",{
+            class:"carousel-item active"
+        })
+
+        wrapper.append(img)
 
         // Remove active class from other items
         let items = document.getElementsByClassName("carousel-item")
@@ -156,7 +160,7 @@ function previewFile(file) {
         })
 
         // Append it to a container element
-        document.getElementById("carouselInner").appendChild(wrapper)
+        document.getElementById("carouselInner").appendChild(wrapper[0])
 
         // Remove placeholder
         if (document.getElementById("previewPlaceHolder") != null) {
@@ -201,10 +205,18 @@ document.getElementById("addTags").addEventListener("keypress", event => {
             let index = tags.push(event.target.value) - 1
 
             // create html element
-            let tagElement = $("<div>", { text: event.target.value, class: "badge bg-primary p2 me-2 mt-2 fs-6" })
+            let tagElement = $("<div>", {
+                text: event.target.value,
+                class: "badge bg-primary p2 me-2 mt-2 fs-6"
+            })
 
             // remove tag control
-            let tagElementRemoveIcon = $("<img>", { src: "/view/content/icons/x.svg", style: "height:1rem;", class: "removeTagIcon", "data-tags-id": index })
+            let tagElementRemoveIcon = $("<img>", {
+                src: "/view/content/icons/x.svg",
+                style: "height:1rem;",
+                class: "removeTagIcon",
+                "data-tags-id": index
+            })
 
             tagElement.append(tagElementRemoveIcon)
 
@@ -218,7 +230,7 @@ document.getElementById("addTags").addEventListener("keypress", event => {
                 // remove tag item
                 e.target.parentNode.remove(e.target)
             })
-            
+
             // Empty input
             event.target.value = "";
         }
@@ -249,7 +261,7 @@ btnRemoveImage.click((e) => {
             return
         }
 
-        let element = $("<div>",{"data-image-index":i,class:"col-12 col-md-4",style:"height:200px"})
+        let element = $("<div>", { "data-image-index": i, class: "col-12 col-md-4", style: "height:200px" })
 
         let ele = document.createElement("div")
         ele.style.height = "200px"
@@ -317,7 +329,7 @@ removeItemConfirm.click(e => {
     })
 
     if (noImage) {
-        document.getElementById("carouselInner").appendChild(createPlaceHolder())
+        $("#carouselInner").append(createPlaceHolder())
     }
 
     // hide modal

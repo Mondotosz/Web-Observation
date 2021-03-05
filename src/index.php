@@ -37,7 +37,7 @@ switch ($_SERVER["REQUEST_URI"]) {
         createPost($_POST, $_FILES);
         break;
     case (preg_match('/^\/post\/(\d+)\/edit\/?$/', $_SERVER["REQUEST_URI"], $res) ? true : false): // Match revery requests on /post/*
-        editPost(@$res[1],$_POST);
+        editPost(@$res[1], $_POST, $_FILES);
         break;
     case (preg_match('/^\/post\/(\d+)\/?$/', $_SERVER["REQUEST_URI"], $res) ? true : false): // Match revery requests on /post/*
         showPost(@$res[1]);

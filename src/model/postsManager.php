@@ -87,6 +87,8 @@ function createPostObject($title, $description, $fileNames, $tags = null, $coord
     return $post;
 }
 
+// TODO : remake addPost
+
 /**
  * @function addPost
  * @description adds a post with a given id to posts.json
@@ -98,6 +100,29 @@ function createPostObject($title, $description, $fileNames, $tags = null, $coord
 function addPost($id, $post)
 {
     // Get every post
+    $posts = getPosts();
+    // Set id to selected post
+    $posts[strval($id)] = $post;
+    // Encode to json
+    $posts = json_encode($posts);
+    // Check id data directory exist and creates it if it doesn't
+    file_exists("data") ?: mkdir("data");
+    // Write to posts.json
+    $res = file_put_contents("data/posts.json", $posts);
+
+    return $res;
+}
+
+/**
+ * @function setPost
+ * @description set a post object with a given id
+ * @param int|string $id : post id
+ * @param array $post : associated array defined in createPostObject
+ * @return int|false int value if successful|false when fail 
+ */
+function setPost($id, $post)
+{
+    // Get every posts
     $posts = getPosts();
     // Set id to selected post
     $posts[strval($id)] = $post;

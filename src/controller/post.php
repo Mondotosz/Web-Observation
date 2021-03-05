@@ -75,9 +75,8 @@ function createPost($request, $files)
     }
 }
 
-function editPost($postId, $request)
+function editPost($postId, $request, $files)
 {
-    file_put_contents("log.log", $postId);
     if (!empty($postId)) {
         // get post and check ownership
         require_once "model/postsManager.php";
@@ -87,10 +86,31 @@ function editPost($postId, $request)
 
             if (!empty($request)) {
 
+                $imageNames = [];
+
+                // Save images
+                require_once "model/imagesManager.php";
+                foreach ($files as $key => $file) {
+                    $imageNames[$key] = saveImage($file, $postId, $key);
+                }
+
+                file_put_contents("log.log", print_r($imageNames, true));
+
+
+                // create post object
+                $post = createPostObject($request["title"], $request["description"], $imageNames, @$request["tags"], @$request["coordinates"], $_SESSION["username"]);
+
+                // set post
+                $res = setPost($postId, $post);
+
                 // Answer depending on whether the request was sent via ajax or simple form
                 // Compatibility reasons
                 if (@$request["handler"] == "ajax") {
-                    echo "$postId";
+                    if (!$res) {
+                        echo json_encode(["response" => "fail", "error" => "unable to save post"]);
+                    } else {
+                        echo json_encode(["response" => "success", "postId" => $postId]);
+                    }
                 } else {
                     header("location:/post/$postID");
                 }
