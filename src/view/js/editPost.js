@@ -191,7 +191,7 @@ $(document).ready(() => {
     })
 })
 
-document.getElementById("addTags").addEventListener("keypress", event => {
+$("#addTags").on("keypress", event => {
     if (event.key === "Enter") {
         // Avoid sending form on enter
         event.preventDefault();
@@ -225,7 +225,7 @@ document.getElementById("addTags").addEventListener("keypress", event => {
                 // null value in tags array
                 tags[index] = null
                 // remove tag item
-                e.target.parentNode.remove(e.target)
+                e.target.parentNode.remove()
             })
 
             // Empty input
@@ -269,7 +269,7 @@ $("#btnRemoveImage").click((e) => {
 
         }
 
-        element.click(e=>{
+        element.click(e => {
             if (e.target.classList.contains("removeImageSelected")) {
                 e.target.classList.remove("removeImageSelected")
             } else {
@@ -283,12 +283,23 @@ $("#btnRemoveImage").click((e) => {
 
 })
 
-// hide on cancel
-$("#removeItemCancel").click(e => {
+function hideModal() {
     removeItemModal.hide();
     modalTab = false
     removeItemContainer.empty()
+}
+
+// cancel with esc
+$('body').keydown(e => {
+    if (e.key == "Escape" && modalTab) {
+        e.preventDefault()
+        hideModal()
+    }
 })
+
+// hide on cancel
+$("#removeItemCancel").click(hideModal)
+$("#removeItemCross").click(hideModal)
 
 // remove images
 $("#removeItemConfirm").click(e => {
@@ -318,9 +329,7 @@ $("#removeItemConfirm").click(e => {
     }
 
     // hide modal
-    removeItemModal.hide();
-    modalTab = false
-    removeItemContainer.empty()
+    hideModal()
 })
 
 // quick fix for null array indexes
