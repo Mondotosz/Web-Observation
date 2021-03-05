@@ -147,24 +147,23 @@ function previewFile(file) {
         })
 
         // Add carousel item wrapper
-        let wrapper = $("<div>",{
-            class:"carousel-item active"
+        let wrapper = $("<div>", {
+            class: "carousel-item active"
         })
 
         wrapper.append(img)
 
         // Remove active class from other items
-        let items = document.getElementsByClassName("carousel-item")
-        Array.prototype.forEach.call(items, (item) => {
-            item.classList.remove("active");
+        $(".carousel-item").each((index, item) => {
+            item.classList.remove("active")
         })
 
         // Append it to a container element
-        document.getElementById("carouselInner").appendChild(wrapper[0])
+        $("#carouselInner").append(wrapper)
 
         // Remove placeholder
-        if (document.getElementById("previewPlaceHolder") != null) {
-            document.getElementById("previewPlaceHolder").remove();
+        if ($("#previewPlaceHolder") != null) {
+            $("#previewPlaceHolder").remove()
         }
     }
 }
@@ -176,8 +175,6 @@ $('#btnAddImage').click(function () { $('#postImage').trigger('click'); });
 
 // Tags
 let tags = [];
-
-let tagsContainer = $("#tagsContainer")
 
 $(document).ready(() => {
     let tagElements = $("img[data-tags-id]")
@@ -222,7 +219,7 @@ document.getElementById("addTags").addEventListener("keypress", event => {
 
 
             // Append it to the tags container
-            tagsContainer.append(tagElement)
+            $("#tagsContainer").append(tagElement)
 
             $(`[data-tags-id=${index}]`).click(e => {
                 // null value in tags array
@@ -240,9 +237,6 @@ document.getElementById("addTags").addEventListener("keypress", event => {
 // remove image handler
 
 let removeItemModal = $("#removeItemModal")
-let removeItemCancel = $("#removeItemCancel")
-let removeItemConfirm = $("#removeItemConfirm")
-let btnRemoveImage = $("#btnRemoveImage");
 let removeItemContainer = $("#removeItemContainer")
 
 // used to disable certain controls when modal is displayed
@@ -250,7 +244,7 @@ let removeItemContainer = $("#removeItemContainer")
 let modalTab = false
 
 // show modal trigger
-btnRemoveImage.click((e) => {
+$("#btnRemoveImage").click((e) => {
     removeItemModal.show()
     modalTab = true
 
@@ -261,30 +255,21 @@ btnRemoveImage.click((e) => {
             return
         }
 
-        let element = $("<div>", { "data-image-index": i, class: "col-12 col-md-4", style: "height:200px" })
-
-        let ele = document.createElement("div")
-        ele.style.height = "200px"
-        ele.style.backgroundRepeat = "no-repeat";
-        ele.style.backgroundPosition = "center center";
-        ele.style.backgroundSize = "contain";
-
-        ele.setAttribute("data-image-index", i)
-
-
-        ele.classList.add("col-4")
-
+        let element = $("<div>", {
+            "data-image-index": i,
+            class: "col-12 col-md-4",
+            style: "height:200px;background:no-repeat center center;background-size:contain"
+        })
 
         let reader = new FileReader()
         reader.readAsDataURL(img)
         reader.onload = function () {
-            ele.style.backgroundImage = `url("${reader.result}")`
+            // ele.style.backgroundImage = `url("${reader.result}")`
+            element.css("background-image", `url("${reader.result}")`)
 
         }
 
-
-
-        ele.addEventListener("click", (e) => {
+        element.click(e=>{
             if (e.target.classList.contains("removeImageSelected")) {
                 e.target.classList.remove("removeImageSelected")
             } else {
@@ -292,21 +277,21 @@ btnRemoveImage.click((e) => {
             }
         })
 
-        removeItemContainer.append(ele)
+        removeItemContainer.append(element)
 
     })
 
 })
 
 // hide on cancel
-removeItemCancel.click(e => {
+$("#removeItemCancel").click(e => {
     removeItemModal.hide();
     modalTab = false
     removeItemContainer.empty()
 })
 
 // remove images
-removeItemConfirm.click(e => {
+$("#removeItemConfirm").click(e => {
     // get indexes
     let selectedItems = removeItemContainer.find(".removeImageSelected").toArray()
     // remove from preview
