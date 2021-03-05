@@ -5,17 +5,17 @@
  * @description 
  * @param string $postID : key to the post in json
  */
-function showPost($postID)
+function showPost($postId)
 {
     // get the requested post
     require_once "model/postsManager.php";
-    $post = getPost($postID);
+    $post = getPost($postId);
 
     // checks if it exist
     if (!empty($post)) {
         // redirects to post view
         require_once "view/post.php";
-        showPostView($post);
+        showPostView($post,$postId);
     } else {
         //redirects to lost
         require "view/lost.php";

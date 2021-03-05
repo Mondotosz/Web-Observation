@@ -10,7 +10,7 @@
  * @param array $post containing post name etc.
  */
 
-function showPostView($post)
+function showPostView($post, $postId)
 {
 
     $title = $post["title"];
@@ -18,6 +18,7 @@ function showPostView($post)
     // Head
     ob_start();
 ?>
+    <link rel="stylesheet" href="/view/css/post.css">
     <style>
         html,
         body {
@@ -88,6 +89,14 @@ function showPostView($post)
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
                 </a>
+                <?php
+                if ($_SESSION["username"] == $post["owner"]) {
+                ?>
+                    <a href="/post/<?= $postId ?>/delete" class="btn btn-danger btn-trash"></a>
+                    <a href="/post/<?= $postId ?>/edit" class="btn btn-primary btn-edit"></a>
+                <?php
+                }
+                ?>
             </div>
 
         </div>
