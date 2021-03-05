@@ -42,26 +42,29 @@ function createPost($request, $files)
 
                 // Generate a post id by incrementing the amount of posts
                 require_once "model/postsManager.php";
-                $postID = count(getPosts()) + 1;
+                $postId = reservePost();
                 $imageNames = [];
 
                 // Save images
                 require_once "model/imagesManager.php";
                 foreach ($files as $key => $file) {
-                    $imageNames[$key] = saveImage($file, $postID, $key);
+                    $imageNames[$key] = saveImage($file, $postId, $key);
                 }
 
                 // Save post
                 require_once "model/postsManager.php";
                 $post = createPostObject($request["title"], $request["description"], $imageNames, @$request["tags"], @$request["coordinates"], $_SESSION["username"]);
-                addPost($postID, $post);
+                $res = setPost($postId, $post);
 
                 // Answer depending on whether the request was sent via ajax or simple form
-                // Compatibility reasons
                 if (@$request["handler"] == "ajax") {
-                    echo $postID;
+                    if (!$res) {
+                        echo json_encode(["response" => "fail", "error" => "unable to save post"]);
+                    } else {
+                        echo json_encode(["response" => "success", "postId" => $postId]);
+                    }
                 } else {
-                    header("location:/post/$postID");
+                    header("location:/post/$postId");
                 }
             }
         } else {
@@ -75,6 +78,13 @@ function createPost($request, $files)
     }
 }
 
+/**
+ * @function editPost
+ * @description handles post edition requests
+ * @param int $postId : id of the post to edit
+ * @param array $request : request array (expected $_POST)
+ * @param array $files : uploaded files (expected $_FILES)
+ */
 function editPost($postId, $request, $files)
 {
     if (!empty($postId)) {
@@ -104,7 +114,6 @@ function editPost($postId, $request, $files)
                 $res = setPost($postId, $post);
 
                 // Answer depending on whether the request was sent via ajax or simple form
-                // Compatibility reasons
                 if (@$request["handler"] == "ajax") {
                     if (!$res) {
                         echo json_encode(["response" => "fail", "error" => "unable to save post"]);

@@ -1,5 +1,4 @@
 //todo add tag with button
-//todo prevent empty post
 
 // create placeholder element using jquery syntax
 function createPlaceHolder() {
@@ -13,8 +12,8 @@ function createPlaceHolder() {
 let images = [];
 
 // Get the file objects from the server
-$(document).ready(() => {
-    $("[data-image-filename]").toArray().forEach(div => {
+jQuery(() => {
+    $("[data-image-filename]").each((_e, div) => {
         fetch(window.location.origin + "/view/content/img/original/" + div.getAttribute("data-image-filename"))
             .then(response => response.blob())
             .then(data => {
@@ -54,8 +53,8 @@ function getPost() {
     let post = new FormData();
 
     post.set("handler", "ajax")
-    post.set("title", document.getElementById("postTitle").value)
-    post.set("description", document.getElementById("postDescription").value)
+    post.set("title", $("#postTitle").val())
+    post.set("description", $("#postDescription").val())
 
     removeNullInArray(tags).forEach(tag => {
         if (tag !== null) post.append("tags[]", tag)
@@ -84,12 +83,12 @@ $("#create").click((e) => {
 });
 
 // Handle drag and drop
-let dropArea = $('#postCarousel')
+let dropArea = $('#postCarousel');
 
-    // Prevent default action
-    ;['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-        dropArea.on(eventName, preventDefaults, false)
-    })
+// Prevent default action
+;['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+    dropArea.on(eventName, preventDefaults, false)
+})
 
 function preventDefaults(e) {
     e.preventDefault()
@@ -98,11 +97,11 @@ function preventDefaults(e) {
 
 ;['dragenter', 'dragover'].forEach(eventName => {
     dropArea.on(eventName, highlight)
-})
+});
 
-    ;['dragleave', 'drop'].forEach(eventName => {
-        dropArea.on(eventName, unHighlight)
-    })
+;['dragleave', 'drop'].forEach(eventName => {
+    dropArea.on(eventName, unHighlight)
+})
 
 // un/Highlight drop area
 function highlight(e) {
@@ -240,7 +239,6 @@ let removeItemModal = $("#removeItemModal")
 let removeItemContainer = $("#removeItemContainer")
 
 // used to disable certain controls when modal is displayed
-// TODO implement this
 let modalTab = false
 
 // show modal trigger
@@ -313,17 +311,20 @@ $("#removeItemConfirm").click(e => {
         images[item.getAttribute("data-image-index")] = null;
     })
 
+    // clean image array
     images = removeNullInArray(images)
 
     let noImage = true
 
     images.forEach(item => {
         if (item !== null) {
+            // regenerate previews
             previewFile(item)
             noImage = false
         }
     })
 
+    // add placeholder when there are no images left
     if (noImage) {
         $("#carouselInner").append(createPlaceHolder())
     }

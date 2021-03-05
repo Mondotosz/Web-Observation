@@ -87,30 +87,27 @@ function createPostObject($title, $description, $fileNames, $tags = null, $coord
     return $post;
 }
 
-// TODO : remake addPost
-
 /**
- * @function addPost
- * @description adds a post with a given id to posts.json
- * @warning post id and filename should be defined here, this implementation is prone to generating overwrites if the increment wasn't done properly
- * @param int|string $id : post id
- * @param array $post : associated array defined in createPostObject
- * @return int|false int value if successful|false when fail 
+ * @function reservePost
+ * @description reserve an id in the post json and return it
+ * @return int $id : int value of the index reserved
  */
-function addPost($id, $post)
+function reservePost()
 {
-    // Get every post
+    // get every post
     $posts = getPosts();
-    // Set id to selected post
-    $posts[strval($id)] = $post;
+    // get the next id
+    $id = intval(array_key_last($posts)) + 1;
+    // add a new entry
+    $post[$id] = [];
     // Encode to json
     $posts = json_encode($posts);
     // Check id data directory exist and creates it if it doesn't
     file_exists("data") ?: mkdir("data");
     // Write to posts.json
-    $res = file_put_contents("data/posts.json", $posts);
+    file_put_contents("data/posts.json", $posts);
 
-    return $res;
+    return $id;
 }
 
 /**

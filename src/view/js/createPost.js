@@ -1,9 +1,13 @@
 //todo add tag with button
 //todo prevent empty post
-// Preview Carousel
-let postCarousel = document.querySelector('#postCarousel')
-let carousel = new bootstrap.Carousel(postCarousel)
-let placeholder = document.getElementById("previewPlaceHolder").cloneNode(true)
+// create placeholder element using jquery syntax
+function createPlaceHolder() {
+    let placeHolder = $("<div>", { id: "previewPlaceHolder", class: "carousel-item text-center active" })
+    placeHolder.append($("<div>", { class: "d-flex align-items-center justify-content-center", style: "height:800px;background:black url('/view/content/icons/dragAndDrop.svg') no-repeat center center;" }))
+    // return dom element from jquery object
+    return placeHolder
+}
+
 
 // Contains each image file
 let images = [];
@@ -20,7 +24,12 @@ function submitForm(data) {
         cache: false,
         timeout: 60000,
         success: (e) => {
-            window.location.replace(window.location.origin + "/post/" + e)
+            e = JSON.parse(e)
+            if (e.response == "success") {
+                window.location.replace(window.location.origin + "/post/" + e.postId)
+            } else if (e.response == "fail") {
+                console.log(e.error)
+            }
         }
     });
 }
@@ -31,36 +40,43 @@ function getPost() {
     let post = new FormData();
 
     post.set("handler", "ajax")
-    post.set("title", document.getElementById("postTitle").value)
-    post.set("description", document.getElementById("postDescription").value)
-    post.set("coordinates[lon]", document.getElementById("postLongitude").value)
-    post.set("coordinates[lat]", document.getElementById("postLatitude").value)
+    post.set("title", $("#postTitle").val())
+    post.set("description", $("#postDescription").val())
+    post.set("coordinates[lon]", $("#postLongitude").val())
+    post.set("coordinates[lat]", $("#postLatitude").val())
 
-    tags.forEach(tag => {
+    removeNullInArray(tags).forEach(tag => {
         if (tag !== null) post.append("tags[]", tag)
     })
 
-    images = removeNullInArray(images)
     // Append images
-    images.forEach((image, i) => {
+    removeNullInArray(images).forEach((image, i) => {
         if (image !== null) post.append(i, image)
     });
     return post;
 }
 
 // Send post on button click
-document.getElementById("create").addEventListener("click", (e) => {
+$("#create").click((e) => {
     e.preventDefault();
     let post = getPost();
-    submitForm(post);
+
+    // Check for required fields
+    let emptyPattern = /$\s*^/
+    if (emptyPattern.test(post.get("title")) || emptyPattern.test(post.get("description")) || removeNullInArray(images).length <= 0) {
+        alert("please fill all required fields")
+    } else {
+        submitForm(post);
+    }
+
 });
 
 // Handle drag and drop
-let dropArea = document.getElementById('postCarousel');
+let dropArea = $('#postCarousel');
 
 // Prevent default action
 ;['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-    dropArea.addEventListener(eventName, preventDefaults, false)
+    dropArea.on(eventName, preventDefaults, false)
 })
 
 function preventDefaults(e) {
@@ -69,24 +85,24 @@ function preventDefaults(e) {
 }
 
 ;['dragenter', 'dragover'].forEach(eventName => {
-    dropArea.addEventListener(eventName, highlight, false)
-})
+    dropArea.on(eventName, highlight)
+});
 
-    ;['dragleave', 'drop'].forEach(eventName => {
-        dropArea.addEventListener(eventName, unHighlight, false)
-    })
+;['dragleave', 'drop'].forEach(eventName => {
+    dropArea.on(eventName, unHighlight)
+})
 
 // un/Highlight drop area
 function highlight(e) {
-    dropArea.classList.add('highlight')
+    dropArea.addClass('highlight')
 }
 
 function unHighlight(e) {
-    dropArea.classList.remove('highlight')
+    dropArea.removeClass('highlight')
 }
 
 // handle drop
-dropArea.addEventListener('drop', handleDrop, false)
+dropArea[0].addEventListener('drop', handleDrop, false)
 
 function handleDrop(e) {
     let dt = e.dataTransfer
@@ -113,35 +129,29 @@ function previewFile(file) {
     reader.onload = function () {
         //TODO add slide indicator
         // Create a div element
-        let img = document.createElement('div');
-        // Style it as a bootstrap carousel item
-        img.style.height = "800px";
-        img.style.backgroundColor = "black";
-        img.style.backgroundRepeat = "no-repeat";
-        img.style.backgroundPosition = "center center";
-        img.style.backgroundSize = "contain";
-        img.classList.add("w-100");
-
-        // Set the image as its source
-        img.style.backgroundImage = `url("${reader.result}")`
+        let img = $("<div>", {
+            style: `height:800px;background:black url("${reader.result}") no-repeat center center;background-size:contain`,
+            class: "w-100"
+        })
 
         // Add carousel item wrapper
-        let wrapper = document.createElement("div");
-        wrapper.classList.add("carousel-item", "active")
-        wrapper.appendChild(img);
+        let wrapper = $("<div>", {
+            class: "carousel-item active"
+        })
+
+        wrapper.append(img)
 
         // Remove active class from other items
-        let items = document.getElementsByClassName("carousel-item")
-        Array.prototype.forEach.call(items, (item) => {
-            item.classList.remove("active");
+        $(".carousel-item").each((index, item) => {
+            item.classList.remove("active")
         })
 
         // Append it to a container element
-        document.getElementById("carouselInner").appendChild(wrapper)
+        $("#carouselInner").append(wrapper)
 
         // Remove placeholder
-        if (document.getElementById("previewPlaceHolder") != null) {
-            document.getElementById("previewPlaceHolder").remove();
+        if ($("#previewPlaceHolder") != null) {
+            $("#previewPlaceHolder").remove()
         }
     }
 }
@@ -154,9 +164,7 @@ $('#btnAddImage').click(function () { $('#postImage').trigger('click'); });
 // Tags
 let tags = [];
 
-let tagsContainer = document.getElementById("tagsContainer");
-
-document.getElementById("addTags").addEventListener("keypress", event => {
+$("#addTags").on("keypress", event => {
     if (event.key === "Enter") {
         // Avoid sending form on enter
         event.preventDefault();
@@ -165,33 +173,32 @@ document.getElementById("addTags").addEventListener("keypress", event => {
         if (!pattern.test(event.target.value)) {
             // save tag in array and get index
             let index = tags.push(event.target.value) - 1
+
             // create html element
-            let tagElement = document.createElement("div");
-            tagElement.innerText = event.target.value;
-            tagElement.classList.add("badge", "bg-primary", "p2", "me-2", "mt-2", "fs-6")
+            let tagElement = $("<div>", {
+                text: event.target.value,
+                class: "badge bg-primary p2 me-2 mt-2 fs-6"
+            })
+
             // remove tag control
-            let removeTagIcon = document.createElement("img")
+            let tagElementRemoveIcon = $("<img>", {
+                src: "/view/content/icons/x.svg",
+                style: "height:1rem;",
+                class: "removeTagIcon",
+                "data-tags-id": index
+            })
 
-            removeTagIcon.src = "/view/content/icons/x.svg"
-            removeTagIcon.style.height = "1rem"
-            removeTagIcon.classList.add("removeTagIcon")
-            removeTagIcon.id = `removeTagIcon-${index}`
-
-
-            tagElement.appendChild(removeTagIcon)
+            tagElement.append(tagElementRemoveIcon)
 
 
             // Append it to the tags container
-            tagsContainer.appendChild(tagElement)
+            $("#tagsContainer").append(tagElement)
 
-            document.getElementById(`removeTagIcon-${index}`).addEventListener("click", (e) => {
-                // get index from id
-                let pattern = /^removeTagIcon-(\d+)$/
-                let res = e.target.id.match(pattern)[1]
+            $(`[data-tags-id=${index}]`).click(e => {
                 // null value in tags array
-                tags[res] = null;
+                tags[index] = null
                 // remove tag item
-                e.target.parentNode.remove(e.target)
+                e.target.parentNode.remove()
             })
 
             // Empty input
@@ -203,17 +210,13 @@ document.getElementById("addTags").addEventListener("keypress", event => {
 // remove image handler
 
 let removeItemModal = $("#removeItemModal")
-let removeItemCancel = $("#removeItemCancel")
-let removeItemConfirm = $("#removeItemConfirm")
-let btnRemoveImage = $("#btnRemoveImage");
 let removeItemContainer = $("#removeItemContainer")
 
 // used to disable certain controls when modal is displayed
-// TODO implement this
 let modalTab = false
 
 // show modal trigger
-btnRemoveImage.click((e) => {
+$("#btnRemoveImage").click((e) => {
     removeItemModal.show()
     modalTab = true
 
@@ -224,28 +227,21 @@ btnRemoveImage.click((e) => {
             return
         }
 
-        let element = document.createElement("div")
-        element.style.height = "200px"
-        element.style.backgroundRepeat = "no-repeat";
-        element.style.backgroundPosition = "center center";
-        element.style.backgroundSize = "contain";
-
-        element.setAttribute("data-image-index", i)
-
-
-        element.classList.add("col-4")
-
+        let element = $("<div>", {
+            "data-image-index": i,
+            class: "col-12 col-md-4",
+            style: "height:200px;background:no-repeat center center;background-size:contain"
+        })
 
         let reader = new FileReader()
         reader.readAsDataURL(img)
         reader.onload = function () {
-            element.style.backgroundImage = `url("${reader.result}")`
+            // ele.style.backgroundImage = `url("${reader.result}")`
+            element.css("background-image", `url("${reader.result}")`)
 
         }
 
-
-
-        element.addEventListener("click", (e) => {
+        element.click(e => {
             if (e.target.classList.contains("removeImageSelected")) {
                 e.target.classList.remove("removeImageSelected")
             } else {
@@ -259,15 +255,26 @@ btnRemoveImage.click((e) => {
 
 })
 
-// hide on cancel
-removeItemCancel.click(e => {
+function hideModal() {
     removeItemModal.hide();
     modalTab = false
     removeItemContainer.empty()
+}
+
+// cancel with esc
+$('body').keydown(e => {
+    if (e.key == "Escape" && modalTab) {
+        e.preventDefault()
+        hideModal()
+    }
 })
 
+// hide on cancel
+$("#removeItemCancel").click(hideModal)
+$("#removeItemCross").click(hideModal)
+
 // remove images
-removeItemConfirm.click(e => {
+$("#removeItemConfirm").click(e => {
     // get indexes
     let selectedItems = removeItemContainer.find(".removeImageSelected").toArray()
     // remove from preview
@@ -281,20 +288,23 @@ removeItemConfirm.click(e => {
     // clean image array
     images = removeNullInArray(images)
 
-    // regenerate previews
+    let noImage = true
+
     images.forEach(item => {
-        previewFile(item)
+        if (item !== null) {
+            // regenerate previews
+            previewFile(item)
+            noImage = false
+        }
     })
 
     // add placeholder when there are no images left
-    if (images.length < 1) {
-        document.getElementById("carouselInner").appendChild(placeholder)
+    if (noImage) {
+        $("#carouselInner").append(createPlaceHolder())
     }
 
     // hide modal
-    removeItemModal.hide();
-    modalTab = false
-    removeItemContainer.empty()
+    hideModal()
 })
 
 // quick fix for null array indexes
@@ -305,6 +315,7 @@ function removeNullInArray(array) {
     })
     return tmp
 }
+
 //map
 
 $("#postLatitude").change(e => {
@@ -328,9 +339,9 @@ marker.addEventListener("moveend", e => {
 
     var txtLat = document.getElementById("postLatitude")
     var txtLng = document.getElementById("postLongitude")
-    
-    txtLat.value = lat;
-    txtlng.value = lng;
 
-    console.log(lat,lng)
+    txtLat.value = lat;
+    txtLng.value = lng;
+
+    console.log(lat, lng)
 })

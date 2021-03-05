@@ -32,11 +32,11 @@ function createPostView()
     ob_start();
     ?>
     <div id="removeItemModal" class="modal" tabindex="-1">
-        <div class="modal-dialog modal-xl">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Remove image</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button id="removeItemCross" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body container-fluid">
                     <div id="removeItemContainer" class="row m-0"></div>
@@ -147,7 +147,6 @@ function createPostView()
                     draggable: true,
                     autoPan: true
                 }).addTo(map).bindPopup('C\'est le spot de photographie');
-
             </script>
 
         </div>
