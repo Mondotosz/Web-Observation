@@ -52,6 +52,17 @@ function trending($request)
                 }
             }
         }
+
+        // Filter by tags
+        if (!empty($request["tags"])) {
+            foreach ($posts as $key => $post) {
+                foreach ($request["tags"] as $tag) {
+                    if (!preg_grep("/^$tag$/i", $post["tags"])) {
+                        unset($posts[$key]);
+                    }
+                }
+            }
+        }
     }
 
     // initialize an empty card array

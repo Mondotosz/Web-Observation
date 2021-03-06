@@ -44,6 +44,59 @@ function createFilterComponent() {
         value: param.get('author') ?? ""
     }))
 
+    // Tag filtering
+    form.append($("<input>", {
+        type: "text",
+        placeholder: "tag",
+        class: "form-control"
+    }).keypress(e => {
+        if (e.key === "Enter") {
+            e.preventDefault()
+            if (!/^\s*$/.test(e.target.value)) {
+
+                $(".tag-container").append($("<div>", {
+                    class: "tag-wrapper"
+                }).append($("<input>", {
+                    type: "text",
+                    readonly: true,
+                    class: "form-control",
+                    name: "tags[]",
+                    value: e.target.value
+                })).append($("<div>", {
+                    class: "tag-remove-icon"
+                }).click(e => {
+                    e.target.parentElement.remove()
+                })))
+
+            }
+            e.target.value = ""
+        }
+    }))
+
+    // Tag container
+    form.append($("<div>", {
+        class: "tag-container"
+    }))
+
+    // Check for existing tags search
+    jQuery(() => {
+        param.getAll("tags[]").forEach(tag => {
+            $(".tag-container").append($("<div>", {
+                class: "tag-wrapper"
+            }).append($("<input>", {
+                type: "text",
+                readonly: true,
+                class: "form-control",
+                name: "tags[]",
+                value: tag
+            })).append($("<div>", {
+                class: "tag-remove-icon"
+            }).click(e => {
+                e.target.parentElement.remove()
+            })))
+        })
+    })
+
     // Create filter button
     form.append($("<button>", {
         type: "submit",
