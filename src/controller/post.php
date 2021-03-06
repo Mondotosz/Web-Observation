@@ -127,6 +127,8 @@ function editPost($postId, $request, $files)
                 require_once "view/editPost.php";
                 editPostView($post);
             }
+        } else {
+            header("Location: /home");
         }
     } else {
         header("Location: /home");
