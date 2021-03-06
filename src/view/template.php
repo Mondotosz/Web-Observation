@@ -78,8 +78,8 @@ function renderTemplate($title = null, $content = null, $currentNav = null, $hea
                   <a class="nav-link <?= (@$currentNav == "trending") ? "active" : "" ?>" href="/trending">Trending</a>
                 </li>
               </ul>
-              <form class="d-flex col-12 col-md-4 col-xl-6 gx-0">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <form class="d-flex col-12 col-md-4 col-xl-6 gx-0" method="GET" action="/trending">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
               </form>
               <div class="col-12 col-md-4 col-xl-3 d-flex justify-content-md-end mt-2 mt-md-0 gx-0">
