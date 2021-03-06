@@ -113,6 +113,7 @@ function createFilterComponent() {
         $(".form-filter").children("input").each((_index, input) => {
             input.value = input.name == "filter" ? "true" : "";
         })
+        $(".tag-container").empty()
     }))
 
     container.append(form)
