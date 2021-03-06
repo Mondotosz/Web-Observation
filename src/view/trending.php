@@ -14,12 +14,11 @@
 function trendingView($cards)
 {
 
-    ob_start();
     $title = "trending";
     $currentNav = "trending";
-    $scripts = "<script src=\"/node_modules/masonry-layout/dist/masonry.pkgd.min.js\" async></script>"
 
     // Content
+    ob_start();
 ?>
 
     <div id="trendingMasonry" class="row mx-auto masonry" style="width:99vw;" data-masonry='{"percentPosition": true , "itemSelector" : ".masonry-item"}'>
@@ -58,6 +57,8 @@ function trendingView($cards)
             }, 250)
         });
     </script>
+
+    <script type="module" src="/view/js/filterPost.js" defer></script>
 
 <?php
     $scripts = ob_get_clean();
