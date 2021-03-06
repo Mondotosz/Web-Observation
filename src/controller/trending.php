@@ -33,27 +33,6 @@ function trending($request)
         }
     }
 
-    // Check if user uses advanced filters
-    if (@$request["filter"] == "true") {
-        // Filter by title
-        if (!empty($request["title"])) {
-            foreach ($posts as $key => $post) {
-                if (!preg_match('/' . $request["title"] . '/i', $post["title"])) {
-                    unset($posts[$key]);
-                }
-            }
-        }
-
-        // Filter by author
-        if (!empty($request["author"])) {
-            foreach ($posts as $key => $post) {
-                if (!preg_match('/' . $request["author"] . '/i', $post["owner"])) {
-                    unset($posts[$key]);
-                }
-            }
-        }
-    }
-
     // initialize an empty card array
     $cards = [];
 
