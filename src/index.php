@@ -16,7 +16,7 @@ require_once "controller/trending.php";
 require_once "controller/authentication.php";
 require_once "controller/post.php";
 
-switch ($_SERVER["REQUEST_URI"]) {
+switch (strtok($_SERVER["REQUEST_URI"],'?')) {
     case "/":
     case "/home":
         home();
@@ -31,7 +31,7 @@ switch ($_SERVER["REQUEST_URI"]) {
         logout();
         break;
     case "/trending":
-        trending();
+        trending($_GET);
         break;
     case "/post/create":
         createPost($_POST, $_FILES);
