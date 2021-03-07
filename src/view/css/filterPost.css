@@ -1,7 +1,8 @@
 .container-filter {
 	display: block;
 	position: fixed;
-	left: 0;
+	width: fit-content;
+	right: 100vw;
 	top: 60px;
 	background-color: #212529;
 	border-radius: 0 0 25px 0;
@@ -41,12 +42,31 @@
 	margin-right: 5px;
 }
 
-.form-filter-on {
-	display: block;
+@keyframes container-filter-on {
+	from {
+		transform: translateX(0px);
+	}
+	to {
+		transform: translateX(100%);
+	}
 }
 
-.form-filter-off {
-	display: none;
+@keyframes container-filter-off {
+	from {
+		transform: translateX(100%);
+	}
+	to {
+		transform: translateX(0px);
+	}
+}
+
+div.filter-on {
+	animation: container-filter-on 0.3s linear;
+	transform: translateX(100%);
+}
+div.filter-off {
+	animation: container-filter-off 0.3s linear;
+	transform: translateX(0px);
 }
 
 .tag-wrapper {

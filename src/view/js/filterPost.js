@@ -16,7 +16,7 @@ function createFilterComponent() {
     let form = $("<form>", {
         method: "GET",
         action: window.location.pathname,
-        class: "form-filter form-filter-off"
+        class: "form-filter"
     })
 
     // Create hidden filter true value
@@ -48,7 +48,7 @@ function createFilterComponent() {
     form.append($("<input>", {
         type: "text",
         placeholder: "tag",
-        class: "form-control"
+        class: "form-control",
     }).keypress(e => {
         if (e.key === "Enter") {
             e.preventDefault()
@@ -116,6 +116,11 @@ function createFilterComponent() {
         $(".tag-container").empty()
     }))
 
+    // Disable tab index by default 
+    form.find("input,button").each((_e, item) => {
+        item.disabled = true
+    })
+
     container.append(form)
 
     // Create toggler with logic
@@ -128,14 +133,20 @@ function createFilterComponent() {
         if (toggleStatus) {
             e.target.classList.remove("chevron-down")
             e.target.classList.add("chevron-left")
-            formFilter.removeClass("form-filter-on")
-            formFilter.addClass("form-filter-off")
+            container.removeClass("filter-on")
+            container.addClass("filter-off")
+            form.find("input,button").each((_e, item) => {
+                item.disabled = true
+            })
             toggleStatus = false
         } else {
             e.target.classList.remove("chevron-left")
             e.target.classList.add("chevron-down")
-            formFilter.removeClass("form-filter-off")
-            formFilter.addClass("form-filter-on")
+            container.removeClass("filter-off")
+            container.addClass("filter-on")
+            form.find("input,button").each((_e, item) => {
+                item.disabled = false
+            })
             toggleStatus = true
         }
     }))
