@@ -4,7 +4,7 @@
 		"title": "Hermine",
 		"description": "Hermine blanche solitaire dans un champ, visible entre 8h30 et 9h30 plusieurs jours de suite",
 		"date": "21.01.2018",
-		"coordinates": { "lon": "46.831366", "lat": "6.564394" },
+		"coordinates": { "lat": "46.831366", "lon": "6.564394" },
 		"tags": ["hermine", "blanc", "champ", "neige"],
 		"pictures": [
 			{ "filename": "1-0.jpg" },
@@ -19,7 +19,7 @@
 		"title": "Raide",
 		"description": "Chamois sur le Château de Joux, dans des pentes impressionnantes",
 		"date": "29.12.2017",
-		"coordinates": { "lon": "46.875676", "lat": "6.376810" },
+		"coordinates": { "lat": "46.875676", "lon": "6.376810" },
 		"tags": ["chamois"],
 		"pictures": [{ "filename": "2-0.jpg" }]
 	},
@@ -28,7 +28,7 @@
 		"title": "Patrouille",
 		"description": "5 sanglier dans la grosse neige et le brouillard",
 		"date": "23.12.2017",
-		"coordinates": { "lon": "46.885889", "lat": "6.465526" },
+		"coordinates": { "lat": "46.885889", "lon": "6.465526" },
 		"tags": ["sangliers"],
 		"pictures": [{ "filename": "3-0.jpg" }]
 	},
@@ -37,7 +37,7 @@
 		"title": "60cm de neige",
 		"description": "2 chevreuils dans 60cm de neige",
 		"date": "17.12.2017",
-		"coordinates": { "lon": "46.847599", "lat": "6.587887" },
+		"coordinates": { "lat": "46.847599", "lon": "6.587887" },
 		"tags": ["chevreuils", "neige"],
 		"pictures": [{ "filename": "4-0.jpg" }]
 	},
@@ -46,7 +46,7 @@
 		"title": "Dialogue",
 		"description": "Dialogue entre un cheval et un chamois",
 		"date": "17.12.2017",
-		"coordinates": { "lon": "46.817931", "lat": "6.530551" },
+		"coordinates": { "lat": "46.817931", "lon": "6.530551" },
 		"tags": ["cheval", "chamois"],
 		"pictures": [{ "filename": "5-0.jpg" }]
 	},
@@ -55,7 +55,7 @@
 		"title": "Arrêt toilette",
 		"description": "Renard, petit arrêt pipi dans la neige",
 		"date": "23.11.2017",
-		"coordinates": { "lon": "46.839803", "lat": "6.567878" },
+		"coordinates": { "lat": "46.839803", "lon": "6.567878" },
 		"tags": ["renard"],
 		"pictures": [{ "filename": "6-0.jpg" }]
 	},
@@ -64,7 +64,7 @@
 		"title": "Première neige",
 		"description": "2 renards jouant dans la première neige",
 		"date": "13.11.2017",
-		"coordinates": { "lon": "46.840312", "lat": "6.566067" },
+		"coordinates": { "lat": "46.840312", "lon": "6.566067" },
 		"tags": ["renard"],
 		"pictures": [{ "filename": "7-0.jpg" }, { "filename": "7-1.jpg" }]
 	},
@@ -73,7 +73,7 @@
 		"title": "Betteraves",
 		"description": "3 chevreuils dans les betteraves",
 		"date": "29.10.2017",
-		"coordinates": { "lon": "46.716372", "lat": "6.561446" },
+		"coordinates": { "lat": "46.716372", "lon": "6.561446" },
 		"tags": ["chevreuils"],
 		"pictures": [{ "filename": "8-0.jpg" }]
 	},
@@ -82,7 +82,7 @@
 		"title": "3 Animaux",
 		"description": "Vache, renard et campagnol dans la gueule du renard",
 		"date": "18.10.2017",
-		"coordinates": { "lon": "46.839803", "lat": "6.567878" },
+		"coordinates": { "lat": "46.839803", "lon": "6.567878" },
 		"tags": ["vache", "renard", "campagnol"],
 		"pictures": [{ "filename": "9-0.jpg" }]
 	},
@@ -91,7 +91,7 @@
 		"title": "Trio",
 		"description": "Hermine, Bouquetin, lagopède à la cabane du Fenestral",
 		"date": "16.10.2017",
-		"coordinates": { "lon": "46.189096", "lat": "7.100579" },
+		"coordinates": { "lat": "46.189096", "lon": "7.100579" },
 		"tags": ["hermine", "bouquetin", "lagopède"],
 		"pictures": [
 			{ "filename": "10-0.jpg" },
@@ -104,7 +104,7 @@
 		"title": "Si près",
 		"description": "renard tout proche",
 		"date": "08.09.2017",
-		"coordinates": { "lon": "46.830002", "lat": "6.455072" },
+		"coordinates": { "lat": "46.830002", "lon": "6.455072" },
 		"tags": ["renard"],
 		"pictures": [{ "filename": "11-0.jpg" }]
 	},
@@ -113,7 +113,7 @@
 		"title": "Faucon crécerelle",
 		"description": "Observation d'un faucon crécerelle",
 		"date": "07.09.2017",
-		"coordinates": { "lon": "46.825369", "lat": "6.549763" },
+		"coordinates": { "lat": "46.825369", "lon": "6.549763" },
 		"tags": ["faucon", "faucon crécerelle"],
 		"pictures": [
 			{ "filename": "12-0.jpg" },
@@ -128,7 +128,7 @@
 		"title": "Hermine profil",
 		"description": "Hermine en été",
 		"date": "20.07.2017",
-		"coordinates": { "lon": "46.831366", "lat": "6.564394" },
+		"coordinates": { "lat": "46.831366", "lon": "6.564394" },
 		"tags": ["hermine"],
 		"pictures": [{ "filename": "13-0.jpg" }]
 	}
