@@ -175,6 +175,7 @@ function editPostView($post)
     ?>
     <script src="/node_modules/jquery/dist/jquery.min.js"></script>
     <script src="/view/js/editPost.js" defer></script>
+    <script src="/view/js/map.js"></script>
 <?php
     $scripts = ob_get_clean();
     require_once "view/template.php";
