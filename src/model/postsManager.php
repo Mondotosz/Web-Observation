@@ -63,13 +63,13 @@ function createPostObject($title, $description, $fileNames, $tags = null, $coord
 {
     // Save post using model
     $post = [
-        "owner" => $owner ?? $_SESSION["username"],
-        "title" => $title,
-        "description" => $description,
+        "owner" => htmlspecialchars($owner) ?? htmlspecialchars($_SESSION["username"]),
+        "title" => htmlspecialchars($title),
+        "description" => htmlspecialchars($description),
         "date" => Date("d.m.Y"),
         "coordinates" => [
-            "lon" => $coordinates["lon"] ?? "dummy",
-            "lat" => $coordinates["lat"] ?? "dummy"
+            "lon" => htmlspecialchars($coordinates["lon"]) ?? "dummy",
+            "lat" => htmlspecialchars($coordinates["lat"]) ?? "dummy"
         ],
         "tags" => []
     ];
@@ -81,7 +81,7 @@ function createPostObject($title, $description, $fileNames, $tags = null, $coord
 
     // Tags
     foreach (@$tags as $tag) {
-        array_push($post["tags"], $tag);
+        array_push($post["tags"], htmlspecialchars($tag));
     }
 
     return $post;
