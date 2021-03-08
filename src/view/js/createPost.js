@@ -345,3 +345,18 @@ marker.addEventListener("moveend", e => {
 
     console.log(lat, lng)
 })
+    map.addEventListener("click", e => {
+
+    var txtLat = document.getElementById("postLatitude")
+    var txtLng = document.getElementById("postLongitude")
+
+    var latlng = e.latlng
+    var lat = latlng.lat
+    var lng = latlng.lng
+    
+    txtLat.value = lat;
+    txtLng.value = lng;
+
+    marker.setLatLng(latlng)
+
+})
