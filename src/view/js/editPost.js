@@ -55,6 +55,8 @@ function getPost() {
     post.set("handler", "ajax")
     post.set("title", $("#postTitle").val())
     post.set("description", $("#postDescription").val())
+    post.set("coordinates[lon]", $("#postLongitude").val())
+    post.set("coordinates[lat]", $("#postLatitude").val())
 
     removeNullInArray(tags).forEach(tag => {
         if (tag !== null) post.append("tags[]", tag)

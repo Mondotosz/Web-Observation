@@ -69,7 +69,7 @@ function addUser($username, $password, $email)
             date_default_timezone_set("Europe/Zurich");
             // add new user to the users array
             // ! due to the limitations of json here if multiple users register at the same time there is a risk of overwriting
-            $users[$username] = ["creationDate" => date("d.m.Y"), "password" => $password, "email" => $email];
+            $users[htmlspecialchars($username)] = ["creationDate" => date("d.m.Y"), "password" => $password, "email" => htmlspecialchars($email)];
             // save to file
             file_put_contents("data/users.json", json_encode($users));
         }

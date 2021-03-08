@@ -111,6 +111,17 @@ function editPostView($post)
                 </div>
                 <div class="d-flex">
                 </div>
+                <h5>Coordinates</h5>
+                <?php /** coordinates latitude */ ?>
+                <div class="row">
+                    <label for="postLatitude" class="form-label">Latitude</label>
+                    <input type="text" id="postLatitude" name="latitude" class="form-control px-1 ms-2 w-75 " value="<?= $post['coordinates']['lat'] ?>" required>
+                </div>
+                <?php /** coordinates longitude */ ?>
+                <div class="row">
+                    <label for="postLongitude" class="form-label">Longitude</label>
+                    <input type="text" id="postLongitude" name="longitude" class="form-control px-1 ms-2 w-75 " value="<?= $post['coordinates']['lon'] ?>" required>
+                </div>
                 <div class="row">
                     <label for="postImage" class="form-label" style="display:none;">Image</label>
                     <input type="file" multiple accept=".jpeg, .jpg, .png, .gif" id="postImage" name="postImage" onchange="handleFiles(this.files); this.value = null" class="form-control ms-2 w-75" style="display:none;">
@@ -125,10 +136,16 @@ function editPostView($post)
             <div id="map"></div>
             <script>
                 var map = L.map('map', {
-                    center: [46.831366, 6.564394],
+                    center: [<?= $post['coordinates']['lat'] ?>, <?= $post['coordinates']['lon'] ?>],
                     zoom: 14,
-                    scrollWheelZoom: false
+                    scrollWheelZoom: true
                 });
+                //geolocalization
+                map.locate({
+                    setView: true,
+                    zoom: 14,
+                    scrollWheelZoom: true
+                })
 
                 // add the OpenStreetMap tiles
                 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -139,11 +156,12 @@ function editPostView($post)
                 // show the scale bar on the lower left corner
                 L.control.scale().addTo(map);
 
+
                 // show a marker on the map
-                L.marker({
-                    lon: 6.564394,
-                    lat: 46.831366
-                }).bindPopup('C\'est le spot de photographie').addTo(map);
+                var marker = new L.marker([<?= $post['coordinates']['lat'] ?>, <?= $post['coordinates']['lon'] ?>], {
+                    draggable: true,
+                    autoPan: true
+                }).addTo(map).bindPopup('C\'est le spot de photographie');
             </script>
 
         </div>
@@ -157,6 +175,7 @@ function editPostView($post)
     ?>
     <script src="/node_modules/jquery/dist/jquery.min.js"></script>
     <script src="/view/js/editPost.js" defer></script>
+    <script src="/view/js/map.js"></script>
 <?php
     $scripts = ob_get_clean();
     require_once "view/template.php";

@@ -33,10 +33,10 @@ function login($request)
                 require "view/home.php";
                 homeView();
             } else {
-                loginView();
+                header("Location: /login?error=pswNotEqual",true);
             }
         } else {
-            loginView();
+            header("Location: /login?error=emptyFields",true);
         }
     } else {
         loginView();
@@ -90,10 +90,10 @@ function register($request)
                 //redirects to /home
                 header("Location: /home");
             } else {
-                registerView();
+                header("Location: /login?error=creationFailed", true);
             }
         } else {
-            registerView();
+            header("Location: /login?error=emptyFields", true);
         }
     } else {
         registerView();
