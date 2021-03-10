@@ -26,8 +26,12 @@ function trending($request)
 
     // Search for a given string
     if (!empty($request["search"])) {
+        $search = preg_quote($request["search"]);
+        $search = preg_replace("/\//","\/",$search);
+        $pattern = "/$search/i";
+        file_put_contents("log.log",$pattern);
         foreach ($posts as $key => $post) {
-            if (!preg_grep('/' . $request["search"] . '/i', $post)) {
+            if ((!preg_match($pattern, print_r($post, true)))) {
                 unset($posts[$key]);
             }
         }
@@ -36,9 +40,14 @@ function trending($request)
     // Check if user uses advanced filters
     if (@$request["filter"] == "true") {
         // Filter by title
+        
         if (!empty($request["title"])) {
+            $search = preg_quote($request["title"]);
+            $search = preg_replace("/\//", "\/", $search);
+            $pattern = "/$search/i";
+
             foreach ($posts as $key => $post) {
-                if (!preg_match('/' . $request["title"] . '/i', $post["title"])) {
+                if (!preg_match($pattern, $post["title"])) {
                     unset($posts[$key]);
                 }
             }
@@ -46,8 +55,12 @@ function trending($request)
 
         // Filter by author
         if (!empty($request["author"])) {
+            $search = preg_quote($request["author"]);
+            $search = preg_replace("/\//", "\/", $search);
+            $pattern = "/$search/i";
+
             foreach ($posts as $key => $post) {
-                if (!preg_match('/' . $request["author"] . '/i', $post["owner"])) {
+                if (!preg_match($pattern, $post["owner"])) {
                     unset($posts[$key]);
                 }
             }
@@ -57,7 +70,10 @@ function trending($request)
         if (!empty($request["tags"])) {
             foreach ($posts as $key => $post) {
                 foreach ($request["tags"] as $tag) {
-                    if (!preg_grep("/^$tag$/i", $post["tags"])) {
+                    $search = preg_quote($tag);
+                    $search = preg_replace("/\//", "\/", $search);
+
+                    if (!preg_grep("/^$search$/i", $post["tags"])) {
                         unset($posts[$key]);
                     }
                 }
