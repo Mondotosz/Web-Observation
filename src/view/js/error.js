@@ -1,33 +1,27 @@
 
 
-var url_string = window.location.href
+document.addEventListener("DOMContentLoaded", e => {
 
-var url = new URL(url_string);
+    const param = new URLSearchParams(window.location.search)
 
-var search = url.searchParams.get("error=");
+    console.log(param.get("error"));
 
-console.log(c);
+    switch (param.get("error")) {
+        case 'creationFailed':
+            alert("The creation of your account has failed!")
+            break;
+        case 'emptyFields':
+            alert("Please, fill all the fields.")
+            break;
+        case 'pswNotMatch':
+            alert("The two passwords do not math.")
+            break;
+        case 'pswNotRight':
+            alert("The password is not right.")
+            break;
+    }
 
-switch (url) {
-    case 1:
+    
 
-        break;
-    case 1:
+})
 
-        break;
-    case 1:
-
-        break;
-    case 1:
-
-        break;
-    case 1:
-
-        break;
-    case 1:
-
-        break;
-    default:
-
-        break;
-}
