@@ -90,7 +90,7 @@ function register($request)
                 //redirects to /home
                 header("Location: /home");
             } else {
-                header("Location: /register?error=creationFailed", true);
+                header("Location: /register?error=emailAlreadyUsed", true);
             }
         } else {
             header("Location: /register?error=emptyFields", true);

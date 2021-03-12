@@ -14,10 +14,13 @@ document.addEventListener("DOMContentLoaded", e => {
             alert("Please, fill all the fields.")
             break;
         case 'pswNotMatch':
-            alert("The two passwords do not math.")
+            alert("The two passwords do not match.")
             break;
         case 'pswNotRight':
             alert("The password is not right.")
+            break;
+        case 'emailAlreadyUsed':
+            alert("This email is already used.")
             break;
     }
 
