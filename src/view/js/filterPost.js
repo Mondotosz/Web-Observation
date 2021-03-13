@@ -125,14 +125,14 @@ function createFilterComponent() {
 
     // Create toggler with logic
     container.append($("<div>", {
-        class: "toggler-filter chevron-left"
+        class: "toggler-filter filter-off-icon"
     }).click(e => {
 
         let formFilter = $(".form-filter")
 
         if (toggleStatus) {
-            e.target.classList.remove("chevron-down")
-            e.target.classList.add("chevron-left")
+            e.target.classList.remove("filter-on-icon")
+            e.target.classList.add("filter-off-icon")
             container.removeClass("filter-on")
             container.addClass("filter-off")
             form.find("input,button").each((_e, item) => {
@@ -140,8 +140,8 @@ function createFilterComponent() {
             })
             toggleStatus = false
         } else {
-            e.target.classList.remove("chevron-left")
-            e.target.classList.add("chevron-down")
+            e.target.classList.remove("filter-off-icon")
+            e.target.classList.add("filter-on-icon")
             container.removeClass("filter-off")
             container.addClass("filter-on")
             form.find("input,button").each((_e, item) => {

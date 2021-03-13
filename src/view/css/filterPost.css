@@ -18,16 +18,19 @@
 	border-radius: 0 50% 50% 0;
 }
 
-.chevron-left {
+.filter-off-icon {
+	background: url("/view/content/icons/filter.svg") no-repeat center center;
+	background-size: contain;
+	background-origin: content-box;
+	padding: 5px;
+}
+
+.filter-on-icon {
 	background: url("/view/content/icons/chevronLeft.svg") no-repeat center
 		center;
 	background-size: contain;
-}
-
-.chevron-down {
-	background: url("/view/content/icons/chevronDown.svg") no-repeat center
-		center;
-	background-size: contain;
+	background-origin: content-box;
+	padding: 5px;
 }
 
 .form-filter {
