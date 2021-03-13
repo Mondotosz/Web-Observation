@@ -125,7 +125,7 @@ function renderTemplate($title = null, $content = null, $currentNav = null, $hea
     </footer>
 
     <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="view/js/error.js"></script>
+    <script src="/view/js/error.js"></script>
     <?php /** Custom html called at the end, mainly used for scripts */ ?>
     <?= $scripts ?? "" ?>
   </body>
