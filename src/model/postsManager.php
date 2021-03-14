@@ -63,7 +63,7 @@ function createPostObject($title, $description, $fileNames, $tags = null, $coord
 {
     // Save post using model
     $post = [
-        "owner" => htmlspecialchars($owner) ?? htmlspecialchars($_SESSION["username"]),
+        "owner" => $owner ?? $_SESSION["username"],
         "title" => htmlspecialchars($title),
         "description" => htmlspecialchars($description),
         "date" => Date("d.m.Y"),
