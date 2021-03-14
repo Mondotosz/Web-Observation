@@ -6,6 +6,10 @@
  * @version 0.1 / 14.02.2021
  */
 
+ /**
+  * @description render the login view
+  * @return void
+  */
 function loginView()
 {
 

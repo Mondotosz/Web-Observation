@@ -8,7 +8,9 @@
  */
 
 /**
+ * @description Render trending view listing posts based on search
  * @param array $cards : card association array containing post titles, images and such
+ * @return void
  */
 
 function trendingView($cards)

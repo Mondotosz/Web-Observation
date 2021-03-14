@@ -6,6 +6,11 @@
  * @author Created by Kenan.Augsburger@cpnv.ch
  * @version 0.1 / 03.02.2021
  */
+
+/**
+ * @description render the 404 not found view
+ * @return void
+ */
 function lostView()
 {
 

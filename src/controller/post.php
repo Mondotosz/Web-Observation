@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @function showPost
- * @description 
+ * @description Show post with a given id
  * @param string $postID : key to the post in json
+ * @return void
  */
 function showPost($postId)
 {
@@ -18,7 +18,7 @@ function showPost($postId)
         showPostView($post, $postId);
     } else {
         //redirects to lost
-        require "view/lost.php";
+        require_once "view/lost.php";
         lostView();
     }
 }
@@ -28,6 +28,7 @@ function showPost($postId)
  * @description handles post creation requests
  * @param array $request : contains post infos in an associative array, files are treated using the $_FILES global variable
  * @param array $files : contains file uploaded
+ * @return void
  */
 function createPost($request, $files)
 {
@@ -79,11 +80,11 @@ function createPost($request, $files)
 }
 
 /**
- * @function editPost
  * @description handles post edition requests
  * @param int $postId : id of the post to edit
  * @param array $request : request array (expected $_POST)
  * @param array $files : uploaded files (expected $_FILES)
+ * @return void
  */
 function editPost($postId, $request, $files)
 {
@@ -136,9 +137,9 @@ function editPost($postId, $request, $files)
 }
 
 /**
- * @function deletePost
  * @description handles post deletion requests
  * @param int $postId : id of the post to delete
+ * @return void
  */
 function deletePost($postId)
 {

@@ -7,7 +7,8 @@
  */
 
 /**
- * @param array $post containing post name etc.
+ * @description renders the post creation view
+ * @return void
  */
 function createPostView()
 {

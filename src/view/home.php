@@ -7,6 +7,10 @@
  * @version 0.1 / 14.02.2021
  */
 
+/**
+ * @description render the homepage view
+ * @return void
+ */
 function homeView()
 {
 

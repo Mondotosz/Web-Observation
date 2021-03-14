@@ -1,7 +1,6 @@
 <?php
 
 /**
- * @function saveImage
  * @description saves a given image in full and cropped format
  * @warning fileNames should be generated elsewhere
  * @param array $image
@@ -66,8 +65,8 @@ function saveImage($image, $postId, $imageNumber)
 }
 
 /**
- * @function getImageExtension
  * @description gets file extension if it's an image
+ * @param array $file excepts a file array from $_FILES
  * @return string|int $ext file extension|0 if no in ["png","jpeg","gif"]
  */
 function getImageExtension($file)

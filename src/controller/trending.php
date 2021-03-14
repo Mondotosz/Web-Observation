@@ -3,9 +3,9 @@
 //TODO : refactor trending to a more fitting name
 
 /**
- * @function trending
  * @description gets every post and displays them in a single view
  * @param array $request : expect $_GET with search and filter values
+ * @return void
  */
 function trending($request)
 {

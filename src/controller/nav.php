@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @function home]
  * @description displays home view
+ * @return void
  */
 function home()
 {
@@ -11,8 +11,8 @@ function home()
 }
 
 /**
- * @function lost
  * @description displays 404 page not found view
+ * @return void
  */
 function lost()
 {

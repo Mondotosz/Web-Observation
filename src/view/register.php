@@ -6,8 +6,10 @@
  * @version 0.1 / 14.02.2021
  */
 
-//TODO : add confirm password field and logic
-
+/**
+ * @description render the registration view
+ * @return void
+ */
 function registerView()
 {
 
@@ -37,7 +39,7 @@ function registerView()
                 <label for="inputPasswordCheck" class="form-label" required>Confirm password</label>
                 <input type="password" class="form-control" id="inputPasswordCheck" name="inputPasswordCheck" value="<?= $_POST['inputPasswordCheck'] ?? "" ?>">
             </div>
-            <button type="submit" class="btn btn-primary" id="btnRegister" >Register</button>
+            <button type="submit" class="btn btn-primary" id="btnRegister">Register</button>
         </form>
         <?php /** dummy div */ ?>
         <div class="col-0 col-md-3 col-xl-4"></div>

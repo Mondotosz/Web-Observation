@@ -49,7 +49,6 @@ function getPost($id)
 }
 
 /**
- * @function createPostObject
  * @description creates a post object
  * @param string $title post title
  * @param string $description post description
@@ -88,7 +87,6 @@ function createPostObject($title, $description, $fileNames, $tags = null, $coord
 }
 
 /**
- * @function reservePost
  * @description reserve an id in the post json and return it
  * @return int $id : int value of the index reserved
  */
@@ -111,7 +109,6 @@ function reservePost()
 }
 
 /**
- * @function setPost
  * @description set a post object with a given id
  * @param int|string $id : post id
  * @param array $post : associated array defined in createPostObject
@@ -133,6 +130,11 @@ function setPost($id, $post)
     return $res;
 }
 
+/**
+ * @description unset given post index from posts
+ * @param int $id id of the post to remove
+ * @return int | false : number of bytes written | false on error
+ */
 function removePost($id)
 {
     // Get every posts

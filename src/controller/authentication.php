@@ -5,10 +5,10 @@
  */
 
 /**
- * @function login
  * @description Manages login request redirects to login view on bad login
  * @TODO add error messages
  * @param array $request : Expect an array with ["inputUsername"=>string, "inputPassword"=>string]
+ * @return void
  */
 function login($request)
 {
@@ -33,10 +33,10 @@ function login($request)
                 require "view/home.php";
                 homeView();
             } else {
-                header("Location: /login?error=pswNotRight",true);
+                header("Location: /login?error=pswNotRight", true);
             }
         } else {
-            header("Location: /login?error=emptyFields",true);
+            header("Location: /login?error=emptyFields", true);
         }
     } else {
         loginView();
@@ -44,9 +44,9 @@ function login($request)
 }
 
 /**
- * @function createSession
  * @description create session variables
  * @param string $username
+ * @return void
  */
 function createSession($username)
 {
@@ -54,8 +54,8 @@ function createSession($username)
 }
 
 /**
- * @function logout
  * @description destroys user session and redirects to /home
+ * @return void
  */
 function logout()
 {
@@ -64,10 +64,9 @@ function logout()
 }
 
 /**
- * @function register
  * @description Manages register request redirects to register view on bad input ()
- * @TODO add error messages
  * @param array $request : Expect an array with ["inputUsername"=>string, "inputPassword"=>string, "inputEmail"=>string]
+ * @return void
  */
 function register($request)
 {

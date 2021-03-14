@@ -7,7 +7,9 @@
  */
 
 /**
+ * @description render the post edition view
  * @param array $post containing post name etc.
+ * @return void
  */
 function editPostView($post)
 {

@@ -7,7 +7,10 @@
  */
 
 /**
+ * @description render post view
  * @param array $post containing post name etc.
+ * @param int $postId containing post id used for referencing
+ * @return void
  */
 
 function showPostView($post, $postId)

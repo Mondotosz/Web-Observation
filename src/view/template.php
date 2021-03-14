@@ -8,12 +8,14 @@
  */
 
 /**
+ * @description Renders the template view containing html boilerplate, navbar and footer
  * @param string  $title required page title
  * @param string  $content required page content
  * @param string  $favicon optional path to specific favicon
  * @param string  $head optional html inserted in the head
  * @param string  $scripts optional html inserted just before the body closing tag
  * @param string  $currentNav optional string to define which navItem should be active for simplicity's sake we'll use lowercase
+ * @return void
  */
 
 function renderTemplate($title = null, $content = null, $currentNav = null, $head = null, $scripts = null, $favicon = null)
