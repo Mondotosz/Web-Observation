@@ -81,7 +81,7 @@ function toggleClassInvalid(e) {
 }
 
 function popEmpty(e) {
-    e.popover({ title: 'Champ Vide', content: "Veuillez remplir ce champ avant de cliquer sur le bouton." })
+    e.popover({ title: 'Empty field', content: "Please fill this field before clicking on the button." })
         .blur(function () {
             $(this).popover('hide');
         });
