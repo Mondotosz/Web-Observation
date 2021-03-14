@@ -25,11 +25,11 @@ function registerView()
         <form class="border rounded-2 p-4 col-12 col-md-6 col-xl-4" method="POST" action="/register">
             <div class="mb-3">
                 <label for="inputEmail" class="form-label" required>Email</label>
-                <input type="email" class="form-control" id="inputEmail" name="inputEmail" value="<?= $_POST['inputEmail'] ?? "" ?>">
+                <input type="email" class="form-control" id="inputEmail" name="inputEmail" placeholder="Bob.Ross@art.com" value="<?= $_POST['inputEmail'] ?? "" ?>">
             </div>
             <div class="mb-3">
                 <label for="inputUsername" class="form-label" required>Username</label>
-                <input type="text" class="form-control" id="inputUsername" name="inputUsername" value="<?= $_POST['inputUsername'] ?? "" ?>">
+                <input type="text" class="form-control" id="inputUsername" name="inputUsername" placeholder="BRoss" value="<?= $_POST['inputUsername'] ?? "" ?>">
             </div>
             <div class="mb-3">
                 <label for="inputPassword" class="form-label" required>Password</label>
