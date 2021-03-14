@@ -11,7 +11,7 @@ document.getElementById("btnRegister").addEventListener("click", e => {
         e.preventDefault()
         toggleClassInvalid(email)
         popEmpty(email)
-    }else{
+    } else {
         toggleClassValid(email)
     }
     if (username.val() == "") {
@@ -21,30 +21,24 @@ document.getElementById("btnRegister").addEventListener("click", e => {
     } else {
         toggleClassValid(username)
     }
-    if (password.val() == "") {
-        e.preventDefault()
-        toggleClassInvalid(password)
-        popEmpty(password)
-    } else {
-        toggleClassValid(password)
-    }
-    if (passwordCheck.val() == "") {
+
+    if (password.val() !== passwordCheck.val()) {
         e.preventDefault()
         toggleClassInvalid(passwordCheck)
-        popEmpty(passwordCheck)
-    } else {
-        toggleClassValid(passwordCheck)
+        if (password.val() == "") {
+            toggleClassInvalid(password)
+            popEmpty(password)
+        }
+        if (passwordCheck.val() == "") {
+            toggleClassInvalid(passwordCheck)
+            popEmpty(passwordCheck)
+        }
     }
 
     if (email.val() !== "" && username.val() !== "" && password.val() !== "" && passwordCheck.val() !== "") {
-        // if (password.val() !== passwordCheck.val()) {
-        //     e.preventDefault()
-        //     toggleClassInvalid(password)
-        //     toggleClassInvalid(passwordCheck)
-        // }else{
-        //     toggleClassValid(password)
-        //     toggleClassValid(passwordCheck)
-        // }
+        if (password.val() !== passwordCheck.val()) {
+            e.preventDefault();
+        }
     }
 })
 
@@ -77,7 +71,7 @@ document.getElementById("inputPasswordCheck").addEventListener("change", e => {
     }
 })
 
-function toggleClassValid(e){
+function toggleClassValid(e) {
     e.removeClass("is-invalid")
     e.addClass("is-valid")
 }
@@ -86,7 +80,7 @@ function toggleClassInvalid(e) {
     e.removeClass("is-valid")
 }
 
-function popEmpty(e){
+function popEmpty(e) {
     e.popover({ title: 'Champ Vide', content: "Veuillez remplir ce champ avant de cliquer sur le bouton." })
         .blur(function () {
             $(this).popover('hide');
