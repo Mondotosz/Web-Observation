@@ -153,7 +153,7 @@ function showPostView($post, $postId)
                 var map = L.map('map', {
                     center: [<?= $lat ?>, <?= $lon ?>],
                     zoom: 14,
-                    scrollWheelZoom: false
+                    scrollWheelZoom: true
                 });
 
                 // add the OpenStreetMap tiles
