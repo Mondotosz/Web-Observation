@@ -219,6 +219,7 @@ let modalTab = false
 $("#btnRemoveImage").click((e) => {
     removeItemModal.show()
     modalTab = true
+    $("body").addClass("overflow-hidden")
 
     // load images as selectable
     images.forEach((img, i) => {
@@ -258,6 +259,7 @@ $("#btnRemoveImage").click((e) => {
 function hideModal() {
     removeItemModal.hide();
     modalTab = false
+    $("body").removeClass("overflow-hidden")
     removeItemContainer.empty()
 }
 
