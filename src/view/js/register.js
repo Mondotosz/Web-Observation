@@ -6,6 +6,7 @@ document.getElementById("btnRegister").addEventListener("click", e => {
     var username = $("#inputUsername")
     var password = $("#inputPassword")
     var passwordCheck = $("#inputPasswordCheck")
+    var tOS = $("#inputTOS")
 
     if (email.val() == "") {
         e.preventDefault()
@@ -13,6 +14,7 @@ document.getElementById("btnRegister").addEventListener("click", e => {
         popEmpty(email)
     } else {
         toggleClassValid(email)
+        destroyPop(email)
     }
     if (username.val() == "") {
         e.preventDefault()
@@ -20,11 +22,24 @@ document.getElementById("btnRegister").addEventListener("click", e => {
         popEmpty(username)
     } else {
         toggleClassValid(username)
+        destroyPop(username)
     }
-
+    if (password.val() == "") {
+        e.preventDefault();
+        toggleClassInvalid(password)
+        popEmpty(password)
+    }else {
+        destroyPop(password)
+    }
+    if (passwordCheck.val() == "") {
+        e.preventDefault();
+        toggleClassInvalid(passwordCheck)
+        popEmpty(passwordCheck)
+    }else {
+        destroyPop(passwordCheck)
+    }
     if (password.val() !== passwordCheck.val()) {
         e.preventDefault()
-        toggleClassInvalid(passwordCheck)
         if (password.val() == "") {
             toggleClassInvalid(password)
             popEmpty(password)
@@ -39,6 +54,9 @@ document.getElementById("btnRegister").addEventListener("click", e => {
         if (password.val() !== passwordCheck.val()) {
             e.preventDefault();
         }
+        if (!tOS.is(":checked")) {
+            e.preventDefault();
+        }
     }
 })
 
@@ -51,9 +69,13 @@ document.getElementById("inputPassword").addEventListener("change", e => {
         e.preventDefault()
         toggleClassInvalid(password)
         toggleClassInvalid(passwordCheck)
+        popEmpty(password)
+        popEmpty(passwordCheck)
     } else if (password.val() == passwordCheck.val()) {
         toggleClassValid(password)
         toggleClassValid(passwordCheck)
+        destroyPop(password)
+        destroyPop(passwordCheck)
     }
 })
 document.getElementById("inputPasswordCheck").addEventListener("change", e => {
@@ -68,6 +90,8 @@ document.getElementById("inputPasswordCheck").addEventListener("change", e => {
     } else if (passwordCheck.val() == password.val()) {
         toggleClassValid(password)
         toggleClassValid(passwordCheck)
+        destroyPop(password)
+        destroyPop(passwordCheck)
     }
 })
 
@@ -85,4 +109,9 @@ function popEmpty(e) {
         .blur(function () {
             $(this).popover('hide');
         });
+    e.popover('enable')
+}
+
+function destroyPop(e) {
+    e.popover('disable')
 }

@@ -39,6 +39,10 @@ function registerView()
                 <label for="inputPasswordCheck" class="form-label" required>Confirm password</label>
                 <input type="password" class="form-control" id="inputPasswordCheck" name="inputPasswordCheck" value="<?= $_POST['inputPasswordCheck'] ?? "" ?>">
             </div>
+            <div class="mb-3">
+                <input type="checkbox" class="form-check-input" id="inputTOS">
+                <label for="inputTOS" class="form-label">I have read the <a href="/termsOfServices">terms of services</a> and I accepted them.</label>
+            </div>
             <button type="submit" class="btn btn-primary" id="btnRegister">Register</button>
         </form>
         <?php /** dummy div */ ?>
@@ -51,7 +55,7 @@ function registerView()
 
     ob_start();
     ?>
-    <script type="module" src="view/js/passwordCheckRegister.js"></script>
+    <script type="module" src="view/js/register.js"></script>
 <?php
     $scripts = ob_get_clean();
 
