@@ -99,12 +99,12 @@ function createPostView()
                 <?php /** coordinates latitude */ ?>
                 <div class="row">
                     <label for="postLatitude" class="form-label">Latitude</label>
-                    <input type="text" id="postLatitude" name="latitude" class="form-control px-1 ms-2 w-75 " required>
+                    <input type="number" id="postLatitude" name="latitude" class="form-control px-1 ms-2 w-75 " required>
                 </div>
                 <?php /** coordinates longitude */ ?>
                 <div class="row">
                     <label for="postLongitude" class="form-label">Longitude</label>
-                    <input type="text" id="postLongitude" name="longitude" class="form-control px-1 ms-2 w-75 " required>
+                    <input type="number" id="postLongitude" name="longitude" class="form-control px-1 ms-2 w-75 " required>
                 </div>
                 <div class="d-flex">
                 </div>

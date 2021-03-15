@@ -117,12 +117,12 @@ function editPostView($post)
                 <?php /** coordinates latitude */ ?>
                 <div class="row">
                     <label for="postLatitude" class="form-label">Latitude</label>
-                    <input type="text" id="postLatitude" name="latitude" class="form-control px-1 ms-2 w-75 " value="<?= $post['coordinates']['lat'] ?>" required>
+                    <input type="number" id="postLatitude" name="latitude" class="form-control px-1 ms-2 w-75 " value="<?= $post['coordinates']['lat'] ?>" required>
                 </div>
                 <?php /** coordinates longitude */ ?>
                 <div class="row">
                     <label for="postLongitude" class="form-label">Longitude</label>
-                    <input type="text" id="postLongitude" name="longitude" class="form-control px-1 ms-2 w-75 " value="<?= $post['coordinates']['lon'] ?>" required>
+                    <input type="number" id="postLongitude" name="longitude" class="form-control px-1 ms-2 w-75 " value="<?= $post['coordinates']['lon'] ?>" required>
                 </div>
                 <div class="row">
                     <label for="postImage" class="form-label" style="display:none;">Image</label>
