@@ -93,7 +93,7 @@ function showPostView($post, $postId)
                     <span class="visually-hidden">Next</span>
                 </a>
                 <?php
-                if ($_SESSION["username"] == $post["owner"]) {
+                if (@$_SESSION["username"] == $post["owner"]) {
                 ?>
                     <a href="/post/<?= $postId ?>/delete" class="btn btn-danger btn-trash"></a>
                     <a href="/post/<?= $postId ?>/edit" class="btn btn-primary btn-edit"></a>
