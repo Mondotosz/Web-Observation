@@ -120,7 +120,7 @@ function renderTemplate($title = null, $content = null, $currentNav = null, $hea
           <a href="" class="link-secondary text-decoration-none">About</a>
         </div>
         <div class="text-muted mx-2">
-          <a href="" class="link-secondary text-decoration-none">Terms</a>
+          <a href="/termsOfServices" class="link-secondary text-decoration-none">Terms</a>
         </div>
       </div>
 

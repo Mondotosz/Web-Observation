@@ -1,5 +1,3 @@
-
-
 $("#postLatitude").change(e => {
     window.lat = e.target.value
     if ($("#postLongitude")) {

@@ -19,3 +19,9 @@ function lost()
     require_once "view/lost.php";
     lostView();
 }
+
+function tOS()
+{
+    require_once "view/termsOfServices.php";
+    tOSView();
+}

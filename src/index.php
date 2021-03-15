@@ -16,7 +16,7 @@ require_once "controller/trending.php";
 require_once "controller/authentication.php";
 require_once "controller/post.php";
 
-switch (strtok($_SERVER["REQUEST_URI"],'?')) {
+switch (strtok($_SERVER["REQUEST_URI"], '?')) {
     case "/":
     case "/home":
         home();
@@ -44,6 +44,9 @@ switch (strtok($_SERVER["REQUEST_URI"],'?')) {
         break;
     case (preg_match('/^\/post\/(\d+)\/?$/', $_SERVER["REQUEST_URI"], $res) ? true : false): // Match revery requests on /post/*
         showPost(@$res[1]);
+        break;
+    case "/termsOfServices":
+        tOS();
         break;
     default:
         lost();
