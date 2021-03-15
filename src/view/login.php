@@ -18,9 +18,9 @@ function loginView()
     // Content
     ob_start();
 ?>
-    <?php/** this div is used to center and resize the login form */?>
+    <?php /** this div is used to center and resize the login form */ ?>
     <div class="row w-auto mx-0 px-2 pt-5">
-        <?php/** dummy div */?>
+        <?php /** dummy div */ ?>
         <div class="col-0 col-md-3 col-xl-4"></div>
         <form class="border rounded-2 p-4 col-12 col-md-6 col-xl-4" method="post" action="/login">
             <div class="mb-3">
@@ -33,7 +33,7 @@ function loginView()
             </div>
             <button type="submit" class="btn btn-primary">Login</button>
         </form>
-        <?php/** dummy div */?>
+        <?php /** dummy div */ ?>
         <div class="col-0 col-md-3 col-xl-4"></div>
     </div>
 <?php
