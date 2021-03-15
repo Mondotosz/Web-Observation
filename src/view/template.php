@@ -114,7 +114,10 @@ function renderTemplate($title = null, $content = null, $currentNav = null, $hea
 
       <div class="d-flex justify-content-center">
         <div class="text-muted mx-2">
-          <a href="" class="link-secondary text-decoration-none">Social</a>
+          <a href="https://github.com/Mondotosz/Web-Observation" class="link-secondary text-decoration-none"><img style="height: 1.25rem;" src="view/content/icons/github.svg"></a>
+        </div>
+        <div class="text-muted mx-2">
+          <a href="" class="link-secondary text-decoration-none"><img style="height: 1.25rem;" src="view/content/icons/email.svg"></a>
         </div>
         <div class="text-muted mx-2">
           <a href="" class="link-secondary text-decoration-none">About</a>
