@@ -19,6 +19,9 @@ function login($request)
         // checks if the required field are filled
         if (!empty($request["inputUsername"]) && !empty($request["inputPassword"])) {
 
+            // Sanitize input
+            $request["inputUsername"] = htmlspecialchars($request["inputUsername"], ENT_QUOTES);
+
             // gets user
             require_once "model/usersManager.php";
             $user = getUser($request["inputUsername"]);
@@ -76,6 +79,10 @@ function register($request)
 
         // checks if the required field are filled
         if (!empty($request["inputUsername"]) && !empty($request["inputPassword"]) && !empty($request["inputEmail"])) {
+
+            // Sanitize input
+            $request["inputUsername"] = htmlspecialchars($request["inputUsername"]);
+            $request["inputEmail"] = htmlspecialchars($request["inputEmail"]);
 
             // Hash password
             $hashedPassword = password_hash($request["inputPassword"], PASSWORD_DEFAULT);

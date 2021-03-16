@@ -55,8 +55,6 @@ function addUser($username, $password, $email)
 
         // go through each existing users to check for email
         foreach ($users as $user) {
-            //TODO: check whether this breaks anything
-            //TODO: find a good way to break
             if ($user["email"] == $email) {
                 $success = false;
                 break;
@@ -68,8 +66,7 @@ function addUser($username, $password, $email)
             // set timezone for creation date
             date_default_timezone_set("Europe/Zurich");
             // add new user to the users array
-            // ! due to the limitations of json here if multiple users register at the same time there is a risk of overwriting
-            $users[htmlspecialchars($username)] = ["creationDate" => date("d.m.Y"), "password" => $password, "email" => htmlspecialchars($email)];
+            $users[$username] = ["creationDate" => date("d.m.Y"), "password" => $password, "email" => $email];
             // save to file
             file_put_contents("data/users.json", json_encode($users));
         }
