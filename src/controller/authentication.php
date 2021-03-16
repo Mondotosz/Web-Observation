@@ -13,36 +13,42 @@
 function login($request)
 {
     require_once "view/login.php";
-    // check for empty request
-    if (!empty($request)) {
 
-        // checks if the required field are filled
-        if (!empty($request["inputUsername"]) && !empty($request["inputPassword"])) {
+    // Guard clauses
 
-            // Sanitize input
-            $request["inputUsername"] = htmlspecialchars($request["inputUsername"], ENT_QUOTES);
+    // User already logged in
+    if (isAuthenticated()) {
+        header("Location: /home");
+        exit();
+    }
 
-            // gets user
-            require_once "model/usersManager.php";
-            $user = getUser($request["inputUsername"]);
-
-            // checks password
-            //@$user["password"] == @$request["inputPassword"]
-            if (password_verify(@$request["inputPassword"], @$user["password"])) {
-                createSession($request["inputUsername"]);
-
-                //redirects to /home
-                header("Location: /home");
-                require "view/home.php";
-                homeView();
-            } else {
-                header("Location: /login?error=pswNotRight", true);
-            }
-        } else {
-            header("Location: /login?error=emptyFields", true);
-        }
-    } else {
+    // Empty request data
+    if (empty($request)) {
         loginView();
+        exit();
+    }
+
+    // Checks if the required field are filled
+    if (empty($request["inputUsername"]) || empty($request["inputPassword"])) {
+        header("Location: /login?error=emptyFields", true);
+        exit();
+    }
+
+    // Sanitize input
+    $request["inputUsername"] = htmlspecialchars($request["inputUsername"], ENT_QUOTES);
+
+    // Gets user
+    require_once "model/usersManager.php";
+    $user = getUser($request["inputUsername"]);
+
+    // Checks password
+    if (password_verify(@$request["inputPassword"], @$user["password"])) {
+        createSession($request["inputUsername"]);
+
+        // Redirects to /home
+        header("Location: /home");
+    } else {
+        header("Location: /login?error=pswNotRight", true);
     }
 }
 
@@ -74,34 +80,52 @@ function logout()
 function register($request)
 {
     require_once "view/register.php";
-    // check for empty request
-    if (!empty($request)) {
 
-        // checks if the required field are filled
-        if (!empty($request["inputUsername"]) && !empty($request["inputPassword"]) && !empty($request["inputEmail"])) {
+    // Guard clauses
 
-            // Sanitize input
-            $request["inputUsername"] = htmlspecialchars($request["inputUsername"]);
-            $request["inputEmail"] = htmlspecialchars($request["inputEmail"]);
-
-            // Hash password
-            $hashedPassword = password_hash($request["inputPassword"], PASSWORD_DEFAULT);
-
-            // try to add user
-            require_once "model/usersManager.php";
-            if (addUser($request["inputUsername"], $hashedPassword, $request["inputEmail"])) {
-                // login to created account
-                createSession($request["inputUsername"]);
-
-                //redirects to /home
-                header("Location: /home");
-            } else {
-                header("Location: /register?error=emailAlreadyUsed", true);
-            }
-        } else {
-            header("Location: /register?error=emptyFields", true);
-        }
-    } else {
-        registerView();
+    // User already logged in
+    if (isAuthenticated()) {
+        header("Location: /home");
+        exit();
     }
+
+    // Empty request data
+    if (empty($request)) {
+        registerView();
+        exit();
+    }
+
+    // checks if the required field are filled
+    if (empty($request["inputUsername"]) || empty($request["inputPassword"]) || empty($request["inputEmail"])) {
+        header("Location: /register?error=emptyFields", true);
+        exit();
+    }
+
+    // Sanitize input
+    $request["inputUsername"] = htmlspecialchars($request["inputUsername"]);
+    $request["inputEmail"] = htmlspecialchars($request["inputEmail"]);
+
+    // Hash password
+    $hashedPassword = password_hash($request["inputPassword"], PASSWORD_DEFAULT);
+
+    // Try to add user
+    require_once "model/usersManager.php";
+    if (addUser($request["inputUsername"], $hashedPassword, $request["inputEmail"])) {
+        // login to created account
+        createSession($request["inputUsername"]);
+
+        //redirects to /home
+        header("Location: /home");
+    } else {
+        header("Location: /register?error=emailAlreadyUsed", true);
+    }
+}
+
+/**
+ * @description checks if the user is logged in
+ * @return bool true if the user is logged in
+ */
+function isAuthenticated()
+{
+    return isset($_SESSION["username"]);
 }
