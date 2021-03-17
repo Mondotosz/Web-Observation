@@ -48,6 +48,9 @@ switch (strtok($_SERVER["REQUEST_URI"], '?')) {
     case "/termsOfServices":
         tOS();
         break;
+    case "/about":
+        about();
+        break;
     default:
         lost();
 }

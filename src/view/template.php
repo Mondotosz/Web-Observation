@@ -120,7 +120,7 @@ function renderTemplate($title = null, $content = null, $currentNav = null, $hea
           <a href="" class="link-secondary text-decoration-none"><img style="height: 1.25rem;" src="view/content/icons/email.svg"> Email</a>
         </div>
         <div class="text-muted mx-2">
-          <a href="" class="link-secondary text-decoration-none">About</a>
+          <a href="/about" class="link-secondary text-decoration-none">About</a>
         </div>
         <div class="text-muted mx-2">
           <a href="/termsOfServices" class="link-secondary text-decoration-none">Terms</a>
