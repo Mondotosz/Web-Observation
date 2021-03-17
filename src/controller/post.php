@@ -48,8 +48,13 @@ function createPost($request, $files)
 
                 // Save images
                 require_once "model/imagesManager.php";
-                foreach ($files as $key => $file) {
-                    $imageNames[$key] = saveImage($file, $postId, $key);
+                $index = 0;
+                foreach ($files as $file) {
+                    $result = saveImage($file, $postId, $index);
+                    if ($result != 0) {
+                        $imageNames[$index] = $result;
+                        $index++;
+                    }
                 }
 
                 // Save post
@@ -101,8 +106,13 @@ function editPost($postId, $request, $files)
 
                 // Save images
                 require_once "model/imagesManager.php";
-                foreach ($files as $key => $file) {
-                    $imageNames[$key] = saveImage($file, $postId, $key);
+                $index = 0;
+                foreach ($files as $file) {
+                    $result = saveImage($file, $postId, $index);
+                    if ($result != 0) {
+                        $imageNames[$index] = $result;
+                        $index++;
+                    }
                 }
 
                 file_put_contents("log.log", print_r($imageNames, true));

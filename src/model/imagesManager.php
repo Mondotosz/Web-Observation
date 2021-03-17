@@ -71,7 +71,7 @@ function saveImage($image, $postId, $imageNumber)
  */
 function getImageExtension($file)
 {
-    switch (getimagesize($file["tmp_name"])["mime"]) {
+    switch (mime_content_type($file["tmp_name"])) {
         case "image/png":
             $ext = "png";
             break;
