@@ -1,4 +1,5 @@
 import "/node_modules/jquery/dist/jquery.min.js"
+import * as helpers from "/view/js/helpers.js"
 
 document.getElementById("btnRegister").addEventListener("click", e => {
 
@@ -28,14 +29,14 @@ document.getElementById("btnRegister").addEventListener("click", e => {
         e.preventDefault();
         toggleClassInvalid(password)
         popEmpty(password)
-    }else {
+    } else {
         destroyPop(password)
     }
     if (passwordCheck.val() == "") {
         e.preventDefault();
         toggleClassInvalid(passwordCheck)
         popEmpty(passwordCheck)
-    }else {
+    } else {
         destroyPop(passwordCheck)
     }
     if (password.val() !== passwordCheck.val()) {
@@ -48,6 +49,14 @@ document.getElementById("btnRegister").addEventListener("click", e => {
             toggleClassInvalid(passwordCheck)
             popEmpty(passwordCheck)
         }
+    }
+
+    // Validate email
+    if (!helpers.validateEmail(email.val())) {
+        toggleClassInvalid(email)
+        e.preventDefault()
+    } else {
+        toggleClassValid(email)
     }
 
     if (email.val() !== "" && username.val() !== "" && password.val() !== "" && passwordCheck.val() !== "") {
