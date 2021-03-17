@@ -67,6 +67,8 @@ function addUser($username, $password, $email)
             date_default_timezone_set("Europe/Zurich");
             // add new user to the users array
             $users[$username] = ["creationDate" => date("d.m.Y"), "password" => $password, "email" => $email];
+            // Check id data directory exist and creates it if it doesn't
+            file_exists("data") ?: mkdir("data");
             // save to file
             file_put_contents("data/users.json", json_encode($users));
         }
