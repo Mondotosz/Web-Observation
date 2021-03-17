@@ -67,8 +67,8 @@ function createPostObject($title, $description, $fileNames, $tags = null, $coord
         "description" => htmlspecialchars($description),
         "date" => Date("d.m.Y"),
         "coordinates" => [
-            "lon" => htmlspecialchars($coordinates["lon"]) ?? "dummy",
-            "lat" => htmlspecialchars($coordinates["lat"]) ?? "dummy"
+            "lon" => htmlspecialchars(@$coordinates["lon"]) ?? "0",
+            "lat" => htmlspecialchars(@$coordinates["lat"]) ?? "0"
         ],
         "tags" => []
     ];
