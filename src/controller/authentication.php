@@ -86,19 +86,24 @@ function register($request)
                 $request["inputUsername"] = htmlspecialchars($request["inputUsername"]);
                 $request["inputEmail"] = htmlspecialchars($request["inputEmail"]);
 
-                // Hash password
-                $hashedPassword = password_hash($request["inputPassword"], PASSWORD_DEFAULT);
+                // Validate email
+                if (filter_var($request["inputEmail"], FILTER_VALIDATE_EMAIL) != false) {
+                    // Hash password
+                    $hashedPassword = password_hash($request["inputPassword"], PASSWORD_DEFAULT);
 
-                // Try to add user
-                require_once "model/usersManager.php";
-                if (addUser($request["inputUsername"], $hashedPassword, $request["inputEmail"])) {
-                    // login to created account
-                    createSession($request["inputUsername"]);
+                    // Try to add user
+                    require_once "model/usersManager.php";
+                    if (addUser($request["inputUsername"], $hashedPassword, $request["inputEmail"])) {
+                        // login to created account
+                        createSession($request["inputUsername"]);
 
-                    //redirects to /home
-                    header("Location: /home");
+                        //redirects to /home
+                        header("Location: /home");
+                    } else {
+                        header("Location: /register?error=emailOrUsernameAlreadyUsed", true);
+                    }
                 } else {
-                    header("Location: /register?error=emailAlreadyUsed", true);
+                    header("Location: /register?error=invalidEmail", true);
                 }
             } else {
                 header("Location: /register?error=emptyFields", true);
