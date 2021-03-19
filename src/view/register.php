@@ -43,7 +43,10 @@ function registerView()
                 <input type="checkbox" class="form-check-input" id="inputTOS">
                 <label for="inputTOS" class="form-label">I have read the <a href="/termsOfServices">terms of services</a> and I accepted them.</label>
             </div>
-            <button type="submit" class="btn btn-primary" id="btnRegister">Register</button>
+            <div class="mb-3">
+            <button type="submit" class="btn btn-primary me-3" id="btnRegister">Register</button>
+                <small>Already have an account? Go to <a href="/login">login</a>.</small>
+            </div>
         </form>
         <?php /** dummy div */ ?>
         <div class="col-0 col-md-3 col-xl-4"></div>
