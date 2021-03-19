@@ -41,6 +41,7 @@ function showPostView($post, $postId)
     ob_start();
     ?>
     <script src="/view/js/fullscreenImage.js"></script>
+    <script type="module" src="/view/js/postDeletion.js"></script>
     <?php
     $script = ob_get_clean();
 
@@ -95,7 +96,7 @@ function showPostView($post, $postId)
                 <?php
                 if (@$_SESSION["username"] == $post["owner"]) {
                 ?>
-                    <a href="/post/<?= $postId ?>/delete" class="btn btn-danger btn-trash"></a>
+                    <a id="btnDeletePost" href="/post/delete" class="btn btn-danger btn-trash"></a>
                     <a href="/post/<?= $postId ?>/edit" class="btn btn-primary btn-edit"></a>
                 <?php
                 }
