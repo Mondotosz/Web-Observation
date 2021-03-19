@@ -175,6 +175,7 @@ function showPostView($post, $postId)
 
         </div>
     </div>
+    <div id="loadTarget"></div>
 <?php
 
     $content = ob_get_clean();
