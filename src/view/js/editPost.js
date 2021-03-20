@@ -174,7 +174,7 @@ function previewFile(file) {
 // Sends to postImage input
 $('#btnAddImage').click(function () { $('#postImage').trigger('click'); });
 
-// Tags
+// ANCHOR Tags
 let tags = [];
 
 $(document).ready(() => {
@@ -192,48 +192,59 @@ $(document).ready(() => {
     })
 })
 
+$("#btnAddTags").on("click", () => {
+    addTag($("#addTags")[0])
+})
+
 $("#addTags").on("keypress", event => {
     if (event.key === "Enter") {
         // Avoid sending form on enter
         event.preventDefault();
         // Check if empty
-        const pattern = /^\s*$/
-        if (!pattern.test(event.target.value)) {
-            // save tag in array and get index
-            let index = tags.push(event.target.value) - 1
+        addTag(event.target)
 
-            // create html element
-            let tagElement = $("<div>", {
-                text: event.target.value,
-                class: "badge bg-primary p2 me-2 mt-2 fs-6"
-            })
-
-            // remove tag control
-            let tagElementRemoveIcon = $("<img>", {
-                src: "/view/content/icons/x.svg",
-                style: "height:1rem;",
-                class: "removeTagIcon",
-                "data-tags-id": index
-            })
-
-            tagElement.append(tagElementRemoveIcon)
-
-
-            // Append it to the tags container
-            $("#tagsContainer").append(tagElement)
-
-            $(`[data-tags-id=${index}]`).click(e => {
-                // null value in tags array
-                tags[index] = null
-                // remove tag item
-                e.target.parentNode.remove()
-            })
-
-            // Empty input
-            event.target.value = "";
-        }
     }
 })
+
+function addTag(domElement) {
+    const pattern = /^\s*$/
+    if (!pattern.test(domElement.value) && !tags.includes(domElement.value)) {
+
+        // save tag in array and get index
+        let index = tags.push(domElement.value) - 1
+
+        // create html element
+        let tagElement = $("<div>", {
+            text: domElement.value,
+            class: "badge bg-primary p2 me-2 mt-2 fs-6"
+        })
+
+        // remove tag control
+        let tagElementRemoveIcon = $("<img>", {
+            src: "/view/content/icons/x.svg",
+            style: "height:1rem;",
+            class: "removeTagIcon",
+            "data-tags-id": index
+        })
+
+        tagElement.append(tagElementRemoveIcon)
+
+
+        // Append it to the tags container
+        $("#tagsContainer").append(tagElement)
+
+        $(`[data-tags-id=${index}]`).click(e => {
+            // null value in tags array
+            tags[index] = null
+            // remove tag item
+            e.target.parentNode.remove()
+        })
+
+        // Empty input
+        domElement.value = "";
+    }
+
+}
 
 // remove image handler
 

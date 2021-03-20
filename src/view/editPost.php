@@ -99,8 +99,12 @@ function editPostView($post)
                 <?php /** tags */ ?>
                 <div class="row">
                     <label for="postTags" class="form-label">Tags</label>
-                    <input type="text" name="tags" id="postTags" class="form-control px-1 ms-2 w-75" style="display:none;">
-                    <input id="addTags" type="text" class="form-control px-1 ms-2 w-25" placeholder="Tag">
+                    <div class="d-flex px-0" style="min-height:1rem;">
+                        <input id="addTags" type="text" class="form-control px-1 ms-2 w-25" placeholder="Tag">
+                        <button id="btnAddTags" class="btn btn-primary ms-2" type="button">
+                            <img src="/view/content/icons/enter.svg" alt="Enter" style="min-width:1rem;">
+                        </button>
+                    </div>
                     <div id="tagsContainer" class="d-flex flex-wrap w-75">
                         <?php
                         foreach (@$post["tags"] as $key => $tag) {
