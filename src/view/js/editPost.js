@@ -260,38 +260,47 @@ $("#btnRemoveImage").click((e) => {
     modalTab = true
     $("body").addClass("overflow-hidden")
 
-    // load images as selectable
-    images.forEach((img, i) => {
-        // check for null value
-        if (img === null) {
-            return
-        }
+    if (removeNullInArray(images).length <= 0) {
+        removeItemContainer.append($("<div>", {
+            class: "col-12 text-center align-items-middle py-5",
+            text: "No image available",
+            style: "min-height:5rem"
+        }))
+    } else {
 
-        let element = $("<div>", {
-            "data-image-index": i,
-            class: "col-12 col-md-4",
-            style: "height:200px;background:no-repeat center center;background-size:contain"
-        })
-
-        let reader = new FileReader()
-        reader.readAsDataURL(img)
-        reader.onload = function () {
-            // ele.style.backgroundImage = `url("${reader.result}")`
-            element.css("background-image", `url("${reader.result}")`)
-
-        }
-
-        element.click(e => {
-            if (e.target.classList.contains("removeImageSelected")) {
-                e.target.classList.remove("removeImageSelected")
-            } else {
-                e.target.classList.add("removeImageSelected")
+        // load images as selectable
+        images.forEach((img, i) => {
+            // check for null value
+            if (img === null) {
+                return
             }
+
+            let element = $("<div>", {
+                "data-image-index": i,
+                class: "col-12 col-md-4",
+                style: "height:200px;background:no-repeat center center;background-size:contain"
+            })
+
+            let reader = new FileReader()
+            reader.readAsDataURL(img)
+            reader.onload = function () {
+                // ele.style.backgroundImage = `url("${reader.result}")`
+                element.css("background-image", `url("${reader.result}")`)
+
+            }
+
+            element.click(e => {
+                if (e.target.classList.contains("removeImageSelected")) {
+                    e.target.classList.remove("removeImageSelected")
+                } else {
+                    e.target.classList.add("removeImageSelected")
+                }
+            })
+
+            removeItemContainer.append(element)
+
         })
-
-        removeItemContainer.append(element)
-
-    })
+    }
 
 })
 
