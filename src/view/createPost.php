@@ -36,15 +36,18 @@ function createPostView()
         <div class="modal-dialog modal-xl modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Remove image</h5>
+                    <h5 class="modal-title">Remove images</h5>
                     <button id="removeItemCross" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body container-fluid">
                     <div id="removeItemContainer" class="row m-0"></div>
                 </div>
-                <div class="modal-footer">
-                    <button id="removeItemCancel" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button id="removeItemConfirm" type="button" class="btn btn-primary">Confirm</button>
+                <div class="modal-footer justify-content-lg-between">
+                    <p>Click to select the images you want to remove</p>
+                    <div class="wrapper">
+                        <button id="removeItemCancel" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button id="removeItemConfirm" type="button" class="btn btn-primary">Confirm</button>
+                    </div>
                 </div>
             </div>
         </div>

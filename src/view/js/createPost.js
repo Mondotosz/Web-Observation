@@ -218,7 +218,7 @@ function addTag(domElement) {
 
 }
 
-// remove image handler
+// ANCHOR remove image handler
 
 let removeItemModal = $("#removeItemModal")
 let removeItemContainer = $("#removeItemContainer")
