@@ -174,7 +174,7 @@ function previewFile(file) {
 // Sends to postImage input
 $('#btnAddImage').click(function () { $('#postImage').trigger('click'); });
 
-// Tags
+// ANCHOR Tags
 let tags = [];
 
 $(document).ready(() => {
@@ -192,50 +192,61 @@ $(document).ready(() => {
     })
 })
 
+$("#btnAddTags").on("click", () => {
+    addTag($("#addTags")[0])
+})
+
 $("#addTags").on("keypress", event => {
     if (event.key === "Enter") {
         // Avoid sending form on enter
         event.preventDefault();
         // Check if empty
-        const pattern = /^\s*$/
-        if (!pattern.test(event.target.value)) {
-            // save tag in array and get index
-            let index = tags.push(event.target.value) - 1
+        addTag(event.target)
 
-            // create html element
-            let tagElement = $("<div>", {
-                text: event.target.value,
-                class: "badge bg-primary p2 me-2 mt-2 fs-6"
-            })
-
-            // remove tag control
-            let tagElementRemoveIcon = $("<img>", {
-                src: "/view/content/icons/x.svg",
-                style: "height:1rem;",
-                class: "removeTagIcon",
-                "data-tags-id": index
-            })
-
-            tagElement.append(tagElementRemoveIcon)
-
-
-            // Append it to the tags container
-            $("#tagsContainer").append(tagElement)
-
-            $(`[data-tags-id=${index}]`).click(e => {
-                // null value in tags array
-                tags[index] = null
-                // remove tag item
-                e.target.parentNode.remove()
-            })
-
-            // Empty input
-            event.target.value = "";
-        }
     }
 })
 
-// remove image handler
+function addTag(domElement) {
+    const pattern = /^\s*$/
+    if (!pattern.test(domElement.value) && !tags.includes(domElement.value)) {
+
+        // save tag in array and get index
+        let index = tags.push(domElement.value) - 1
+
+        // create html element
+        let tagElement = $("<div>", {
+            text: domElement.value,
+            class: "badge bg-primary p2 me-2 mt-2 fs-6"
+        })
+
+        // remove tag control
+        let tagElementRemoveIcon = $("<img>", {
+            src: "/view/content/icons/x.svg",
+            style: "height:1rem;",
+            class: "removeTagIcon",
+            "data-tags-id": index
+        })
+
+        tagElement.append(tagElementRemoveIcon)
+
+
+        // Append it to the tags container
+        $("#tagsContainer").append(tagElement)
+
+        $(`[data-tags-id=${index}]`).click(e => {
+            // null value in tags array
+            tags[index] = null
+            // remove tag item
+            e.target.parentNode.remove()
+        })
+
+        // Empty input
+        domElement.value = "";
+    }
+
+}
+
+// ANCHOR remove image handler
 
 let removeItemModal = $("#removeItemModal")
 let removeItemContainer = $("#removeItemContainer")
@@ -249,38 +260,47 @@ $("#btnRemoveImage").click((e) => {
     modalTab = true
     $("body").addClass("overflow-hidden")
 
-    // load images as selectable
-    images.forEach((img, i) => {
-        // check for null value
-        if (img === null) {
-            return
-        }
+    if (removeNullInArray(images).length <= 0) {
+        removeItemContainer.append($("<div>", {
+            class: "col-12 text-center align-items-middle py-5",
+            text: "No image available",
+            style: "min-height:5rem"
+        }))
+    } else {
 
-        let element = $("<div>", {
-            "data-image-index": i,
-            class: "col-12 col-md-4",
-            style: "height:200px;background:no-repeat center center;background-size:contain"
-        })
-
-        let reader = new FileReader()
-        reader.readAsDataURL(img)
-        reader.onload = function () {
-            // ele.style.backgroundImage = `url("${reader.result}")`
-            element.css("background-image", `url("${reader.result}")`)
-
-        }
-
-        element.click(e => {
-            if (e.target.classList.contains("removeImageSelected")) {
-                e.target.classList.remove("removeImageSelected")
-            } else {
-                e.target.classList.add("removeImageSelected")
+        // load images as selectable
+        images.forEach((img, i) => {
+            // check for null value
+            if (img === null) {
+                return
             }
+
+            let element = $("<div>", {
+                "data-image-index": i,
+                class: "col-12 col-md-4",
+                style: "height:200px;background:no-repeat center center;background-size:contain"
+            })
+
+            let reader = new FileReader()
+            reader.readAsDataURL(img)
+            reader.onload = function () {
+                // ele.style.backgroundImage = `url("${reader.result}")`
+                element.css("background-image", `url("${reader.result}")`)
+
+            }
+
+            element.click(e => {
+                if (e.target.classList.contains("removeImageSelected")) {
+                    e.target.classList.remove("removeImageSelected")
+                } else {
+                    e.target.classList.add("removeImageSelected")
+                }
+            })
+
+            removeItemContainer.append(element)
+
         })
-
-        removeItemContainer.append(element)
-
-    })
+    }
 
 })
 

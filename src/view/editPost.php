@@ -37,15 +37,18 @@ function editPostView($post)
         <div class="modal-dialog modal-xl modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Remove image</h5>
+                    <h5 class="modal-title">Remove images</h5>
                     <button id="removeItemCross" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body container-fluid">
                     <div id="removeItemContainer" class="row m-0"></div>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer justify-content-lg-between">
+                    <p>Click to select the images you want to remove</p>
+                    <div class="wrapper">
                     <button id="removeItemCancel" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                     <button id="removeItemConfirm" type="button" class="btn btn-primary">Confirm</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -99,8 +102,12 @@ function editPostView($post)
                 <?php /** tags */ ?>
                 <div class="row">
                     <label for="postTags" class="form-label">Tags</label>
-                    <input type="text" name="tags" id="postTags" class="form-control px-1 ms-2 w-75" style="display:none;">
-                    <input id="addTags" type="text" class="form-control px-1 ms-2 w-25" placeholder="Tag">
+                    <div class="d-flex px-0" style="min-height:1rem;">
+                        <input id="addTags" type="text" class="form-control px-1 ms-2 w-25" placeholder="Tag">
+                        <button id="btnAddTags" class="btn btn-primary ms-2" type="button">
+                            <img src="/view/content/icons/enter.svg" alt="Enter" style="min-width:1rem;">
+                        </button>
+                    </div>
                     <div id="tagsContainer" class="d-flex flex-wrap w-75">
                         <?php
                         foreach (@$post["tags"] as $key => $tag) {
