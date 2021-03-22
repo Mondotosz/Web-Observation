@@ -49,6 +49,7 @@ function createFilterComponent() {
         type: "text",
         placeholder: "tag",
         class: "form-control",
+        id: "iptFilterTags"
     }).keypress(e => {
         if (e.key === "Enter") {
             e.preventDefault()
@@ -102,6 +103,10 @@ function createFilterComponent() {
         type: "submit",
         class: "btn btn-primary",
         text: "filter"
+    }).on("click", e => {
+        if (!(/^\s*$/.test($("#iptFilterTags").first().val()))) {
+            $("#iptFilterTags").first().trigger($.Event("keypress", { key: "Enter" }))
+        }
     }))
 
     // Create reset button
