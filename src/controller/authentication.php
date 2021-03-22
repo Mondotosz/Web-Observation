@@ -76,46 +76,74 @@ function register($request)
 {
     require_once "view/register.php";
 
-    // User already logged in
-    if (!isAuthenticated()) {
-        // Empty request data
-        if (!empty($request)) {
-            // checks if the required field are filled
-            if (!empty($request["inputUsername"]) && !empty($request["inputPassword"]) && !empty($request["inputEmail"])) {
-                // Sanitize input
-                $request["inputUsername"] = htmlspecialchars($request["inputUsername"]);
-                $request["inputEmail"] = htmlspecialchars($request["inputEmail"]);
+    if (@$request["action"] == "checkUsername") {
 
-                // Validate email
-                if (filter_var($request["inputEmail"], FILTER_VALIDATE_EMAIL) != false) {
-                    // Hash password
-                    $hashedPassword = password_hash($request["inputPassword"], PASSWORD_DEFAULT);
+        require_once 'model/usersManager.php';
 
-                    // Try to add user
-                    require_once "model/usersManager.php";
-                    if (addUser($request["inputUsername"], $hashedPassword, $request["inputEmail"])) {
-                        // login to created account
-                        createSession($request["inputUsername"]);
+        $response = [];
+        $response['valid'] = true;
 
-                        //redirects to /home
-                        header("Location: /home");
+            if (!empty(getUser($request['username']))){
+                $response['valid'] = false;
+            }
+
+        echo json_encode($response);
+
+    }else if (@$request["action"] == "checkEmail") {
+
+        require_once 'model/usersManager.php';
+
+        $response = [];
+        $response['valid'] = true;
+
+            if (getEmail($request['email'])){
+                $response['valid'] = false;
+            }
+
+        echo json_encode($response);
+
+    } else {
+        //echo file_get_contents("php://input");
+        // User already logged in
+        if (!isAuthenticated()) {
+            // Empty request data
+            if (!empty($request)) {
+                // checks if the required field are filled
+                if (!empty($request["inputUsername"]) && !empty($request["inputPassword"]) && !empty($request["inputEmail"])) {
+                    // Sanitize input
+                    $request["inputUsername"] = htmlspecialchars($request["inputUsername"]);
+                    $request["inputEmail"] = htmlspecialchars($request["inputEmail"]);
+
+                    // Validate email
+                    if (filter_var($request["inputEmail"], FILTER_VALIDATE_EMAIL) != false) {
+                        // Hash password
+                        $hashedPassword = password_hash($request["inputPassword"], PASSWORD_DEFAULT);
+
+                        // Try to add user
+                        require_once "model/usersManager.php";
+                        if (addUser($request["inputUsername"], $hashedPassword, $request["inputEmail"])) {
+                            // login to created account
+                            createSession($request["inputUsername"]);
+
+                            //redirects to /home
+                            header("Location: /home");
+                        } else {
+                            header("Location: /register?error=emailOrUsernameAlreadyUsed", true);
+                        }
                     } else {
-                        header("Location: /register?error=emailOrUsernameAlreadyUsed", true);
+                        header("Location: /register?error=invalidEmail", true);
                     }
                 } else {
-                    header("Location: /register?error=invalidEmail", true);
+                    header("Location: /register?error=emptyFields", true);
                 }
             } else {
-                header("Location: /register?error=emptyFields", true);
+                registerView();
             }
         } else {
-            registerView();
+            header("Location: /home");
         }
-    } else {
-        header("Location: /home");
     }
 }
-
 /**
  * @description checks if the user is logged in
  * @return bool true if the user is logged in
