@@ -37,6 +37,27 @@ function getUser($username)
     }
     return $user;
 }
+/**
+ * @description gets a specific email
+ * @return bool
+ */
+
+function getEmail($email)
+{
+
+    $found = false;
+
+    $users = getUsers();
+
+    foreach ($users as $user){
+        if(in_array($email, $user)){
+            $found = true;
+        }
+    }
+
+    return $found;
+
+}
 
 /**
  * @description Add an user to the users file
