@@ -18,7 +18,21 @@ document.getElementById("inputUsername").addEventListener("change", e => {
         success: e => {
             e = JSON.parse(e)
             if(e.valid == false){
-                alert("This username is already used.")
+
+                $("#inputUsername").popover({ title: 'Username taken', content: "This username is already taken." })
+                    .blur(function () {
+                        $(this).popover('hide');
+                    });
+                $("#inputUsername").popover('enable')
+
+                $("#inputUsername").removeClass("is-valid")
+                $("#inputUsername").addClass("is-invalid")
+
+            }else{
+                $("#inputUsername").popover('disable')
+
+                $("#inputUsername").removeClass("is-invalid")
+                $("#inputUsername").addClass("is-valid")
             }
         }
     })
@@ -43,7 +57,21 @@ document.getElementById("inputEmail").addEventListener("change", e => {
         success: e => {
             e = JSON.parse(e)
             if(e.valid == false){
-                alert("This email is already used.")
+
+                $("#inputEmail").popover({ title: 'Email taken', content: "This email is already taken." })
+                    .blur(function () {
+                        $(this).popover('hide');
+                    });
+                $("#inputEmail").popover('enable')
+
+                $("#inputEmail").addClass("is-invalid")
+                $("#inputEmail").removeClass("is-valid")
+
+            } else {
+                $("#inputEmail").popover('disable')
+
+                $("#inputEmail").removeClass("is-invalid")
+                $("#inputEmail").addClass("is-valid")
             }
         }
     })
