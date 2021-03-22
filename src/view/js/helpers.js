@@ -7,3 +7,11 @@ const EMAIL_PATTERN = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`
 export function validateEmail(email) {
     return (EMAIL_PATTERN.test(email))
 }
+
+export function disableScroll(element) {
+    element.style.overflow = "hidden";
+}
+
+export function enableScroll(element) {
+    element.style.overflow = "";
+}

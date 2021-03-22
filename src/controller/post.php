@@ -148,20 +148,21 @@ function editPost($postId, $request, $files)
 
 /**
  * @description handles post deletion requests
- * @param int $postId : id of the post to delete
+ * @param array $request : ["id"=>int]
  * @return void
  */
-function deletePost($postId)
+function deletePost($request)
 {
-    if (!empty($postId)) {
+    file_put_contents("log.log", print_r($request, true), FILE_APPEND);
+    if (!empty($request)) {
         // get post and check ownership
         require_once "model/postsManager.php";
-        $post = getPost($postId);
+        $post = getPost(@$request["id"]);
         if (!empty($post) && $post["owner"] == $_SESSION["username"]) {
             // remove post
-            removePost($postId);
+            removePost($request["id"]);
         }
         // send to home
-        header("Location: /home");
+        echo json_encode(["response" => "success"]);
     }
 }
