@@ -59,7 +59,6 @@ function registerView()
     ob_start();
     ?>
     <script type="module" src="view/js/register.js"></script>
-    <script type="module" src="view/js/checkUsername.js"></script>
 <?php
     $scripts = ob_get_clean();
 
