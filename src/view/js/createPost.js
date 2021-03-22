@@ -45,6 +45,8 @@ function getPost() {
     post.set("coordinates[lon]", $("#postLongitude").val())
     post.set("coordinates[lat]", $("#postLatitude").val())
 
+    $("#btnAddTags").trigger("click")
+
     removeNullInArray(tags).forEach(tag => {
         if (tag !== null) post.append("tags[]", tag)
     })
