@@ -81,7 +81,7 @@ function trending($request)
         }
     }
 
-    switch (@$request["sortBy"]) {
+    switch (@$request["orderBy"]) {
         case "old":
             usort($posts, "sortByDateOld");
             break;
