@@ -105,7 +105,7 @@ function showPostView($post, $postId)
 
         </div>
         <?php /** title and description */ ?>
-        <div class="col-12 col-xl-6 col-xxl-4 border rounded-2 p-4">
+        <div class="col-12 col-xl-6 col-xxl-3 border rounded-2 p-4">
             <?php /** title */ ?>
             <div class="row">
                 <div class="col-12 h2"><?= @$title ?></div>
@@ -151,7 +151,7 @@ function showPostView($post, $postId)
                 </div>
             </div>
         </div>
-        <div class="col-12 col-xl-6 col-xxl-8" style="height: 600px;">
+        <div class="col-12 col-xl-6 col-xxl-9" style="height: 600px;">
 
             <?php /** OpenStreetMap */ ?>
             <div id="map"></div>
