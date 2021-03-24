@@ -27,9 +27,9 @@ function trending($request)
     // Search for a given string
     if (!empty($request["search"])) {
         $search = preg_quote($request["search"]);
-        $search = preg_replace("/\//","\/",$search);
+        $search = preg_replace("/\//", "\/", $search);
         $pattern = "/$search/i";
-        file_put_contents("log.log",$pattern);
+        file_put_contents("log.log", $pattern);
         foreach ($posts as $key => $post) {
             if ((!preg_match($pattern, print_r($post, true)))) {
                 unset($posts[$key]);
@@ -40,7 +40,7 @@ function trending($request)
     // Check if user uses advanced filters
     if (@$request["filter"] == "true") {
         // Filter by title
-        
+
         if (!empty($request["title"])) {
             $search = preg_quote($request["title"]);
             $search = preg_replace("/\//", "\/", $search);
@@ -81,6 +81,16 @@ function trending($request)
         }
     }
 
+    switch (@$request["sortBy"]) {
+        case "old":
+            usort($posts, "sortByDateOld");
+            break;
+        case "new":
+        default:
+            usort($posts, "sortByDateNew");
+    }
+
+
     // initialize an empty card array
     $cards = [];
 
@@ -96,4 +106,14 @@ function trending($request)
     // send cards to the trending view
     require_once "view/trending.php";
     trendingView($cards);
+}
+
+function sortByDateNew($a, $b)
+{
+    return date_create_from_format("d.m.Y", $b['date'])->getTimestamp() - date_create_from_format("d.m.Y", $a['date'])->getTimestamp();
+}
+
+function sortByDateOld($a, $b)
+{
+    return date_create_from_format("d.m.Y", $a['date'])->getTimestamp() - date_create_from_format("d.m.Y", $b['date'])->getTimestamp();
 }
