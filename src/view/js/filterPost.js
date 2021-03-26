@@ -35,6 +35,17 @@ function createFilterComponent() {
         value: param.get('title') ?? ""
     }))
 
+    // Create search by title
+    form.append($("<select>", {
+        type: "text",
+        name: "orderBy",
+        placeholder: "orderBy",
+        class: "form-select mb-1",
+        html: `<option value="">order by</option>
+        <option ${param.get('orderBy') == "new" ? `selected=selected` : ""} value="new">new</option>
+        <option ${param.get('orderBy') == "old" ? `selected=selected` : ""} value="old">old</option>`
+    }))
+
     // Create search by author
     form.append($("<input>", {
         type: "text",
