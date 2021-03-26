@@ -23,6 +23,8 @@ function registerView()
         <?php /** dummy div */ ?>
         <div class="col-0 col-md-3 col-xl-4"></div>
         <form class="border rounded-2 p-4 col-12 col-md-6 col-xl-4" method="POST" action="/register">
+            <div class="mb-3" id="errorArea">
+            </div>
             <div class="mb-3">
                 <label for="inputEmail" class="form-label" required>Email</label>
                 <input type="email" class="form-control" id="inputEmail" name="inputEmail" placeholder="Bob.Ross@art.com" value="<?= $_POST['inputEmail'] ?? "" ?>">
@@ -44,7 +46,7 @@ function registerView()
                 <label for="inputTOS" class="form-label">I have read the <a href="/termsOfServices">terms of services</a> and I accepted them.</label>
             </div>
             <div class="mb-3">
-            <button type="submit" class="btn btn-primary me-3" id="btnRegister">Register</button>
+                <button type="submit" class="btn btn-primary me-3" id="btnRegister">Register</button>
                 <small>Already have an account? Go to <a href="/login">login</a>.</small>
             </div>
         </form>
