@@ -97,7 +97,6 @@ function trending($request)
 
     // initialize an empty card array
     $cards = [];
-    file_put_contents("log.log", print_r($posts, true));
 
     // creates a card with each post title and first picture
     foreach ($posts as $post) {
