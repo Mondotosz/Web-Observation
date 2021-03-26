@@ -19,7 +19,11 @@ function trending($request)
     // TODO: check if it should be implemented in the model when saving posts
     // Remove null values for safety
     foreach ($posts as $key => $post) {
-        if (empty($post)) unset($posts[$key]);
+        if (empty($post)) {
+            unset($posts[$key]);
+        } else {
+            $posts[$key]["id"] = $key;
+        }
     }
 
     // Filter
@@ -93,13 +97,14 @@ function trending($request)
 
     // initialize an empty card array
     $cards = [];
+    file_put_contents("log.log", print_r($posts, true));
 
     // creates a card with each post title and first picture
-    foreach ($posts as $key => $post) {
+    foreach ($posts as $post) {
         // verify if the necessary values exist
         // might become obsolete with good constraints in the model
         if (!empty($post["title"]) && !empty($post["pictures"][0]["filename"])) {
-            array_push($cards, getComponent($post["title"], "/view/content/img/thumbnail/" . $post["pictures"][0]["filename"], "/post/" . $key));
+            array_push($cards, getComponent($post["title"], "/view/content/img/thumbnail/" . $post["pictures"][0]["filename"], "/post/" . $post["id"]));
         }
     }
 
