@@ -210,7 +210,7 @@ $("#addTags").on("keypress", event => {
 
 function addTag(domElement) {
     const pattern = /^\s*$/
-    if (!pattern.test(domElement.value) && !tags.includes(domElement.value)) {
+    if (!pattern.test(domElement.value) && !tags.includes(domElement.value) && domElement.value.length <= 30) {
 
         // save tag in array and get index
         let index = tags.push(domElement.value) - 1

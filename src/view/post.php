@@ -117,7 +117,7 @@ function showPostView($post, $postId)
             <?php /** description */ ?>
             <div class="row mt-2">
                 <div class="col-12 h5">Description</div>
-                <div class="col-12 h6"><?= @$desc ?></div>
+                <div class="col-12 h6"><?= str_replace("\n", "<br />", @$desc) ?></div>
             </div>
             <?php /** tags */ ?>
             <div class="row mt-2">
