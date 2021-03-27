@@ -33,7 +33,6 @@ function trending($request)
         $search = preg_quote($request["search"]);
         $search = preg_replace("/\//", "\/", $search);
         $pattern = "/$search/i";
-        file_put_contents("log.log", $pattern);
         foreach ($posts as $key => $post) {
             if ((!preg_match($pattern, print_r($post, true)))) {
                 unset($posts[$key]);
