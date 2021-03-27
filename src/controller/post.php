@@ -165,12 +165,16 @@ function editPost($postId, $request, $files)
  */
 function deletePost($request)
 {
-    file_put_contents("log.log", print_r($request, true), FILE_APPEND);
     if (!empty($request)) {
         // get post and check ownership
         require_once "model/postsManager.php";
         $post = getPost(@$request["id"]);
         if (!empty($post) && $post["owner"] == $_SESSION["username"]) {
+            require_once "model/imagesManager.php";
+            // delete images
+            foreach ($post["pictures"] as $picture) {
+                removeImage($picture["filename"]);
+            }
             // remove post
             removePost($request["id"]);
         }
