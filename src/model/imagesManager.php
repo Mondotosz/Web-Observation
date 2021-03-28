@@ -86,3 +86,10 @@ function getImageExtension($file)
     }
     return $ext;
 }
+
+function removeImage($filename)
+{
+    $res1 = unlink($_SERVER["DOCUMENT_ROOT"] . "/view/content/img/original/$filename");
+    $res2 = unlink($_SERVER["DOCUMENT_ROOT"] . "/view/content/img/thumbnail/$filename");
+    return ($res1 && $res2);
+}

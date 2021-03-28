@@ -115,8 +115,20 @@ function editPost($postId, $request, $files)
                     }
                 }
 
-                file_put_contents("log.log", print_r($imageNames, true));
+                // compare amount of files to remove unused
+                $postFileNames = [];
+                foreach ($post["pictures"] as $picture) {
+                    array_push($postFileNames, $picture["filename"]);
+                }
 
+                if (count($postFileNames) > count($imageNames)) {
+                    $amount = count($postFileNames) - count($imageNames);
+                    $offset = count($imageNames);
+                    // Remove unused files
+                    for ($i = 0; $i < $amount; $i++) {
+                        removeImage($postFileNames[$offset + $i]);
+                    }
+                }
 
                 // create post object
                 $post = createPostObject($request["title"], $request["description"], $imageNames, @$request["tags"], @$request["coordinates"], $_SESSION["username"]);
@@ -153,12 +165,16 @@ function editPost($postId, $request, $files)
  */
 function deletePost($request)
 {
-    file_put_contents("log.log", print_r($request, true), FILE_APPEND);
     if (!empty($request)) {
         // get post and check ownership
         require_once "model/postsManager.php";
         $post = getPost(@$request["id"]);
         if (!empty($post) && $post["owner"] == $_SESSION["username"]) {
+            require_once "model/imagesManager.php";
+            // delete images
+            foreach ($post["pictures"] as $picture) {
+                removeImage($picture["filename"]);
+            }
             // remove post
             removePost($request["id"]);
         }
