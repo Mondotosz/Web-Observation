@@ -78,40 +78,40 @@ function createPostView()
 
         </div>
         <?php /** title and description */ ?>
-        <div class="col-12 col-xl-6">
+        <div class="col-12 col-xl-6 col-xxl-3 border rounded-2 p-4">
             <form method="POST" enctype="multipart/form-data" action="/post/create">
                 <?php /** title */ ?>
-                <div class="row">
-                    <label for="postTitle" class="form-label">Title</label>
-                    <input type="text" id="postTitle" name="title" class="form-control px-1 ms-2 w-75" required>
+                <div class="row w-full px-2 mb-2">
+                    <label for="postTitle" class="form-label h5">Title</label>
+                    <input type="text" id="postTitle" name="title" class="form-control" required>
                 </div>
                 <?php /** description */ ?>
-                <div class="row">
-                    <label for="postDescription" class="form-label">Description</label>
-                    <input type="text" id="postDescription" name="description" class="form-control px-1 ms-2 w-75 " required>
+                <div class="row w-full px-2 mb-2">
+                    <label for="postDescription" class="form-label h5">Description</label>
+                    <textarea id="postDescription" name="description" class="form-control" required></textarea>
                 </div>
                 <?php /** tags */ ?>
-                <div class="row">
-                    <label for="postTags" class="form-label">Tags</label>
+                <div class="row w-full px-2 mb-2">
+                    <label for="postTags" class="form-label h5">Tags</label>
                     <div class="d-flex px-0" style="min-height:1rem;">
-                        <input id="addTags" type="text" class="form-control px-1 ms-2 w-25" placeholder="Tag">
+                        <input id="addTags" type="text" class="form-control" placeholder="Tag">
                         <button id="btnAddTags" class="btn btn-primary ms-2" type="button">
                             <img src="/view/content/icons/enter.svg" alt="Enter" style="min-width:1rem;">
                         </button>
                     </div>
-                    <div id="tagsContainer" class="d-flex flex-wrap w-75">
+                    <div id="tagsContainer" class="d-flex flex-wrap px-0">
                     </div>
                 </div>
-                <h5>Coordinates</h5>
+                <label for="" class="form-label h5">Coordinates</label>
                 <?php /** coordinates latitude */ ?>
-                <div class="row">
-                    <label for="postLatitude" class="form-label">Latitude</label>
-                    <input type="number" id="postLatitude" name="latitude" class="form-control px-1 ms-2 w-75 " required>
+                <div class="row w-full px-2">
+                    <label for="postLatitude" class="form-label h6">Latitude</label>
+                    <input type="number" id="postLatitude" name="latitude" class="form-control px-1 ms-g-2" required>
                 </div>
                 <?php /** coordinates longitude */ ?>
-                <div class="row">
-                    <label for="postLongitude" class="form-label">Longitude</label>
-                    <input type="number" id="postLongitude" name="longitude" class="form-control px-1 ms-2 w-75 " required>
+                <div class="row w-full px-2">
+                    <label for="postLongitude" class="form-label h6">Longitude</label>
+                    <input type="number" id="postLongitude" name="longitude" class="form-control px-1 ms-g-2" required>
                 </div>
                 <div class="d-flex">
                 </div>
@@ -123,7 +123,7 @@ function createPostView()
                 <button id="create" type="submit" class="btn btn-primary">submit</button>
             </form>
         </div>
-        <div class="col-12 col-xl-6" style="height: 600px;">
+        <div class="col-12 col-xl-6 col-xxl-9" style="min-height: 600px;">
 
             <?php /** OpenStreetMap */ ?>
             <div id="map"></div>
