@@ -1,3 +1,5 @@
+import "/node_modules/jquery/dist/jquery.min.js"
+
 $("#postLatitude").change(e => {
     window.lat = e.target.value
     if ($("#postLongitude")) {

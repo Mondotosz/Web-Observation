@@ -131,7 +131,7 @@ function editPostView($post)
                 </div>
                 <div class="row">
                     <label for="postImage" class="form-label" style="display:none;">Image</label>
-                    <input type="file" multiple accept=".jpeg, .jpg, .png, .gif" id="postImage" name="postImage" onchange="handleFiles(this.files); this.value = null" class="form-control ms-2 w-75" style="display:none;">
+                    <input type="file" multiple accept=".jpeg, .jpg, .png, .gif" id="postImage" name="postImage" class="form-control ms-2 w-75" style="display:none;">
                 </div>
                 <br>
                 <button id="create" type="submit" class="btn btn-primary">submit</button>
@@ -180,9 +180,8 @@ function editPostView($post)
     // Scripts
     ob_start();
     ?>
-    <script src="/node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="/view/js/editPost.js" defer></script>
-    <script src="/view/js/map.js"></script>
+    <script type="module" src="/view/js/editPost.js" defer></script>
+    <script type="module" src="/view/js/map.js"></script>
 <?php
     $scripts = ob_get_clean();
     require_once "view/template.php";
