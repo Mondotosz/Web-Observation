@@ -4,8 +4,6 @@ document.addEventListener("DOMContentLoaded", e => {
 
     const param = new URLSearchParams(window.location.search)
 
-    console.log(param.get("error"));
-
     switch (param.get("error")) {
         case 'creationFailed':
             alert("The creation of your account has failed!")
@@ -24,7 +22,7 @@ document.addEventListener("DOMContentLoaded", e => {
             break;
     }
 
-    
+
 
 })
 

@@ -1,79 +1,103 @@
+import "/node_modules/jquery/dist/jquery.min.js"
 
-document.getElementById("inputUsername").addEventListener("change", e => {
- 
-    let data = new FormData()
+// !double click triggers bug
+jQuery(() => {
 
-    data.set("username",e.target.value)
-    data.set("action", "checkUsername")
+    // get input elements
+    let usernameInput = $("#inputUsername")
+    let emailInput = $("#inputEmail")
+    // initialize popovers
+    popoverInit(usernameInput, 'Username taken', "This username is already taken.")
+    popoverInit(emailInput, 'Email taken', "This email is already taken.")
 
-    
-    $.ajax({
-        method: "POST",
-        url: window.location.origin + "/register",
-        data: data,
-        processData: false,
-        enctype: "multipart/form-data",
-        contentType: false,
-        cache: false,
-        success: e => {
+    // make a request to check username availability
+    usernameInput.on("change", e => {
+        // create the form data
+        let data = new FormData()
+
+        // get the current username in input
+        data.set("username", e.target.value)
+        // add action value for backend handling
+        data.set("action", "checkUsername")
+
+        // create POST request
+        sendRequest(data, e => {
             e = JSON.parse(e)
-            if(e.valid == false){
-
-                $("#inputUsername").popover({ title: 'Username taken', content: "This username is already taken." })
-                    .blur(function () {
-                        $(this).popover('hide');
-                    });
-                $("#inputUsername").popover('enable')
-
-                $("#inputUsername").removeClass("is-valid")
-                $("#inputUsername").addClass("is-invalid")
-
-            }else{
-                $("#inputUsername").popover('disable')
-
-                $("#inputUsername").removeClass("is-invalid")
-                $("#inputUsername").addClass("is-valid")
-            }
-        }
-    })
-
-})
-document.getElementById("inputEmail").addEventListener("change", e => {
- 
-    let data = new FormData()
-
-    data.set("email",e.target.value)
-    data.set("action", "checkEmail")
-
-    
-    $.ajax({
-        method: "POST",
-        url: window.location.origin + "/register",
-        data: data,
-        processData: false,
-        enctype: "multipart/form-data",
-        contentType: false,
-        cache: false,
-        success: e => {
-            e = JSON.parse(e)
-            if(e.valid == false){
-
-                $("#inputEmail").popover({ title: 'Email taken', content: "This email is already taken." })
-                    .blur(function () {
-                        $(this).popover('hide');
-                    });
-                $("#inputEmail").popover('enable')
-
-                $("#inputEmail").addClass("is-invalid")
-                $("#inputEmail").removeClass("is-valid")
-
+            // Change styling according to response
+            if (e.valid == false) {
+                invalidInput(usernameInput)
             } else {
-                $("#inputEmail").popover('disable')
-
-                $("#inputEmail").removeClass("is-invalid")
-                $("#inputEmail").addClass("is-valid")
+                validInput(usernameInput)
             }
-        }
+        })
+
+    })
+
+    // make a request to check email availability
+    emailInput.on("change", e => {
+
+        // create the form data
+        let data = new FormData()
+
+        // get the current email in input
+        data.set("email", e.target.value)
+        // add action value for backend handling
+        data.set("action", "checkEmail")
+
+        // create POST request
+        sendRequest(data, e => {
+            e = JSON.parse(e)
+            // Change styling according to response
+            if (e.valid == false) {
+                invalidInput(emailInput)
+            } else {
+                validInput(emailInput)
+            }
+        })
+
     })
 
 })
+
+
+// initialize popover
+function popoverInit(input, popoverTitle, popoverContent) {
+    $(input).popover({ title: popoverTitle, content: popoverContent })
+        .blur(function () {
+            $(this).popover('hide');
+        });
+    $(input).popover("disable")
+}
+
+// applies invalid style to the input element
+function invalidInput(input) {
+    $(input).popover('enable')
+
+    $(input).removeClass("is-valid")
+    $(input).addClass("is-invalid")
+
+}
+
+// applies valid style to the input element
+function validInput(input) {
+    $(input).popover('disable')
+
+    $(input).removeClass("is-invalid")
+    $(input).addClass("is-valid")
+
+}
+
+// Send request to register controller, response is handled with a callback function
+function sendRequest(data, callback) {
+    $.ajax({
+        method: "POST",
+        url: window.location.origin + "/register",
+        data: data,
+        processData: false,
+        enctype: "multipart/form-data",
+        contentType: false,
+        cache: false,
+        success: callback
+    })
+
+}
