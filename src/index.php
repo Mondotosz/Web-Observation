@@ -51,6 +51,9 @@ switch (strtok($_SERVER["REQUEST_URI"], '?')) {
     case "/about":
         about();
         break;
+    case "/contact":
+        contact();
+        break;
     default:
         lost();
 }

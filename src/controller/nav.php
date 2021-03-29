@@ -25,8 +25,15 @@ function tOS()
     require_once "view/termsOfServices.php";
     tOSView();
 }
+
 function about()
 {
     require_once "view/about.php";
     aboutView();
+}
+
+function contact()
+{
+    require_once "view/contact.php";
+    contactView();
 }
