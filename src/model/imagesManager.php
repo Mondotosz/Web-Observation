@@ -1,8 +1,11 @@
 <?php
 
 /**
+ * @brief this file handles images CR(U)D
+ */
+
+/**
  * @description saves a given image in full and cropped format
- * @warning fileNames should be generated elsewhere
  * @param array $image
  * @param int|string $postId used to define file name
  * @param int $imageNumber used to define index in file name
@@ -87,6 +90,11 @@ function getImageExtension($file)
     return $ext;
 }
 
+/**
+ * @description this function remove an user generated image by it's filename
+ * @param string $filename name of the image (expects /^\d+-\d+\.jpeg$/ )
+ * @return bool true when both files were deleted | false when one or more file couldn't be deleted
+ */
 function removeImage($filename)
 {
     $res1 = unlink($_SERVER["DOCUMENT_ROOT"] . "/view/content/img/original/$filename");

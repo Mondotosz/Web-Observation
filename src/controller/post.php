@@ -1,4 +1,7 @@
 <?php
+/**
+ * @brief this file handles post requests logic
+ */
 
 /**
  * @description Show post with a given id

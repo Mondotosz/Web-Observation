@@ -1,14 +1,13 @@
 <?php
 
 /**
- * @brief this model interacts with the post file
+ * @brief this model interacts with the users file
  */
 
 /**
  * @description Read user file
  * @return array $users containing every users
  */
-
 function getUsers()
 {
     //checks if file exist
@@ -27,7 +26,6 @@ function getUsers()
  * @description gets a specific user
  * @return array $user containing requested user, empty response when the user doesn't exist
  */
-
 function getUser($username)
 {
     if (!empty(getUsers()[$username])) {
@@ -37,11 +35,11 @@ function getUser($username)
     }
     return $user;
 }
+
 /**
  * @description gets a specific email
  * @return bool
  */
-
 function getEmail($email)
 {
 
@@ -49,21 +47,19 @@ function getEmail($email)
 
     $users = getUsers();
 
-    foreach ($users as $user){
-        if(in_array($email, $user)){
+    foreach ($users as $user) {
+        if (in_array($email, $user)) {
             $found = true;
         }
     }
 
     return $found;
-
 }
 
 /**
  * @description Add an user to the users file
  * @return boolean $success true => user saved | false => couldn't save the user
  */
-
 function addUser($username, $password, $email)
 {
     $success = true;
@@ -94,10 +90,8 @@ function addUser($username, $password, $email)
             file_put_contents("data/users.json", json_encode($users));
         }
     } else {
-
         $success = false;
     }
-    // Add the user
 
     return $success;
 }

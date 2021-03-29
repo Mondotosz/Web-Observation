@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @file post.php
+ * @file createPost.php
  * @author Created by Kenan.Augsburger@cpnv.ch
  * @version 0.1 / 15.02.2021
  */

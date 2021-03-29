@@ -1,6 +1,8 @@
 <?php
 
-//TODO : refactor trending to a more fitting name
+/**
+ * @brief this file handles the trending view logic (filtering and ordering)
+ */
 
 /**
  * @description gets every post and displays them in a single view
@@ -16,7 +18,6 @@ function trending($request)
     // TODO: add a limit
     $posts = getPosts();
 
-    // TODO: check if it should be implemented in the model when saving posts
     // Remove null values for safety
     foreach ($posts as $key => $post) {
         if (empty($post)) {
@@ -26,7 +27,7 @@ function trending($request)
         }
     }
 
-    // Filter
+    // Filters
 
     // Search for a given string
     if (!empty($request["search"])) {
@@ -84,6 +85,7 @@ function trending($request)
         }
     }
 
+    // Posts order
     switch (@$request["orderBy"]) {
         case "old":
             usort($posts, "sortByDateOld");
@@ -111,11 +113,23 @@ function trending($request)
     trendingView($cards);
 }
 
+/**
+ * @description callback function for usort when ordering by new
+ * @param Date $a date[n]
+ * @param Date $b date[n+1]
+ * @return int
+ */
 function sortByDateNew($a, $b)
 {
     return date_create_from_format("d.m.Y", $b['date'])->getTimestamp() - date_create_from_format("d.m.Y", $a['date'])->getTimestamp();
 }
 
+/**
+ * @description callback function for usort when ordering by old
+ * @param Date $a date[n]
+ * @param Date $b date[n+1]
+ * @return int
+ */
 function sortByDateOld($a, $b)
 {
     return date_create_from_format("d.m.Y", $a['date'])->getTimestamp() - date_create_from_format("d.m.Y", $b['date'])->getTimestamp();

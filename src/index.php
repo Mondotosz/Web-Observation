@@ -2,7 +2,7 @@
 
 /**
  * @file index.php
- * @brief This is the rooter, it handles requests and redirect them to the correct controller
+ * @brief This is the router, it handles requests and redirect them to the correct controller
  * @author Created by Kenan.Augsburger@cpnv.ch
  * @version 0.1 / 03.02.2021
  */
@@ -16,6 +16,7 @@ require_once "controller/trending.php";
 require_once "controller/authentication.php";
 require_once "controller/post.php";
 
+// Routing
 switch (strtok($_SERVER["REQUEST_URI"], '?')) {
     case "/":
     case "/home":

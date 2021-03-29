@@ -6,7 +6,6 @@
 
 /**
  * @description Manages login request redirects to login view on bad login
- * @TODO add error messages
  * @param array $request : Expect an array with ["inputUsername"=>string, "inputPassword"=>string]
  * @return void
  */
@@ -144,6 +143,7 @@ function register($request)
         }
     }
 }
+
 /**
  * @description checks if the user is logged in
  * @return bool true if the user is logged in
