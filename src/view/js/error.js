@@ -1,5 +1,5 @@
 
-
+// Check for get parameters matching an error and displays a basic alert with error message
 document.addEventListener("DOMContentLoaded", e => {
 
     const param = new URLSearchParams(window.location.search)
@@ -21,8 +21,6 @@ document.addEventListener("DOMContentLoaded", e => {
             alert("This email is already used.")
             break;
     }
-
-
 
 })
 

@@ -1,5 +1,6 @@
 import "/node_modules/jquery/dist/jquery.min.js"
 
+// update on latitude change in input
 $("#postLatitude").change(e => {
     window.lat = e.target.value
     if ($("#postLongitude")) {
@@ -7,6 +8,7 @@ $("#postLatitude").change(e => {
     }
 })
 
+// update on longitude change in input
 $("#postLongitude").change(e => {
     window.lon = e.target.value
     if ($("#postLatitude")) {
@@ -14,6 +16,7 @@ $("#postLongitude").change(e => {
     }
 })
 
+// move marker by dragging
 marker.addEventListener("moveend", e => {
     var markerLatLng = marker.getLatLng()
     var lat = markerLatLng.lat
@@ -27,6 +30,8 @@ marker.addEventListener("moveend", e => {
 
     console.log(lat, lng)
 })
+
+// move marker by clicking
 map.addEventListener("click", e => {
 
     var txtLat = document.getElementById("postLatitude")

@@ -171,6 +171,7 @@ function createFilterComponent() {
     $("main").append(container)
 }
 
+// Appends css to document head
 jQuery(() => {
     let stylesheet = $("<link>", {
         rel: "stylesheet",
@@ -181,3 +182,5 @@ jQuery(() => {
 
     createFilterComponent()
 })
+
+// Html elements shouldn't be created like this but it was interesting to make
