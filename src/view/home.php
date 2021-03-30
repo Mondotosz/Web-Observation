@@ -32,15 +32,15 @@ function homeView()
         <div id="homeCarousel" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner bg-info" role="listbox">
                 <div class="carousel-item active">
-                    <div class="d-flex align-items-center justify-content-center min-vh-100" style="background: url('view/content/public/Home/1.jpg') no-repeat center center; background-size: cover">
+                    <div class="d-flex align-items-center justify-content-center min-vh-100" style="background: url('/view/content/Public/Home/1.jpg') no-repeat center center; background-size: cover">
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <div class="d-flex align-items-center justify-content-center min-vh-100" style="background: url('view/content/public/Home/2.jpg') no-repeat center center; background-size: cover">
+                    <div class="d-flex align-items-center justify-content-center min-vh-100" style="background: url('/view/content/Public/Home/2.jpg') no-repeat center center; background-size: cover">
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <div class="d-flex align-items-center justify-content-center min-vh-100" style="background: url('view/content/public/Home/3.jpg') no-repeat center center; background-size: cover">
+                    <div class="d-flex align-items-center justify-content-center min-vh-100" style="background: url('/view/content/Public/Home/3.jpg') no-repeat center center; background-size: cover">
                     </div>
                 </div>
             </div>
