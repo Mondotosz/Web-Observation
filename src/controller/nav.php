@@ -47,6 +47,12 @@ function about()
  */
 function contact()
 {
-    require_once "view/contact.php";
-    contactView();
+        require_once "view/contact.php";
+        contactView();
+    
+}function contactUs()
+{
+        require_once "view/contactUs.php";
+        contactUsView();
+    
 }

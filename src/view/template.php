@@ -117,7 +117,7 @@ function renderTemplate($title = null, $content = null, $currentNav = null, $hea
           <a href="https://github.com/Mondotosz/Web-Observation" class="link-secondary text-decoration-none"><img style="height: 1.25rem;" src="/view/content/icons/github.svg"> GitHub</a>
         </div>
         <div class="text-muted mx-2">
-          <a href="" class="link-secondary text-decoration-none"><img style="height: 1.25rem;" src="/view/content/icons/email.svg"> Email</a>
+          <a href="/contactUs" class="link-secondary text-decoration-none"><img style="height: 1.25rem;" src="/view/content/icons/email.svg"> Email</a>
         </div>
         <div class="text-muted mx-2">
           <a href="/about" class="link-secondary text-decoration-none">About</a>

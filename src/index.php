@@ -56,8 +56,14 @@ switch (strtok($_SERVER["REQUEST_URI"], '?')) {
     case "/contact":
         contact();
         break;
+    case "/contactUs":
+        contactUs();
+        break;
     case "/sendMail":
-        sendMail();
+        sendMail(false);
+        break;
+    case "/sendMailToUs":
+        sendMail(true);
         break;
     default:
         lost();

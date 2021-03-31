@@ -46,7 +46,7 @@ function trendingView($cards)
         <div class="d-flex justify-content-center align-middle mt-5">
             <div class="d-flex flex-column">
                 <img src="/view/content/icons/deer.svg" alt="deer icon" style="height:5rem;">
-                <p class="h1">Nothing to see here yet</h5>
+                <p class="h1">Nothing to see Deer yet</h5>
             </div>
         </div>
     <?php

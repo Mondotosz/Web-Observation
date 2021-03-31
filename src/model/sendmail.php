@@ -5,12 +5,17 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-function mailTo($emailTo, $text, $signature)
+function mailTo($emailTo, $text, $username, $emailFrom)
 {
     //Load Composer's autoloader
     require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
     //Instantiation and passing `true` enables exceptions
     $mail = new PHPMailer(true);
+
+    if ($emailFrom == null){
+        $emailFrom = "contact@photify.mycpnv.ch";
+        $emailUsername = "Photify contact";
+    }
 
     try {
         //Server settings
@@ -24,11 +29,11 @@ function mailTo($emailTo, $text, $signature)
         $mail->Port       = 587;                                    //TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
 
         //Recipients
-        $mail->setFrom('contact@photify.mycpnv.ch', 'Photify contact');
+        $mail->setFrom($emailFrom, $username);
         //Add a recipient
         $mail->addAddress($emailTo);
-        //Sender Signature
-        $mail->FromName = $signature;
+        //Sender username
+        $mail->FromName = $username;
 
 
         //Content
@@ -38,12 +43,23 @@ function mailTo($emailTo, $text, $signature)
         $mail->Body = $text;
 
         $mail->send();
-
+        
         // echo 'Message has been sent';
 
-        header('Location: /post/' . $_SESSION['currentPost']);
-
+        $currentPost = $_SESSION['currentPost'];
+        
         $_SESSION['currentPost'] = [];
+
+        if (!empty($currentPost)){
+
+            header('Location: /post/' . $currentPost);
+        
+        }else {
+
+            header("Location: /home");
+
+        }
+
 
     } catch (Exception $e) {
 

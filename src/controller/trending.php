@@ -14,6 +14,9 @@ function trending($request)
     require_once "view/content/components/cards.php";
     require_once "model/postsManager.php";
 
+    //flush the previous viewed post
+    $_SESSION['currentPost'] = [];
+
     // get every existing posts
     // TODO: add a limit
     $posts = getPosts();
