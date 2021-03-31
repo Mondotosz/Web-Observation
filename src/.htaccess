@@ -1,3 +1,9 @@
+# Apache authentication because some people had the idea of sharing unwanted pictures
+AuthType Basic
+AuthName "Restricted Content"
+AuthUserFile /home/photify/.htpasswd
+Require valid-user
+
 # Apache access configuration file
 RewriteEngine on
 
