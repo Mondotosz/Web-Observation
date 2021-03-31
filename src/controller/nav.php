@@ -32,6 +32,7 @@ function tOS()
     tOSView();
 }
 
+
 /**
  * @description displays the about view
  */
@@ -39,4 +40,13 @@ function about()
 {
     require_once "view/about.php";
     aboutView();
+}
+
+/**
+ * @description displays the contact view
+ */
+function contact()
+{
+    require_once "view/contact.php";
+    contactView();
 }
