@@ -15,6 +15,7 @@ require_once "controller/nav.php";
 require_once "controller/trending.php";
 require_once "controller/authentication.php";
 require_once "controller/post.php";
+require_once "controller/mail.php";
 
 switch (strtok($_SERVER["REQUEST_URI"], '?')) {
     case "/":
@@ -53,6 +54,9 @@ switch (strtok($_SERVER["REQUEST_URI"], '?')) {
         break;
     case "/contact":
         contact();
+        break;
+    case "/sendMail":
+        sendMail();
         break;
     default:
         lost();

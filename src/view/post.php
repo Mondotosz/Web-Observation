@@ -102,7 +102,6 @@ function showPostView($post, $postId)
                 }
                 ?>
             </div>
-
         </div>
         <?php /** title and description */ ?>
         <div class="col-12 col-xl-6 col-xxl-3 border rounded-2 p-4">
@@ -113,6 +112,7 @@ function showPostView($post, $postId)
             <?php /** author */ ?>
             <div class="row">
                 <div class="col h4">By <a href="/trending?filter=true&title=&author=<?= @$owner ?>"><?= @$owner ?></a></div>
+                <div><a href="/contact?target=<?= $owner ?>&post=<?= $_SESSION['currentPost'] = $postId ?>" class="link-secondary text-decoration-none"><img style="height: 1.25rem;" src="/view/content/icons/emailBlack.svg"> Email</a></div>
             </div>
             <?php /** description */ ?>
             <div class="row mt-2">
