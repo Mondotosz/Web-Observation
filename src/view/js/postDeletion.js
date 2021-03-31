@@ -8,6 +8,7 @@ $("#btnDeletePost").on("click", e => {
 
 })
 
+// Displays delete confirmation dialog
 function showConfirmation() {
     disableScroll($("body")[0])
     $("#loadTarget").load("/view/content/components/html/modal-confirm-delete.html", () => {
@@ -26,11 +27,13 @@ function showConfirmation() {
     })
 }
 
+// hide confirmation dialog
 function hideConfirmation() {
     $("#loadTarget").html("")
     enableScroll($("body")[0])
 }
 
+// send deletion request to backend
 function sendDeletionRequest() {
     // Prepare request
     let id = window.location.pathname.match(/\/post\/(\d+)\/?/)[1]

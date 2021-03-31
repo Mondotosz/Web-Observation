@@ -5,16 +5,6 @@
  */
 
 /**
- * TODO: order by <argument>
- * TODO: create
- * TODO: filter
- * TODO: edit
- * TODO: delete
- * TODO: cascade
- * TODO: constraint verification
- */
-
-/**
  * @description Read post file
  * @return array $posts containing every posts
  */
@@ -49,7 +39,7 @@ function getPost($id)
 }
 
 /**
- * @description creates a post object
+ * @description creates an associated array representing a post ready for json
  * @param string $title post title
  * @param string $description post description
  * @param array $fileNames name of each image file with extension (expected["id-index.jpg"])

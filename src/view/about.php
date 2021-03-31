@@ -1,4 +1,9 @@
 <?php
+
+/**
+ * @description about view displays information about this website
+ * @return void
+ */
 function aboutView()
 {
     $title = "About";

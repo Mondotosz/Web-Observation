@@ -1,4 +1,7 @@
 <?php
+/**
+ * @brief this file handles static views
+ */
 
 /**
  * @description displays home view
@@ -20,11 +23,18 @@ function lost()
     lostView();
 }
 
+/**
+ * @description displays terms of services view
+ */
 function tOS()
 {
     require_once "view/termsOfServices.php";
     tOSView();
 }
+
+/**
+ * @description displays the about view
+ */
 function about()
 {
     require_once "view/about.php";

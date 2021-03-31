@@ -1,4 +1,8 @@
 <?php
+/**
+ * @description basic terms of service page
+ * @return void
+ */
 function tOSView()
 {
     $title = "Terms";

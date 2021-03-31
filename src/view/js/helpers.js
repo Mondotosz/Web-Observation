@@ -8,10 +8,18 @@ export function validateEmail(email) {
     return (EMAIL_PATTERN.test(email))
 }
 
+/**
+ * @description disable scroll on htmlElement
+ * @param htmlElement element to disable scroll on
+ */
 export function disableScroll(element) {
     element.style.overflow = "hidden";
 }
 
+/**
+ * @description enables scroll on htmlElement
+ * @param htmlElement element to enable scroll on
+ */
 export function enableScroll(element) {
     element.style.overflow = "";
 }

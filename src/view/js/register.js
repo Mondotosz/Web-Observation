@@ -1,6 +1,7 @@
 import "/node_modules/jquery/dist/jquery.min.js"
 import * as helpers from "/view/js/helpers.js"
 
+// form validation on form submission
 document.getElementById("btnRegister").addEventListener("click", e => {
 
     var email = $("#inputEmail")
@@ -9,6 +10,7 @@ document.getElementById("btnRegister").addEventListener("click", e => {
     var passwordCheck = $("#inputPasswordCheck")
     var tOS = $("#inputTOS")
 
+    // Check for empty fields and updates styling
     if (email.val() == "") {
         e.preventDefault()
         toggleClassInvalid(email)
@@ -39,6 +41,7 @@ document.getElementById("btnRegister").addEventListener("click", e => {
     } else {
         destroyPop(passwordCheck)
     }
+    // Double check password
     if (password.val() !== passwordCheck.val()) {
         e.preventDefault()
         if (password.val() == "") {
@@ -51,7 +54,8 @@ document.getElementById("btnRegister").addEventListener("click", e => {
         }
     }
 
-    // Validate email
+    // ! issues with email availability overwriting class
+    // Validate email format
     if (!helpers.validateEmail(email.val())) {
         toggleClassInvalid(email)
         e.preventDefault()
@@ -59,6 +63,7 @@ document.getElementById("btnRegister").addEventListener("click", e => {
         toggleClassValid(email)
     }
 
+    // prevent submission on empty values
     if (email.val() !== "" && username.val() !== "" && password.val() !== "" && passwordCheck.val() !== "") {
         if (password.val() !== passwordCheck.val()) {
             e.preventDefault();
@@ -69,11 +74,15 @@ document.getElementById("btnRegister").addEventListener("click", e => {
     }
 })
 
+// live double password confirmation
+
+// first password field
 document.getElementById("inputPassword").addEventListener("change", e => {
 
     var password = $("#inputPassword")
     var passwordCheck = $("#inputPasswordCheck")
 
+    //
     if (password.val() !== passwordCheck.val() && passwordCheck.val() != "") {
         e.preventDefault()
         toggleClassInvalid(password)
@@ -87,6 +96,8 @@ document.getElementById("inputPassword").addEventListener("change", e => {
         destroyPop(passwordCheck)
     }
 })
+
+// second password field
 document.getElementById("inputPasswordCheck").addEventListener("change", e => {
 
     var password = $("#inputPassword")
@@ -104,15 +115,19 @@ document.getElementById("inputPasswordCheck").addEventListener("change", e => {
     }
 })
 
+// styles element as valid
 function toggleClassValid(e) {
     e.removeClass("is-invalid")
     e.addClass("is-valid")
 }
+
+// styles element as invalid
 function toggleClassInvalid(e) {
     e.addClass("is-invalid")
     e.removeClass("is-valid")
 }
 
+// add empty field popover next to element
 function popEmpty(e) {
     e.popover({ title: 'Empty field', content: "Please fill this field before clicking on the button." })
         .blur(function () {
@@ -121,6 +136,7 @@ function popEmpty(e) {
     e.popover('enable')
 }
 
+// add empty field popover next to element
 function destroyPop(e) {
     e.popover('disable')
 }

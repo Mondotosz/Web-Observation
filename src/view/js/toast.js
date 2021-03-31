@@ -2,6 +2,7 @@ import "/node_modules/jquery/dist/jquery.min.js"
 
 let container
 
+// get toast container if it doesn't exists
 if ($(".toast-container").length == 0) {
     // Create container
     container = $("<div>", {
@@ -51,6 +52,7 @@ export function showToast(title, body, icon = null) {
     })
 }
 
+// handles timer on element
 function timeSince(e) {
     let timeDiff = new Date(Date.now() - e.attr("data-toast-timer"))
     if (timeDiff > 3599500) {

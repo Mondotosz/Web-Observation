@@ -1,7 +1,10 @@
+# Apache access configuration file
 RewriteEngine on
 
+# Redirects all request for /data/* to forbidden
 RewriteRule ^(data/.*) - [F]
 
+# Redirects all requests to index.php unless they are file requests
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ /index.php?path=$1 [NC,L,QSA]
